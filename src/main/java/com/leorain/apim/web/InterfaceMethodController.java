@@ -18,12 +18,23 @@ public class InterfaceMethodController {
     @Autowired
     private InterfaceMethodService interfaceMethodService;
 
+    /**
+     * 根据接口方法ID查询接口方法信息
+     *
+     * @param interfaceMethodId
+     * @return
+     */
     @RequestMapping("/findInterfaceMethod/{interfaceMethodId}")
-    public InterfaceMethodEntity findInterfaceMethod(@PathVariable("interfaceMethodId") Long interfaceMethodId){
+    public InterfaceMethodEntity findInterfaceMethod(@PathVariable("interfaceMethodId") Long interfaceMethodId) {
         return interfaceMethodService.findInterfaceMethodEntity(interfaceMethodId);
     }
 
 
+    /**
+     * 查询所有接口方法信息列表
+     *
+     * @return
+     */
     @RequestMapping("/findInterfaceMethodList")
     public List<InterfaceMethodEntity> findInterfaceMethodList() {
         return interfaceMethodService.findInterfaceMethodEntityList();
