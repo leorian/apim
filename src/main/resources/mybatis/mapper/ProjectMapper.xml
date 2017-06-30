@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.ProjectMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.ProjectEntity">
+        <id column="projectId" property="projectId" jdbcType="BIGINT"/>
+        <result column="projectName" property="projectName" jdbcType="VARCHAR"/>
+        <result column="projectDescribe" property="projectDescribe" jdbcType="VARCHAR"/>
+        <result column="projectManager" property="projectManager" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        projectId, projectName, projectDescribe, projectManager
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT
+        WHERE projectId = #{projectId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.ProjectEntity">
+       INSERT INTO 
+       		T_API_PROJECT
+       		(projectId, projectName, projectDescribe, projectManager)
+       	VALUES
+       		(#{projectId}, #{projectName}, #{projectDescribe}, #{projectManager})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.ProjectEntity">
+        UPDATE
+        T_API_PROJECT
+        SET
+        <if test="projectName != null">projectName = #{projectName},</if>
+        <if test="projectDescribe != null">projectDescribe = #{projectDescribe},</if>
+        <if test="projectManager != null">projectManager = #{projectManager}</if>
+        WHERE
+        projectId = #{projectId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_PROJECT
+       WHERE 
+       		 projectId =#{projectId}
+    </delete>
+
+</mapper>
