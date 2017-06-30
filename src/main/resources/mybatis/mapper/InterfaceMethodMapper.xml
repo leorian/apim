@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceMethodMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceMethodEntity">
+        <id column="interfaceMethodId" property="interfaceMethodId" jdbcType="BIGINT"/>
+        <result column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="interfaceMethodName" property="interfaceMethodName" jdbcType="VARCHAR"/>
+        <result column="functionDescribe" property="functionDescribe" jdbcType="VARCHAR"/>
+        <result column="methodParameter" property="methodParameter" jdbcType="VARCHAR"/>
+        <result column="returnType" property="returnType" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        interfaceMethodId, interfaceId, interfaceMethodName, functionDescribe, methodParameter, returnType
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_METHOD
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_METHOD
+        WHERE interfaceMethodId = #{interfaceMethodId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.ApiUserEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_METHOD
+       		(interfaceMethodId, interfaceId, interfaceMethodName, functionDescribe, methodParameter, returnType)
+       	VALUES
+       		(#{interfaceMethodId}, #{interfaceId}, #{interfaceMethodName}, #{functionDescribe}, #{methodParameter}, #{returnType})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.ApiUserEntity">
+        UPDATE
+        T_API_INTERFACE_METHOD
+        SET
+        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+        <if test="interfaceMethodName != null">interfaceMethodName = #{interfaceMethodName},</if>
+        <if test="functionDescribe != null">functionDescribe = #{functionDescribe},</if>
+        <if test="methodParameter != null">methodParameter = #{methodParameter},</if>
+        <if test="returnType != null">returnType = #{returnType}</if>
+        WHERE
+        interfaceMethodId = #{interfaceMethodId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_METHOD
+       WHERE 
+       		 interfaceMethodId =#{interfaceMethodId}
+    </delete>
+
+</mapper>
