@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.PublisherMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.PublisherEntity">
+        <id column="publisherId" property="publisherId" jdbcType="BIGINT"/>
+        <result column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="environment" property="environment" jdbcType="INTEGER"/>
+        <result column="interfaceRealAddress" property="interfaceRealAddress" jdbcType="VARCHAR"/>
+        <result column="groupName" property="groupName" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        publisherId, interfaceId, environment, interfaceRealAddress, groupName, version
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PUBLISHER
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PUBLISHER
+        WHERE publisherId = #{publisherId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.PublisherEntity">
+       INSERT INTO 
+       		T_API_PUBLISHER
+       		(publisherId, interfaceId, environment, interfaceRealAddress, groupName, version)
+       	VALUES
+       		(#{publisherId}, #{interfaceId}, #{environment}, #{interfaceRealAddress}, #{groupName}, #{version})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.PublisherEntity">
+        UPDATE
+        T_API_PUBLISHER
+        SET
+        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+        <if test="environment != null">environment = #{environment} </if>
+        <if test="interfaceRealAddress != null">interfaceRealAddress = #{interfaceRealAddress} </if>
+        <if test="groupName != null">groupName = #{groupName} </if>
+        <if test="version != null">version = #{version} </if>
+        WHERE
+        publisherId = #{publisherId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_PUBLISHER
+       WHERE 
+       		 publisherId =#{publisherId}
+    </delete>
+
+</mapper>
