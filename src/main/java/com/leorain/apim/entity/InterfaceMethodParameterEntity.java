@@ -10,17 +10,17 @@ public class InterfaceMethodParameterEntity extends  BaseEntity{
     /**
      * 参数ID
      */
-    private long parameterId;
+    private Long parameterId;
 
     /**
      * 接口方法ID
      */
-    private long interfaceMethodId;
+    private Long interfaceMethodId;
 
     /**
      * 方法ID
      */
-    private long methodId;
+    private Long methodId;
 
     /**
      * 参数索引
@@ -50,42 +50,42 @@ public class InterfaceMethodParameterEntity extends  BaseEntity{
     /**
      * 参数必填
      */
-    private int parameterRequired;
+    private Integer parameterRequired;
 
     /**
      * 源代码
      */
     private String code;
 
-    public long getParameterId() {
+    public Long getParameterId() {
         return parameterId;
     }
 
-    public void setParameterId(long parameterId) {
+    public void setParameterId(Long parameterId) {
         this.parameterId = parameterId;
     }
 
-    public long getInterfaceMethodId() {
+    public Long getInterfaceMethodId() {
         return interfaceMethodId;
     }
 
-    public void setInterfaceMethodId(long interfaceMethodId) {
+    public void setInterfaceMethodId(Long interfaceMethodId) {
         this.interfaceMethodId = interfaceMethodId;
     }
 
-    public long getMethodId() {
+    public Long getMethodId() {
         return methodId;
     }
 
-    public void setMethodId(long methodId) {
+    public void setMethodId(Long methodId) {
         this.methodId = methodId;
     }
 
-    public int getParameterIndex() {
+    public Integer getParameterIndex() {
         return parameterIndex;
     }
 
-    public void setParameterIndex(int parameterIndex) {
+    public void setParameterIndex(Integer parameterIndex) {
         this.parameterIndex = parameterIndex;
     }
 

@@ -10,17 +10,17 @@ public class PublisherEntity  extends BaseEntity{
     /**
      * 发布管理ID
      */
-    private long publisherId;
+    private Long publisherId;
 
     /**
      * 接口ID
      */
-    private long interfaceId;
+    private Long interfaceId;
 
     /**
      * 环境
      */
-    private int environment;
+    private Integer environment;
 
     /**
      * 实际调用地址
@@ -37,27 +37,27 @@ public class PublisherEntity  extends BaseEntity{
      */
     private String version;
 
-    public long getPublisherId() {
+    public Long getPublisherId() {
         return publisherId;
     }
 
-    public void setPublisherId(long publisherId) {
+    public void setPublisherId(Long publisherId) {
         this.publisherId = publisherId;
     }
 
-    public long getInterfaceId() {
+    public Long getInterfaceId() {
         return interfaceId;
     }
 
-    public void setInterfaceId(long interfaceId) {
+    public void setInterfaceId(Long interfaceId) {
         this.interfaceId = interfaceId;
     }
 
-    public int getEnvironment() {
+    public Integer getEnvironment() {
         return environment;
     }
 
-    public void setEnvironment(int environment) {
+    public void setEnvironment(Integer environment) {
         this.environment = environment;
     }
 

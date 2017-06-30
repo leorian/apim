@@ -11,7 +11,7 @@ public abstract class BaseEntity implements Serializable{
     /**
      * 创建人
      */
-    private long createUserId;
+    private Long createUserId;
 
     /**
      * 创建时间
@@ -21,18 +21,18 @@ public abstract class BaseEntity implements Serializable{
     /**
      * 更新人
      */
-    private long updateUserId;
+    private Long updateUserId;
 
     /**
      * 更新时间
      */
     private Date updateDateTime;
 
-    public long getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(long createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -44,11 +44,11 @@ public abstract class BaseEntity implements Serializable{
         this.createDateTime = createDateTime;
     }
 
-    public long getUpdateUserId() {
+    public Long getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(long updateUserId) {
+    public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
     }
 

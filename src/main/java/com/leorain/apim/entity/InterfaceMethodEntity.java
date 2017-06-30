@@ -11,12 +11,12 @@ public class InterfaceMethodEntity extends BaseEntity {
     /**
      * 接口方法ID
      */
-    private long interfaceMethodId;
+    private Long interfaceMethodId;
 
     /**
      * 接口ID
      */
-    private long interfaceId;
+    private Long interfaceId;
 
     /**
      * 接口方法名称
@@ -38,19 +38,19 @@ public class InterfaceMethodEntity extends BaseEntity {
      */
     private String returnType;
 
-    public long getInterfaceMethodId() {
+    public Long getInterfaceMethodId() {
         return interfaceMethodId;
     }
 
-    public void setInterfaceMethodId(long interfaceMethodId) {
+    public void setInterfaceMethodId(Long interfaceMethodId) {
         this.interfaceMethodId = interfaceMethodId;
     }
 
-    public long getInterfaceId() {
+    public Long getInterfaceId() {
         return interfaceId;
     }
 
-    public void setInterfaceId(long interfaceId) {
+    public void setInterfaceId(Long interfaceId) {
         this.interfaceId = interfaceId;
     }
 

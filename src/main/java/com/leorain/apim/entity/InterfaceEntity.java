@@ -12,36 +12,36 @@ import com.alibaba.fastjson.JSON;
  */
 public class InterfaceEntity extends BaseEntity{
     //接口ID
-    private long interfaceId;
+    private Long interfaceId;
 
     //项目ID
-    private long projectId;
+    private Long projectId;
 
     //项目名称
     private String interfaceName;
 
     //接口类型
-    private int interfaceType;
+    private Integer interfaceType;
 
     //接口地址
     private String interfaceAddress;
 
     //请求方式
-    private int requestMethod;
+    private Integer requestMethod;
 
-    public long getInterfaceId() {
+    public Long getInterfaceId() {
         return interfaceId;
     }
 
-    public void setInterfaceId(long interfaceId) {
+    public void setInterfaceId(Long interfaceId) {
         this.interfaceId = interfaceId;
     }
 
-    public long getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(long projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 
@@ -53,11 +53,11 @@ public class InterfaceEntity extends BaseEntity{
         this.interfaceName = interfaceName;
     }
 
-    public int getInterfaceType() {
+    public Integer getInterfaceType() {
         return interfaceType;
     }
 
-    public void setInterfaceType(int interfaceType) {
+    public void setInterfaceType(Integer interfaceType) {
         this.interfaceType = interfaceType;
     }
 
@@ -69,11 +69,11 @@ public class InterfaceEntity extends BaseEntity{
         this.interfaceAddress = interfaceAddress;
     }
 
-    public int getRequestMethod() {
+    public Integer getRequestMethod() {
         return requestMethod;
     }
 
-    public void setRequestMethod(int requestMethod) {
+    public void setRequestMethod(Integer requestMethod) {
         this.requestMethod = requestMethod;
     }
 

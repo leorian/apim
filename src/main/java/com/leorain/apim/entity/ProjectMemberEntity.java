@@ -10,39 +10,39 @@ public class ProjectMemberEntity  extends BaseEntity{
     /**
      * 项目成员Id
      */
-    private long projectMemberId;
+    private Long projectMemberId;
 
     /**
      * 项目ID
      */
-    private long projectId;
+    private Long projectId;
 
     /**
      * 用户ID
      */
-    private long userId;
+    private Long userId;
 
-    public long getProjectMemberId() {
+    public Long getProjectMemberId() {
         return projectMemberId;
     }
 
-    public void setProjectMemberId(long projectMemberId) {
+    public void setProjectMemberId(Long projectMemberId) {
         this.projectMemberId = projectMemberId;
     }
 
-    public long getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(long projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

@@ -11,17 +11,17 @@ public class InterfaceRequestEntity extends BaseEntity{
     /**
      * 接口入参ID
      */
-    private long interfaceRequestId;
+    private Long interfaceRequestId;
 
     /**
      * 接口ID
      */
-    private long interfaceId;
+    private Long interfaceId;
 
     /**
      * 入参位置
      */
-    private int location;
+    private Integer location;
 
     /**
      * 入参名称
@@ -36,34 +36,34 @@ public class InterfaceRequestEntity extends BaseEntity{
     /**
      * 是否必填
      */
-    private int parameterRequired;
+    private Integer parameterRequired;
 
     /**
      * 参数说明
      */
     private String parameterDescribe;
 
-    public long getInterfaceRequestId() {
+    public Long getInterfaceRequestId() {
         return interfaceRequestId;
     }
 
-    public void setInterfaceRequestId(long interfaceRequestId) {
+    public void setInterfaceRequestId(Long interfaceRequestId) {
         this.interfaceRequestId = interfaceRequestId;
     }
 
-    public long getInterfaceId() {
+    public Long getInterfaceId() {
         return interfaceId;
     }
 
-    public void setInterfaceId(long interfaceId) {
+    public void setInterfaceId(Long interfaceId) {
         this.interfaceId = interfaceId;
     }
 
-    public int getLocation() {
+    public Integer getLocation() {
         return location;
     }
 
-    public void setLocation(int location) {
+    public void setLocation(Integer location) {
         this.location = location;
     }
 
@@ -83,11 +83,11 @@ public class InterfaceRequestEntity extends BaseEntity{
         this.requestParameterType = requestParameterType;
     }
 
-    public int getParameterRequired() {
+    public Integer getParameterRequired() {
         return parameterRequired;
     }
 
-    public void setParameterRequired(int parameterRequired) {
+    public void setParameterRequired(Integer parameterRequired) {
         this.parameterRequired = parameterRequired;
     }
 

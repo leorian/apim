@@ -11,7 +11,7 @@ public class ProjectEntity extends BaseEntity{
     /**
      * 项目ID
      */
-    private long projectId;
+    private Long projectId;
 
     /**
      * 项目名称
@@ -26,13 +26,13 @@ public class ProjectEntity extends BaseEntity{
     /**
      * 项目描述
      */
-    private long projectManager;
+    private Long projectManager;
 
-    public long getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(long projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 
@@ -52,11 +52,11 @@ public class ProjectEntity extends BaseEntity{
         this.projectDescribe = projectDescribe;
     }
 
-    public long getProjectManager() {
+    public Long getProjectManager() {
         return projectManager;
     }
 
-    public void setProjectManager(long projectManager) {
+    public void setProjectManager(Long projectManager) {
         this.projectManager = projectManager;
     }
 

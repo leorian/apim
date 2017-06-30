@@ -10,17 +10,17 @@ public class InterfaceMethodReturnTypeEntity extends BaseEntity{
     /**
      * 返回值类型ID
      */
-    private long returnTypeId;
+    private Long returnTypeId;
 
     /**
      * 接口方法ID
      */
-    private long interfaceMethodId;
+    private Long interfaceMethodId;
 
     /**
      * 方法ID
      */
-    private long methodId;
+    private Long methodId;
 
     /**
      * 返回值类型简称
@@ -37,27 +37,27 @@ public class InterfaceMethodReturnTypeEntity extends BaseEntity{
      */
     private String code;
 
-    public long getReturnTypeId() {
+    public Long getReturnTypeId() {
         return returnTypeId;
     }
 
-    public void setReturnTypeId(long returnTypeId) {
+    public void setReturnTypeId(Long returnTypeId) {
         this.returnTypeId = returnTypeId;
     }
 
-    public long getInterfaceMethodId() {
+    public Long getInterfaceMethodId() {
         return interfaceMethodId;
     }
 
-    public void setInterfaceMethodId(long interfaceMethodId) {
+    public void setInterfaceMethodId(Long interfaceMethodId) {
         this.interfaceMethodId = interfaceMethodId;
     }
 
-    public long getMethodId() {
+    public Long getMethodId() {
         return methodId;
     }
 
-    public void setMethodId(long methodId) {
+    public void setMethodId(Long methodId) {
         this.methodId = methodId;
     }
 

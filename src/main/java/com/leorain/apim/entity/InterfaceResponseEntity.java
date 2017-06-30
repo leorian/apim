@@ -11,22 +11,22 @@ public class InterfaceResponseEntity extends BaseEntity {
     /**
      * 接口出参ID
      */
-    private long interfaceResponseId;
+    private Long interfaceResponseId;
 
     /**
      * 接口ID
      */
-    private long interfaceId;
+    private Long interfaceId;
 
     /**
      * 场景
      */
-    private int scene;
+    private Integer scene;
 
     /**
      * 返回类型
      */
-    private int responseReturnMode;
+    private Integer responseReturnMode;
 
     /**
      * 返回示例
@@ -38,35 +38,35 @@ public class InterfaceResponseEntity extends BaseEntity {
      */
     private String responseRemark;
 
-    public long getInterfaceResponseId() {
+    public Long getInterfaceResponseId() {
         return interfaceResponseId;
     }
 
-    public void setInterfaceResponseId(long interfaceResponseId) {
+    public void setInterfaceResponseId(Long interfaceResponseId) {
         this.interfaceResponseId = interfaceResponseId;
     }
 
-    public long getInterfaceId() {
+    public Long getInterfaceId() {
         return interfaceId;
     }
 
-    public void setInterfaceId(long interfaceId) {
+    public void setInterfaceId(Long interfaceId) {
         this.interfaceId = interfaceId;
     }
 
-    public int getScene() {
+    public Integer getScene() {
         return scene;
     }
 
-    public void setScene(int scene) {
+    public void setScene(Integer scene) {
         this.scene = scene;
     }
 
-    public int getResponseReturnMode() {
+    public Integer getResponseReturnMode() {
         return responseReturnMode;
     }
 
-    public void setResponseReturnMode(int responseReturnMode) {
+    public void setResponseReturnMode(Integer responseReturnMode) {
         this.responseReturnMode = responseReturnMode;
     }
 
