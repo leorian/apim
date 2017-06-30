@@ -8,6 +8,12 @@
         <result column="interfaceType" property="interfaceType" jdbcType="INTEGER"/>
         <result column="interfaceAddress" property="interfaceAddress" jdbcType="VARCHAR"/>
         <result column="requestMethod" property="requestMethod" jdbcType="INTEGER"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
     </resultMap>
 
     <sql id="Base_Column_List">

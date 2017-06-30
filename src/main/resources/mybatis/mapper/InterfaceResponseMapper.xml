@@ -8,6 +8,12 @@
         <result column="responseReturnMode" property="responseReturnMode" jdbcType="INTEGER"/>
         <result column="responseExample" property="responseExample" jdbcType="VARCHAR"/>
         <result column="responseRemark" property="responseRemark" jdbcType="INTEGER"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
     </resultMap>
 
     <sql id="Base_Column_List">
