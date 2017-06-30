@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceMethodReturnTypeMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceMethodReturnTypeEntity">
+        <id column="returnTypeId" property="returnTypeId" jdbcType="BIGINT"/>
+        <result column="interfaceMethodId" property="interfaceMethodId" jdbcType="BIGINT"/>
+        <result column="methodId" property="methodId" jdbcType="BIGINT"/>
+        <result column="returnTypeShortName" property="returnTypeShortName" jdbcType="VARCHAR"/>
+        <result column="returnTypeFullName" property="returnTypeFullName" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        returnTypeId, interfaceMethodId, methodId, returnTypeShortName, returnTypeFullName, code
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_METHOD_RETURNTYPE
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_METHOD_RETURNTYPE
+        WHERE returnTypeId = #{returnTypeId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceMethodReturnTypeEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_METHOD_RETURNTYPE
+       		(returnTypeId, interfaceMethodId, methodId, returnTypeShortName, returnTypeFullName, code)
+       	VALUES
+       		(#{returnTypeId}, #{interfaceMethodId}, #{methodId}, #{returnTypeShortName}, #{returnTypeFullName}, #{code})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceMethodReturnTypeEntity">
+        UPDATE
+        T_API_INTERFACE_METHOD_RETURNTYPE
+        SET
+        <if test="interfaceMethodId != null">interfaceMethodId = #{interfaceMethodId},</if>
+        <if test="methodId != null">methodId = #{methodId},</if>
+        <if test="returnTypeShortName != null">returnTypeShortName = #{returnTypeShortName},</if>
+        <if test="returnTypeFullName != null">returnTypeFullName = #{returnTypeFullName},</if>
+        <if test="code != null">code = #{code}</if>
+        WHERE
+        returnTypeId = #{returnTypeId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_METHOD_RETURNTYPE
+       WHERE 
+       		 returnTypeId =#{returnTypeId}
+    </delete>
+
+</mapper>

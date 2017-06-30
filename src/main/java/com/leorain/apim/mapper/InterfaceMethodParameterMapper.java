@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
+ * 接口方法参数DAO操作
  */
 public interface InterfaceMethodParameterMapper {
     List<InterfaceMethodParameterEntity> getAll();
