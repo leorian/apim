@@ -38,7 +38,8 @@ public class InterfaceMethodEntity extends BaseEntity {
      */
     private String returnType;
 
-    public InterfaceMethodEntity(Long interfaceMethodId, Long interfaceId, String interfaceMethodName, String functionDescribe, String methodParameter, String returnType) {
+    public InterfaceMethodEntity(Long interfaceMethodId, Long interfaceId, String interfaceMethodName,
+                                 String functionDescribe, String methodParameter, String returnType) {
         this.interfaceMethodId = interfaceMethodId;
         this.interfaceId = interfaceId;
         this.interfaceMethodName = interfaceMethodName;
