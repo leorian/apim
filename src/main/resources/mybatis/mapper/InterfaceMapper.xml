@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceEntity">
+        <id column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="projectId" property="projectId" jdbcType="BIGINT"/>
+        <result column="interfaceName" property="interfaceName" jdbcType="VARCHAR"/>
+        <result column="interfaceType" property="interfaceType" jdbcType="INTEGER"/>
+        <result column="interfaceAddress" property="interfaceAddress" jdbcType="VARCHAR"/>
+        <result column="requestMethod" property="requestMethod" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        interfaceId, projectId, interfaceName, interfaceType, interfaceAddress, requestMethod
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE
+        WHERE interfaceId = #{interfaceId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.ApiUserEntity">
+       INSERT INTO 
+       		T_API_INTERFACE
+       		(interfaceId, projectId, interfaceName, interfaceType, interfaceAddress, requestMethod)
+       	VALUES
+       		(#{interfaceId}, #{projectId}, #{interfaceName}, #{interfaceType}, #{interfaceAddress}, #{requestMethod})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.ApiUserEntity">
+        UPDATE
+        T_API_INTERFACE
+        SET
+        <if test="projectId != null">projectId = #{projectId},</if>
+        <if test="interfaceName != null">interfaceName = #{interfaceName},</if>
+        <if test="interfaceType != null">interfaceType = #{interfaceType},</if>
+        <if test="interfaceAddress != null">interfaceAddress = #{interfaceAddress},</if>
+        <if test="requestMethod != null">requestMethod = #{requestMethod}</if>
+        WHERE
+        interfaceId = #{interfaceId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE
+       WHERE 
+       		 interfaceId =#{interfaceId}
+    </delete>
+
+</mapper>
