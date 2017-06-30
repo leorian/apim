@@ -10,7 +10,7 @@ public class ApiUserEntity extends BaseEntity{
     /**
      * 用户ID
      */
-    private long userId;
+    private Long userId;
 
     /**
      * 英文名称
@@ -25,7 +25,7 @@ public class ApiUserEntity extends BaseEntity{
     /**
      * 用户身份
      */
-    private int userRole;
+    private Integer userRole;
 
     /**
      * 手机号码
@@ -37,11 +37,26 @@ public class ApiUserEntity extends BaseEntity{
      */
     private String email;
 
-    public long getUserId() {
+    /**
+     * 密码
+     */
+    private String password;
+
+    public ApiUserEntity(Long userId, String usName, String cnName, Integer userRole, String cellPhone, String email, String password) {
+        this.userId = userId;
+        this.usName = usName;
+        this.cnName = cnName;
+        this.userRole = userRole;
+        this.cellPhone = cellPhone;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -61,11 +76,11 @@ public class ApiUserEntity extends BaseEntity{
         this.cnName = cnName;
     }
 
-    public int getUserRole() {
+    public Integer getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(int userRole) {
+    public void setUserRole(Integer userRole) {
         this.userRole = userRole;
     }
 
@@ -83,6 +98,14 @@ public class ApiUserEntity extends BaseEntity{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
