@@ -38,6 +38,16 @@ public class InterfaceResponseEntity extends BaseEntity {
      */
     private String responseRemark;
 
+    public InterfaceResponseEntity(Long interfaceResponseId, Long interfaceId, Integer scene, Integer responseReturnMode,
+                                   String responseExample, String responseRemark) {
+        this.interfaceResponseId = interfaceResponseId;
+        this.interfaceId = interfaceId;
+        this.scene = scene;
+        this.responseReturnMode = responseReturnMode;
+        this.responseExample = responseExample;
+        this.responseRemark = responseRemark;
+    }
+
     public Long getInterfaceResponseId() {
         return interfaceResponseId;
     }

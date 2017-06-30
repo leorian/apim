@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceResponseMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceResponseEntity">
+        <id column="interfaceResponseId" property="interfaceResponseId" jdbcType="BIGINT"/>
+        <result column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="scene" property="scene" jdbcType="INTEGER"/>
+        <result column="responseReturnMode" property="responseReturnMode" jdbcType="INTEGER"/>
+        <result column="responseExample" property="responseExample" jdbcType="VARCHAR"/>
+        <result column="responseRemark" property="responseRemark" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        interfaceResponseId, interfaceId, scene, responseReturnMode, responseExample, responseRemark
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RESPONSE
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RESPONSE
+        WHERE interfaceResponseId = #{interfaceResponseId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceResponseEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_RESPONSE
+       		(interfaceResponseId, interfaceId, scene, responseReturnMode, responseExample, responseRemark)
+       	VALUES
+       		(#{interfaceResponseId}, #{interfaceId}, #{scene}, #{responseReturnMode}, #{responseExample}, #{responseRemark})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceResponseEntity">
+        UPDATE
+        T_API_INTERFACE_RESPONSE
+        SET
+        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+        <if test="scene != null">scene = #{scene},</if>
+        <if test="responseReturnMode != null">responseReturnMode = #{responseReturnMode},</if>
+        <if test="responseExample != null">responseExample = #{responseExample},</if>
+        <if test="responseRemark != null">responseRemark = #{responseRemark}</if>
+        WHERE
+        interfaceResponseId = #{interfaceResponseId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_RESPONSE
+       WHERE 
+       		 interfaceResponseId =#{interfaceResponseId}
+    </delete>
+
+</mapper>
