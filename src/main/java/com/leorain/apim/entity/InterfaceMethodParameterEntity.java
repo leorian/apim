@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 接口方法参数表
  */
-public class InterfaceMethodParameterEntity {
+public class InterfaceMethodParameterEntity extends  BaseEntity{
     /**
      * 参数ID
      */

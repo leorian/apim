@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 项目表
  */
-public class ProjectEntity {
+public class ProjectEntity extends BaseEntity{
 
     /**
      * 项目ID

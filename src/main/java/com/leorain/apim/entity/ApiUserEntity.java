@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 用户表
  */
-public class ApiUserEntity {
+public class ApiUserEntity extends BaseEntity{
     /**
      * 用户ID
      */

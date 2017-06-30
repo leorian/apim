@@ -2,13 +2,12 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
-import java.io.Serializable;
 
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 接口方法表
  */
-public class InterfaceMethodEntity implements Serializable {
+public class InterfaceMethodEntity extends BaseEntity {
     /**
      * 接口方法ID
      */

@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 接口方法返回值类型表
  */
-public class InterfaceMethodReturnTypeEntity {
+public class InterfaceMethodReturnTypeEntity extends BaseEntity{
     /**
      * 返回值类型ID
      */

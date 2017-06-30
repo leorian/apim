@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 接口出参表
  */
-public class InterfaceResponseEntity {
+public class InterfaceResponseEntity extends BaseEntity {
 
     /**
      * 接口出参ID

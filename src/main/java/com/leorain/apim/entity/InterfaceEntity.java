@@ -6,12 +6,11 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
-import java.io.Serializable;
 
 /**
  * 项目接口表
  */
-public class InterfaceEntity implements Serializable{
+public class InterfaceEntity extends BaseEntity{
     //接口ID
     private long interfaceId;
 
