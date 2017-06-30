@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.ProjectMemberMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.ProjectMemberEntity">
+        <id column="projectMemberId" property="projectMemberId" jdbcType="BIGINT"/>
+        <result column="projectId" property="projectId" jdbcType="BIGINT"/>
+        <result column="userId" property="userId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        projectMemberId, projectId, userId
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT_MEMBER
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT_MEMBER
+        WHERE projectMemberId = #{projectMemberId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.ProjectMemberEntity">
+       INSERT INTO 
+       		T_API_PROJECT_MEMBER
+       		(projectMemberId, projectId, userId)
+       	VALUES
+       		(#{projectMemberId}, #{projectId}, #{userId})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.ProjectMemberEntity">
+        UPDATE
+        T_API_PROJECT_MEMBER
+        SET
+        <if test="projectId != null">projectId = #{projectId},</if>
+        <if test="userId != null">userId = #{userId} </if>
+        WHERE
+        projectMemberId = #{projectMemberId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_PROJECT_MEMBER
+       WHERE 
+       		 projectMemberId =#{projectMemberId}
+    </delete>
+
+</mapper>

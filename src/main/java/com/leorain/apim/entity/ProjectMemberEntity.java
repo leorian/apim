@@ -22,6 +22,12 @@ public class ProjectMemberEntity  extends BaseEntity{
      */
     private Long userId;
 
+    public ProjectMemberEntity(Long projectMemberId, Long projectId, Long userId) {
+        this.projectMemberId = projectMemberId;
+        this.projectId = projectId;
+        this.userId = userId;
+    }
+
     public Long getProjectMemberId() {
         return projectMemberId;
     }
