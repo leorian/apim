@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceMethodParameterMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceMethodParameterEntity">
+        <id column="parameterId" property="parameterId" jdbcType="BIGINT"/>
+        <result column="interfaceMethodId" property="interfaceMethodId" jdbcType="BIGINT"/>
+        <result column="methodId" property="methodId" jdbcType="BIGINT"/>
+        <result column="parameterIndex" property="parameterIndex" jdbcType="INTEGER"/>
+        <result column="parameterTypeShortName" property="parameterTypeShortName" jdbcType="VARCHAR"/>
+        <result column="parameterTypeFullName" property="parameterTypeFullName" jdbcType="VARCHAR"/>
+        <result column="parameterName" property="parameterName" jdbcType="VARCHAR"/>
+        <result column="parameterMeaning" property="parameterMeaning" jdbcType="VARCHAR"/>
+        <result column="parameterRequired" property="parameterRequired" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        parameterId, interfaceMethodId, methodId, parameterIndex, parameterTypeShortName, parameterTypeFullName,
+        parameterName, parameterMeaning, parameterRequired, code
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_METHOD_PARAMETER
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_METHOD_PARAMETER
+        WHERE parameterId = #{parameterId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceMethodParameterEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_METHOD_PARAMETER
+       		(parameterId, interfaceMethodId, methodId, parameterIndex, parameterTypeShortName, parameterTypeFullName,
+       		 parameterName, parameterMeaning, parameterRequired, code)
+       	VALUES
+       		(#{parameterId}, #{interfaceMethodId}, #{methodId}, #{parameterIndex}, #{parameterTypeShortName}, #{parameterTypeFullName},
+       		  #{parameterName}, #{parameterMeaning}, #{parameterRequired}, #{code})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceMethodParameterEntity">
+        UPDATE
+        T_API_INTERFACE_METHOD_PARAMETER
+        SET
+        <if test="interfaceMethodId != null">interfaceMethodId = #{interfaceMethodId},</if>
+        <if test="methodId != null">methodId = #{methodId},</if>
+        <if test="parameterIndex != null">parameterIndex = #{parameterIndex},</if>
+        <if test="parameterTypeShortName != null">parameterTypeShortName = #{parameterTypeShortName},</if>
+        <if test="parameterTypeFullName != null">parameterTypeFullName = #{parameterTypeFullName},</if>
+        <if test="parameterName != null">parameterName = #{parameterName},</if>
+        <if test="parameterMeaning != null">parameterMeaning = #{parameterMeaning},</if>
+        <if test="parameterRequired != null">parameterRequired = #{parameterRequired},</if>
+        <if test="code != null">code = #{code}</if>
+        WHERE
+        parameterId = #{parameterId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_METHOD_PARAMETER
+       WHERE 
+       		 parameterId =#{parameterId}
+    </delete>
+
+</mapper>

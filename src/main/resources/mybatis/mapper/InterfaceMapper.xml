@@ -27,7 +27,7 @@
         WHERE interfaceId = #{interfaceId}
     </select>
 
-    <insert id="insert" parameterType="com.leorain.apim.entity.ApiUserEntity">
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceEntity">
        INSERT INTO 
        		T_API_INTERFACE
        		(interfaceId, projectId, interfaceName, interfaceType, interfaceAddress, requestMethod)
@@ -35,7 +35,7 @@
        		(#{interfaceId}, #{projectId}, #{interfaceName}, #{interfaceType}, #{interfaceAddress}, #{requestMethod})
     </insert>
 
-    <update id="update" parameterType="com.leorain.apim.entity.ApiUserEntity">
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceEntity">
         UPDATE
         T_API_INTERFACE
         SET
