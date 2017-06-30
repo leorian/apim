@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceRequestMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceRequestEntity">
+        <id column="interfaceRequestId" property="interfaceRequestId" jdbcType="BIGINT"/>
+        <result column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="location" property="location" jdbcType="INTEGER"/>
+        <result column="requestParameterName" property="requestParameterName" jdbcType="VARCHAR"/>
+        <result column="requestParameterType" property="requestParameterType" jdbcType="VARCHAR"/>
+        <result column="parameterRequired" property="parameterRequired" jdbcType="INTEGER"/>
+        <result column="parameterDescribe" property="parameterDescribe" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        interfaceRequestId, interfaceId, location, requestParameterName, requestParameterType, parameterRequired, parameterDescribe
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_REQUEST
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_REQUEST
+        WHERE interfaceRequestId = #{interfaceRequestId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceRequestEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_REQUEST
+       		(interfaceRequestId, interfaceId, location, requestParameterName, requestParameterType, parameterRequired, parameterDescribe)
+       	VALUES
+       		(#{interfaceRequestId}, #{interfaceId}, #{location}, #{requestParameterName}, #{requestParameterType}, #{parameterRequired}, #{parameterDescribe})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceRequestEntity">
+        UPDATE
+        T_API_INTERFACE_REQUEST
+        SET
+        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+        <if test="location != null">location = #{location},</if>
+        <if test="requestParameterName != null">requestParameterName = #{requestParameterName},</if>
+        <if test="requestParameterType != null">requestParameterType = #{requestParameterType},</if>
+        <if test="parameterRequired != null">parameterRequired = #{parameterRequired}, </if>
+        <if test="parameterDescribe != null">parameterDescribe = #{parameterDescribe} </if>
+        WHERE
+        interfaceRequestId = #{interfaceRequestId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_REQUEST
+       WHERE 
+       		 interfaceRequestId =#{interfaceRequestId}
+    </delete>
+
+</mapper>
