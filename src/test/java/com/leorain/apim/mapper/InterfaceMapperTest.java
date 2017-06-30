@@ -23,7 +23,7 @@ public class InterfaceMapperTest {
                 1, "com.bozhong.test.service.UserService", 1));
         interfaceMapper.insert(new InterfaceEntity(2l, 1l, "用户接口",
                 1, "com.bozhong.test.service.UserService", 1));
-        interfaceMapper.insert(new InterfaceEntity(2l, 1l, "用户接口",
+        interfaceMapper.insert(new InterfaceEntity(3l, 1l, "用户接口",
                 1, "com.bozhong.test.service.UserService", 1));
 
         Assert.assertEquals(3, interfaceMapper.getAll().size());
