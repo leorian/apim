@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/6/29 星期四 15:31:52                       */
+/* Created on:     2017/6/30 星期五 10:31:00                       */
 /*==============================================================*/
 
 
@@ -35,6 +35,10 @@ create table T_API_INTERFACE
    interfaceType        int comment '接口类型',
    interfaceAddress     varchar(256) comment '接口地址',
    requestMethod        int comment '请求方式',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (interfaceId)
 );
 
@@ -51,6 +55,10 @@ create table T_API_INTERFACE_METHOD
    functionDescribe     varchar(256) comment '功能说明',
    methodParameter      varchar(512) comment '方法参数',
    returnType           varchar(512) comment '返回值类型',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (interfaceMethodId)
 );
 
@@ -71,6 +79,10 @@ create table T_API_INTERFACE_METHOD_PARAMETER
    parameterMeaning     varchar(256) comment '参数解释',
    parameterRequired    int comment '是否必填',
    code                 text comment '源代码',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (parameterId)
 );
 
@@ -87,6 +99,10 @@ create table T_API_INTERFACE_METHOD_RETURNTYPE
    returnTypeShortName  varchar(32) comment '返回值类型简称',
    returnTypeFullName   varchar(128) comment '返回值类型全称',
    code                 text comment '代码',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (returnTypeId)
 );
 
@@ -104,6 +120,10 @@ create table T_API_INTERFACE_REQUEST
    requestParameterType varchar(64) comment '入参类型',
    parameterRequired    int comment '是否必填',
    parameterDescribe    varchar(512) comment '参数说明',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (interfaceRequestId)
 );
 
@@ -120,6 +140,10 @@ create table T_API_INTERFACE_RESPONSE
    responseReturnMode   int comment '返回类型',
    responseExample      text comment '返回示例',
    responseRemark       text comment '返回备注',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (interfaceResponseId)
 );
 
@@ -134,6 +158,10 @@ create table T_API_PROJECT
    projectName          varchar(100) comment '项目名称',
    projectDescribe      varchar(512) comment '项目描述',
    projectManager       bigint not null comment '项目经理',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (projectId)
 );
 
@@ -147,6 +175,10 @@ create table T_API_PROJECT_MEMBER
    projectMemberId      bigint not null comment '项目成员关系ID',
    projectId            bigint comment '项目ID',
    userId               bigint comment '用户ID',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (projectMemberId)
 );
 
@@ -161,8 +193,12 @@ create table T_API_PUBLISHER
    interfaceId          bigint comment '接口ID',
    environment          int comment '环境',
    interfaceRealAddress varchar(256) comment '接口实际调用地址',
-   group                varchar(32) comment '组',
+   groupName            varchar(32) comment '组',
    version              varchar(32) comment '版本',
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (publisherId)
 );
 
@@ -179,6 +215,11 @@ create table T_API_USER
    userRole             int comment '用户身份',
    cellPhone            varchar(11) comment '手机号码',
    email                varchar(50) comment '工作邮箱',
+   password             varchar(256),
+   createUserId         bigint,
+   createDateTime       datetime,
+   updateUserId         bigint,
+   updateDateTime       datetime,
    primary key (userId)
 );
 
