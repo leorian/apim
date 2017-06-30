@@ -25,7 +25,8 @@ public class InterfaceMethodParameterController {
      * @return
      */
     @RequestMapping("/findInterfaceMethodParameter/{interfaceMethodParameterId}")
-    public InterfaceMethodParameterEntity findInterfaceMethodParameter(@PathVariable("interfaceMethodParameterId") Long interfaceMethodParameterId) {
+    public InterfaceMethodParameterEntity findInterfaceMethodParameter(@PathVariable("interfaceMethodParameterId")
+                                                                                   Long interfaceMethodParameterId) {
         return interfaceMethodParameterService.findInterfaceMethodParameterEntity(interfaceMethodParameterId);
     }
 
