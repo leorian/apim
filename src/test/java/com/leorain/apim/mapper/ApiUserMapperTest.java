@@ -31,21 +31,21 @@ public class ApiUserMapperTest {
 
     @Test
     public void testQuery() throws Exception {
-        List<ApiUserEntity> users = apiUserMapper.getAll();
-        if (users == null || users.size() == 0) {
+        List<ApiUserEntity> apiUserEntities = apiUserMapper.getAll();
+        if (apiUserEntities == null || apiUserEntities.size() == 0) {
             System.out.println("is null");
         } else {
-            System.out.println(users.toString());
+            System.out.println(apiUserEntities.toString());
         }
     }
 
 
     @Test
     public void testUpdate() throws Exception {
-        ApiUserEntity user = apiUserMapper.getOne(1l);
-        System.out.println(user.toString());
-        user.setCellPhone("1860559808");
-        apiUserMapper.update(user);
+        ApiUserEntity apiUserEntity = apiUserMapper.getOne(1l);
+        System.out.println(apiUserEntity.toString());
+        apiUserEntity.setCellPhone("1860559808");
+        apiUserMapper.update(apiUserEntity);
         Assert.assertTrue(("1860559808".equals(apiUserMapper.getOne(1l).getCellPhone())));
     }
 

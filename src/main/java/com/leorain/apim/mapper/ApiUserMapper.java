@@ -13,9 +13,9 @@ public interface ApiUserMapper {
 
     ApiUserEntity getOne(Long id);
 
-    void insert(ApiUserEntity user);
+    void insert(ApiUserEntity apiUserEntity);
 
-    void update(ApiUserEntity user);
+    void update(ApiUserEntity apiUserEntity);
 
     void delete(Long id);
 }
