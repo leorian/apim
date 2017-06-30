@@ -25,7 +25,7 @@ public class InterfaceMethodParameterEntity extends  BaseEntity{
     /**
      * 参数索引
      */
-    private int parameterIndex;
+    private Integer parameterIndex;
 
     /**
      * 参数类型简称
@@ -56,6 +56,21 @@ public class InterfaceMethodParameterEntity extends  BaseEntity{
      * 源代码
      */
     private String code;
+
+    public InterfaceMethodParameterEntity(Long parameterId, Long interfaceMethodId, Long methodId,
+                                          Integer parameterIndex, String parameterTypeShortName, String parameterTypeFullName,
+                                          String parameterName, String parameterMeaning, Integer parameterRequired, String code) {
+        this.parameterId = parameterId;
+        this.interfaceMethodId = interfaceMethodId;
+        this.methodId = methodId;
+        this.parameterIndex = parameterIndex;
+        this.parameterTypeShortName = parameterTypeShortName;
+        this.parameterTypeFullName = parameterTypeFullName;
+        this.parameterName = parameterName;
+        this.parameterMeaning = parameterMeaning;
+        this.parameterRequired = parameterRequired;
+        this.code = code;
+    }
 
     public Long getParameterId() {
         return parameterId;
@@ -121,11 +136,11 @@ public class InterfaceMethodParameterEntity extends  BaseEntity{
         this.parameterMeaning = parameterMeaning;
     }
 
-    public int getParameterRequired() {
+    public Integer getParameterRequired() {
         return parameterRequired;
     }
 
-    public void setParameterRequired(int parameterRequired) {
+    public void setParameterRequired(Integer parameterRequired) {
         this.parameterRequired = parameterRequired;
     }
 
