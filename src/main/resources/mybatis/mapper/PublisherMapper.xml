@@ -40,9 +40,9 @@
         T_API_PUBLISHER
         SET
         <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
-        <if test="environment != null">environment = #{environment} </if>
-        <if test="interfaceRealAddress != null">interfaceRealAddress = #{interfaceRealAddress} </if>
-        <if test="groupName != null">groupName = #{groupName} </if>
+        <if test="environment != null">environment = #{environment}, </if>
+        <if test="interfaceRealAddress != null">interfaceRealAddress = #{interfaceRealAddress}, </if>
+        <if test="groupName != null">groupName = #{groupName}, </if>
         <if test="version != null">version = #{version} </if>
         WHERE
         publisherId = #{publisherId}
