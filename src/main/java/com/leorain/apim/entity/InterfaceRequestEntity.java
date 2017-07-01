@@ -43,6 +43,9 @@ public class InterfaceRequestEntity extends BaseEntity{
      */
     private String parameterDescribe;
 
+    public InterfaceRequestEntity() {
+    }
+
     public InterfaceRequestEntity(Long interfaceRequestId, Long interfaceId, Integer location, String requestParameterName,
                                   String requestParameterType, Integer parameterRequired, String parameterDescribe) {
         this.interfaceRequestId = interfaceRequestId;

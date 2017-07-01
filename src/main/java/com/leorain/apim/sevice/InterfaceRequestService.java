@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.InterfaceRequestEntity;
+import com.leorain.apim.tools.JqPage;
 
 import java.util.List;
 
@@ -22,4 +23,13 @@ public interface InterfaceRequestService {
      * @return
      */
     List<InterfaceRequestEntity> findInterfaceRequestEntityList();
+
+    /**
+     * 分页查询
+     *
+     * @param jqPage
+     * @param interfaceRequestEntity
+     * @return
+     */
+    JqPage<InterfaceRequestEntity> findInterfaceRequestEntityPage(JqPage jqPage, InterfaceRequestEntity interfaceRequestEntity);
 }

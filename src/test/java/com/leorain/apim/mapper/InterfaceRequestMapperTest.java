@@ -1,6 +1,9 @@
 package com.leorain.apim.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.InterfaceRequestEntity;
+import com.leorain.apim.sevice.InterfaceRequestService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,17 +20,20 @@ public class InterfaceRequestMapperTest {
     @Autowired
     private InterfaceRequestMapper interfaceRequestMapper;
 
+    @Autowired
+    private InterfaceRequestService interfaceRequestService;
+
     @Test
     public void testInsert() throws Exception {
         interfaceRequestMapper.insert(new InterfaceRequestEntity(1L, 1L,
                 1, "Integer",
-                "java.lang.Integer",1 ,"userId"));
+                "java.lang.Integer", 1, "userId"));
         interfaceRequestMapper.insert(new InterfaceRequestEntity(2L, 1L,
                 1, "Integer",
-                "java.lang.Integer",1 ,"userId"));
+                "java.lang.Integer", 1, "userId"));
         interfaceRequestMapper.insert(new InterfaceRequestEntity(3L, 1L,
                 1, "Integer",
-                "java.lang.Integer",1 ,"userId"));
+                "java.lang.Integer", 1, "userId"));
 
         Assert.assertEquals(3, interfaceRequestMapper.getAll().size());
     }
@@ -52,4 +58,13 @@ public class InterfaceRequestMapperTest {
         Assert.assertTrue(("userId".equals(interfaceRequestMapper.getOne(1l).getRequestParameterName())));
     }
 
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = interfaceRequestService.findInterfaceRequestEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
+    }
 }
