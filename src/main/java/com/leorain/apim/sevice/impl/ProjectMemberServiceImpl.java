@@ -1,9 +1,12 @@
 package com.leorain.apim.sevice.impl;
 
 import com.leorain.apim.entity.ProjectMemberEntity;
+import com.leorain.apim.entity.ProjectMemberRowMapper;
 import com.leorain.apim.mapper.ProjectMemberMapper;
 import com.leorain.apim.sevice.ProjectMemberService;
+import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     @Autowired
     private ProjectMemberMapper projectMemberMapper;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Override
     public ProjectMemberEntity findProjectMemberEntity(Long projectMemberId) {
         return projectMemberMapper.getOne(projectMemberId);
@@ -25,5 +31,15 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     @Override
     public List<ProjectMemberEntity> findProjectMemberEntityList() {
         return projectMemberMapper.getAll();
+    }
+
+    @Override
+    public JqPage<ProjectMemberEntity> findProjectMemberEntityPage(JqPage jqPage, ProjectMemberEntity projectMemberEntity) {
+        String countSQL = " SELECT COUNT(*) FROM T_API_PROJECT_MEMBER ";
+        String resultSQL = " SELECT * FROM T_API_PROJECT_MEMBER LIMIT ?, ?";
+        jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, int.class));
+        Object[] args = {jqPage.getFromIndex(), jqPage.getPageSize()};
+        jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectMemberRowMapper()));
+        return jqPage;
     }
 }

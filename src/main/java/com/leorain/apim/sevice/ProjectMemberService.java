@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.ProjectMemberEntity;
+import com.leorain.apim.tools.JqPage;
 
 import java.util.List;
 
@@ -23,4 +24,13 @@ public interface ProjectMemberService {
      * @return
      */
     List<ProjectMemberEntity> findProjectMemberEntityList();
+
+    /**
+     * 分页查询所有
+     *
+     * @param jqPage
+     * @param projectMemberEntity
+     * @return
+     */
+    JqPage<ProjectMemberEntity> findProjectMemberEntityPage(JqPage jqPage, ProjectMemberEntity projectMemberEntity);
 }

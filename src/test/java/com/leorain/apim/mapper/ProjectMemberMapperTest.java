@@ -1,6 +1,9 @@
 package com.leorain.apim.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.ProjectMemberEntity;
+import com.leorain.apim.sevice.ProjectMemberService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +19,9 @@ public class ProjectMemberMapperTest {
 
     @Autowired
     private ProjectMemberMapper projectMemberMapper;
+
+    @Autowired
+    private ProjectMemberService projectMemberService;
 
     @Test
     public void testInsert() throws Exception {
@@ -47,6 +53,15 @@ public class ProjectMemberMapperTest {
         projectMemberEntity.setProjectMemberId(1l);
         projectMemberMapper.update(projectMemberEntity);
         Assert.assertTrue(1l == projectMemberMapper.getOne(1l).getProjectMemberId());
+    }
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = projectMemberService.findProjectMemberEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
     }
 
 }
