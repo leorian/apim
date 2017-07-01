@@ -1,21 +1,11 @@
 package com.leorain.apim.mapper;
 
 import com.leorain.apim.entity.InterfaceMethodEntity;
-
-import java.util.List;
+import com.leorain.apim.mapper.base.BaseMapper;
 
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 接口方法DAO操作
  */
-public interface InterfaceMethodMapper {
-    List<InterfaceMethodEntity> getAll();
-
-    InterfaceMethodEntity getOne(Long id);
-
-    void insert(InterfaceMethodEntity interfaceMethodEntity);
-
-    void update(InterfaceMethodEntity interfaceMethodEntity);
-
-    void delete(Long id);
+public interface InterfaceMethodMapper extends BaseMapper<InterfaceMethodEntity> {
 }
