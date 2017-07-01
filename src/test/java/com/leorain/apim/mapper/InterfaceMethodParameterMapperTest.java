@@ -1,6 +1,9 @@
 package com.leorain.apim.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.InterfaceMethodParameterEntity;
+import com.leorain.apim.sevice.InterfaceMethodParameterService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,18 +20,21 @@ public class InterfaceMethodParameterMapperTest {
     @Autowired
     private InterfaceMethodParameterMapper interfaceMethodParameterMapper;
 
+    @Autowired
+    private InterfaceMethodParameterService interfaceMethodParameterService;
+
     @Test
     public void testInsert() throws Exception {
-        interfaceMethodParameterMapper.insert(new InterfaceMethodParameterEntity(1L,1L,
-                1L,1,"Integer",
+        interfaceMethodParameterMapper.insert(new InterfaceMethodParameterEntity(1L, 1L,
+                1L, 1, "Integer",
                 "java.lang.Integer", "userId", "用户ID",
                 1, "dfasdf"));
-        interfaceMethodParameterMapper.insert(new InterfaceMethodParameterEntity(2L,1L,
-                1L,1,"Integer",
+        interfaceMethodParameterMapper.insert(new InterfaceMethodParameterEntity(2L, 1L,
+                1L, 1, "Integer",
                 "java.lang.Integer", "userId", "用户ID",
                 1, "dfasdf"));
-        interfaceMethodParameterMapper.insert(new InterfaceMethodParameterEntity(3L,1L,
-                1L,1,"Integer",
+        interfaceMethodParameterMapper.insert(new InterfaceMethodParameterEntity(3L, 1L,
+                1L, 1, "Integer",
                 "java.lang.Integer", "userId", "用户ID",
                 1, "dfasdf"));
 
@@ -53,6 +59,15 @@ public class InterfaceMethodParameterMapperTest {
         interfaceMethodParameterEntity.setParameterName("userId");
         interfaceMethodParameterMapper.update(interfaceMethodParameterEntity);
         Assert.assertTrue(("userId".equals(interfaceMethodParameterMapper.getOne(1l).getParameterName())));
+    }
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = interfaceMethodParameterService.findInterfaceMethodParameterEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
     }
 
 }

@@ -57,6 +57,9 @@ public class InterfaceMethodParameterEntity extends  BaseEntity{
      */
     private String code;
 
+    public InterfaceMethodParameterEntity() {
+    }
+
     public InterfaceMethodParameterEntity(Long parameterId, Long interfaceMethodId, Long methodId,
                                           Integer parameterIndex, String parameterTypeShortName, String parameterTypeFullName,
                                           String parameterName, String parameterMeaning, Integer parameterRequired, String code) {
