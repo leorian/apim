@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Created by xiezg@317hu.com on 2017/7/1 0001.
  */
-public class ProjectMemberRowMapper implements RowMapper<ProjectMemberEntity> {
+public class ProjectMemberEntityRowMapper implements RowMapper<ProjectMemberEntity> {
     @Override
     public ProjectMemberEntity mapRow(ResultSet resultSet, int i) throws SQLException {
         ProjectMemberEntity projectMemberEntity = new ProjectMemberEntity();

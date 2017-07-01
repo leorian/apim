@@ -1,7 +1,7 @@
 package com.leorain.apim.sevice.impl;
 
 import com.leorain.apim.entity.ProjectMemberEntity;
-import com.leorain.apim.entity.ProjectMemberRowMapper;
+import com.leorain.apim.entity.ProjectMemberEntityRowMapper;
 import com.leorain.apim.mapper.ProjectMemberMapper;
 import com.leorain.apim.sevice.ProjectMemberService;
 import com.leorain.apim.tools.JqPage;
@@ -39,7 +39,7 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
         String resultSQL = " SELECT * FROM T_API_PROJECT_MEMBER LIMIT ?, ?";
         jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, int.class));
         Object[] args = {jqPage.getFromIndex(), jqPage.getPageSize()};
-        jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectMemberRowMapper()));
+        jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectMemberEntityRowMapper()));
         return jqPage;
     }
 }
