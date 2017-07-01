@@ -1,6 +1,9 @@
 package com.leorain.apim.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.InterfaceMethodReturnTypeEntity;
+import com.leorain.apim.sevice.InterfaceMethodReturnTypeService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +19,9 @@ public class InterfaceMethodReturnTypeMapperTest {
 
     @Autowired
     private InterfaceMethodReturnTypeMapper interfaceMethodReturnTypeMapper;
+
+    @Autowired
+    private InterfaceMethodReturnTypeService interfaceMethodReturnTypeService;
 
     @Test
     public void testInsert() throws Exception {
@@ -52,4 +58,13 @@ public class InterfaceMethodReturnTypeMapperTest {
         Assert.assertTrue(("String".equals(interfaceMethodReturnTypeMapper.getOne(1l).getReturnTypeShortName())));
     }
 
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = interfaceMethodReturnTypeService.findInterfaceMethodReturnTypeEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
+    }
 }

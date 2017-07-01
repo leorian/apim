@@ -37,6 +37,9 @@ public class InterfaceMethodReturnTypeEntity extends BaseEntity{
      */
     private String code;
 
+    public InterfaceMethodReturnTypeEntity() {
+    }
+
     public InterfaceMethodReturnTypeEntity(Long returnTypeId, Long interfaceMethodId, Long methodId,
                                            String returnTypeShortName, String returnTypeFullName, String code) {
         this.returnTypeId = returnTypeId;
