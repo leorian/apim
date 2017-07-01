@@ -1,6 +1,9 @@
 package com.leorain.apim.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.ApiUserEntity;
+import com.leorain.apim.sevice.ApiUserService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +19,9 @@ public class ApiUserMapperTest {
 
     @Autowired
     private ApiUserMapper apiUserMapper;
+
+    @Autowired
+    private ApiUserService apiUserService;
 
     @Test
     public void testInsert() throws Exception {
@@ -47,6 +53,15 @@ public class ApiUserMapperTest {
         apiUserEntity.setCellPhone("1860559808");
         apiUserMapper.update(apiUserEntity);
         Assert.assertTrue(("1860559808".equals(apiUserMapper.getOne(1l).getCellPhone())));
+    }
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = apiUserService.findApiUserEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.ApiUserEntity;
+import com.leorain.apim.tools.JqPage;
 
 import java.util.List;
 
@@ -22,4 +23,13 @@ public interface ApiUserService {
      * @return
      */
     List<ApiUserEntity> findApiUserEntityList();
+
+    /**
+     * 分页查询
+     *
+     * @param jqPage
+     * @param apiUserEntity
+     * @return
+     */
+    JqPage<ApiUserEntity> findApiUserEntityPage(JqPage jqPage, ApiUserEntity apiUserEntity);
 }

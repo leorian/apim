@@ -2,6 +2,8 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
+import java.io.Serializable;
+
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 用户表
@@ -41,6 +43,9 @@ public class ApiUserEntity extends BaseEntity{
      * 密码
      */
     private String password;
+
+    public ApiUserEntity() {
+    }
 
     public ApiUserEntity(Long userId, String usName, String cnName, Integer userRole, String cellPhone, String email, String password) {
         this.userId = userId;

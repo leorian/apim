@@ -59,4 +59,7 @@ public abstract class BaseEntity implements Serializable{
     public void setUpdateDateTime(Date updateDateTime) {
         this.updateDateTime = updateDateTime;
     }
+
+    public BaseEntity() {
+    }
 }
