@@ -37,6 +37,9 @@ public class PublisherEntity  extends BaseEntity{
      */
     private String version;
 
+    public PublisherEntity() {
+    }
+
     public PublisherEntity(Long publisherId, Long interfaceId, Integer environment,
                            String interfaceRealAddress, String groupName, String version) {
         this.publisherId = publisherId;

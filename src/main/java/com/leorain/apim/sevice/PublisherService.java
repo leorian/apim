@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.PublisherEntity;
+import com.leorain.apim.tools.JqPage;
 
 import java.util.List;
 
@@ -23,4 +24,13 @@ public interface PublisherService {
      * @return
      */
     List<PublisherEntity> findPublisherEntityList();
+
+    /**
+     * 分页查询
+     *
+     * @param jqPage
+     * @param publisherEntity
+     * @return
+     */
+    JqPage<PublisherEntity> findPublisherEntityPage(JqPage jqPage, PublisherEntity publisherEntity);
 }
