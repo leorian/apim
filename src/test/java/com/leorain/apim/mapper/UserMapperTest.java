@@ -2,6 +2,9 @@ package com.leorain.apim.mapper;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.leorain.apim.sevice.UserService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,36 +19,48 @@ import com.leorain.apim.enums.UserSexEnum;
 @SpringBootTest
 public class UserMapperTest {
 
-	@Autowired
-	private UserMapper UserMapper;
+    @Autowired
+    private UserMapper UserMapper;
 
-	@Test
-	public void testInsert() throws Exception {
-		UserMapper.insert(new UserEntity("aa", "a123456", UserSexEnum.MAN));
-		UserMapper.insert(new UserEntity("bb", "b123456", UserSexEnum.WOMAN));
-		UserMapper.insert(new UserEntity("cc", "b123456", UserSexEnum.WOMAN));
+    @Autowired
+    private UserService userService;
 
-		Assert.assertEquals(3, UserMapper.getAll().size());
-	}
+    @Test
+    public void testInsert() throws Exception {
+        UserMapper.insert(new UserEntity("aa", "a123456", UserSexEnum.MAN));
+        UserMapper.insert(new UserEntity("bb", "b123456", UserSexEnum.WOMAN));
+        UserMapper.insert(new UserEntity("cc", "b123456", UserSexEnum.WOMAN));
 
-	@Test
-	public void testQuery() throws Exception {
-		List<UserEntity> users = UserMapper.getAll();
-		if(users==null || users.size()==0){
-			System.out.println("is null");
-		}else{
-			System.out.println(users.toString());
-		}
-	}
-	
-	
-	@Test
-	public void testUpdate() throws Exception {
-		UserEntity user = UserMapper.getOne(6l);
-		System.out.println(user.toString());
-		user.setNickName("neo");
-		UserMapper.update(user);
-		Assert.assertTrue(("neo".equals(UserMapper.getOne(6l).getNickName())));
-	}
+        Assert.assertEquals(3, UserMapper.getAll().size());
+    }
 
+    @Test
+    public void testQuery() throws Exception {
+        List<UserEntity> users = UserMapper.getAll();
+        if (users == null || users.size() == 0) {
+            System.out.println("is null");
+        } else {
+            System.out.println(users.toString());
+        }
+    }
+
+
+    @Test
+    public void testUpdate() throws Exception {
+        UserEntity user = UserMapper.getOne(6l);
+        System.out.println(user.toString());
+        user.setNickName("neo");
+        UserMapper.update(user);
+        Assert.assertTrue(("neo".equals(UserMapper.getOne(6l).getNickName())));
+    }
+
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = userService.findUserEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
+    }
 }
