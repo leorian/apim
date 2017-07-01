@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.ProjectEntity;
+import com.leorain.apim.tools.JqPage;
 
 import java.util.List;
 
@@ -9,15 +10,20 @@ import java.util.List;
  */
 public interface ProjectService {
     /**
-     *
      * @param projectId
      * @return
      */
     ProjectEntity findProjectEntity(Long projectId);
 
     /**
-     *
      * @return
      */
     List<ProjectEntity> findProjectEntityList();
+
+    /**
+     * @param jqPage
+     * @param projectEntity
+     * @return
+     */
+    JqPage<ProjectEntity> findProjectEntityPage(JqPage jqPage, ProjectEntity projectEntity);
 }

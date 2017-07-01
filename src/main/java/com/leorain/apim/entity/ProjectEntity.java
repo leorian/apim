@@ -28,6 +28,9 @@ public class ProjectEntity extends BaseEntity{
      */
     private Long projectManager;
 
+    public ProjectEntity() {
+    }
+
     public ProjectEntity(Long projectId, String projectName, String projectDescribe, Long projectManager) {
         this.projectId = projectId;
         this.projectName = projectName;
