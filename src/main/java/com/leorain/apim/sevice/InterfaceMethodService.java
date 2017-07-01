@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.InterfaceMethodEntity;
+import com.leorain.apim.tools.JqPage;
 
 import java.util.List;
 
@@ -22,4 +23,13 @@ public interface InterfaceMethodService {
      * @return
      */
     List<InterfaceMethodEntity> findInterfaceMethodEntityList();
+
+    /**
+     * 分页查询
+     *
+     * @param jqPage
+     * @param interfaceMethodEntity
+     * @return
+     */
+    JqPage<InterfaceMethodEntity> findInterfaceMethodEntityPage(JqPage jqPage, InterfaceMethodEntity interfaceMethodEntity);
 }
