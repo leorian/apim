@@ -29,6 +29,9 @@ public class InterfaceEntity extends BaseEntity{
     //请求方式
     private Integer requestMethod;
 
+    public InterfaceEntity() {
+    }
+
     public InterfaceEntity(Long interfaceId, Long projectId, String interfaceName,
                            Integer interfaceType, String interfaceAddress, Integer requestMethod) {
         this.interfaceId = interfaceId;

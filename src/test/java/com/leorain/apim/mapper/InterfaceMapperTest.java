@@ -1,6 +1,9 @@
 package com.leorain.apim.mapper;
 
+import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.InterfaceEntity;
+import com.leorain.apim.sevice.InterfaceService;
+import com.leorain.apim.tools.JqPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +19,9 @@ public class InterfaceMapperTest {
 
     @Autowired
     private InterfaceMapper interfaceMapper;
+
+    @Autowired
+    private InterfaceService interfaceService;
 
     @Test
     public void testInsert() throws Exception {
@@ -47,6 +53,15 @@ public class InterfaceMapperTest {
         interfaceEntity.setInterfaceAddress("com.bozhong.hello.service.UserService");
         interfaceMapper.update(interfaceEntity);
         Assert.assertTrue(("com.bozhong.hello.service.UserService".equals(interfaceMapper.getOne(1l).getInterfaceAddress())));
+    }
+
+    @Test
+    public void testPage() {
+        JqPage jqPage = new JqPage();
+        jqPage.setPage(1);
+        jqPage.setPageSize(10);
+        jqPage = interfaceService.findInterfaceEntityPage(jqPage, null);
+        System.out.println(JSON.toJSONString(jqPage));
     }
 
 }
