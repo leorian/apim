@@ -1,14 +1,14 @@
 package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
-
+import com.leorain.apim.enums.UserRoleEnum;
 
 
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 用户表
  */
-public class ApiUserEntity extends BaseEntity{
+public class ApiUserEntity extends BaseEntity {
     /**
      * 用户ID
      */
@@ -28,6 +28,11 @@ public class ApiUserEntity extends BaseEntity{
      * 用户身份
      */
     private Integer userRole;
+
+    /**
+     * 用户身份转换后的值
+     */
+    private String userRoleText;
 
     /**
      * 手机号码
@@ -111,6 +116,14 @@ public class ApiUserEntity extends BaseEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserRoleText() {
+        return UserRoleEnum.DATA_MAP.get(this.getUserRole());
+    }
+
+    public void setUserRoleText(String userRoleText) {
+        this.userRoleText = userRoleText;
     }
 
     @Override

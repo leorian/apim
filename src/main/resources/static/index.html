@@ -16,6 +16,26 @@
                 }
             }, "json");
 
+            //用户列表
+            $.get("apiUser/findApiUserList", null, function (data) {
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        var trElement = "<tr>";
+                        trElement += ("<td class='text-center'>" + data[i].userId + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].usName + "</td>");
+                        trElement += ("<td class='text-center' >" + data[i].cnName + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].userRoleText + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].cellPhone + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].email + "</td>");
+                        trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\">编辑</button>"
+                        + "&nbsp;&nbsp;&nbsp;&nbsp;" +
+                        "<button class=\"btn btn-danger btn-xs\">删除</button>" + "</td>");
+                        trElement += "</tr>";
+                        $("#userTableTBody").append(trElement);
+                    }
+                }
+            }, "json");
+
             //新增用户提交按钮
             $("#newUserSubmitBtn").click(function () {
                 $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
@@ -83,7 +103,10 @@
                     <th class="text-center">手机号</th>
                     <th class="text-center">工作邮箱</th>
                     <th class="text-center">操作</th>
-                    <tr>
+                    <tbody id="userTableTBody">
+
+                    </tbody>
+                    <!--<tr>
                         <td class="text-center">20170628084501</td>
                         <td class="text-center">xiezg</td>
                         <td class="text-center">谢中贵</td>
@@ -147,7 +170,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <button class="btn btn-danger btn-xs">删除</button>
                         </td>
-                    </tr>
+                    </tr>-->
                 </table>
                 <ul class="pager">
                     <li class="previous"><a href="#">&larr; 上一页</a></li>
