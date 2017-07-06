@@ -74,4 +74,10 @@ public class ApiUserController {
         apiUserService.insertApiUserEntity(apiUserDomain.buildApiUserEntity());
         return new ResultDomain();
     }
+
+    @RequestMapping("/deleteApiUser")
+    public ResultDomain deleteApiUser(@RequestParam("userId") Long userId) {
+        apiUserService.deleteApiUserEntity(userId);
+        return new ResultDomain();
+    }
 }

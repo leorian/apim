@@ -84,4 +84,9 @@ public class ApiUserServiceImpl implements ApiUserService {
     public void insertApiUserEntity(ApiUserEntity apiUserEntity) {
         apiUserMapper.insert(apiUserEntity);
     }
+
+    @Override
+    public void deleteApiUserEntity(Long userId) {
+        apiUserMapper.delete(userId);
+    }
 }
