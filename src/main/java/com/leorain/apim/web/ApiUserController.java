@@ -50,11 +50,18 @@ public class ApiUserController {
      */
     @RequestMapping("/findApiUserPage")
     public JqPage<ApiUserEntity> findApiUserPage(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
-                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                 @RequestParam(value = "userNameCondition",required = false) String userNameCondition,
+                                                 @RequestParam(value = "contactWayCondition", required = false) String contactWayCondition) {
         JqPage jqPage = new JqPage();
         jqPage.setPage(currentPage);
         jqPage.setPageSize(pageSize);
-        return apiUserService.findApiUserEntityPage(jqPage, null);
+        ApiUserEntity apiUserEntity = new ApiUserEntity();
+        apiUserEntity.setUsName(userNameCondition);
+        apiUserEntity.setCnName(userNameCondition);
+        apiUserEntity.setCellPhone(contactWayCondition);
+        apiUserEntity.setEmail(contactWayCondition);
+        return apiUserService.findApiUserEntityPage(jqPage, apiUserEntity);
     }
 
     /**
