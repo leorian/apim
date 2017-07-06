@@ -2,7 +2,9 @@ package com.leorain.apim.domain;
 
 import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.ApiUserEntity;
+import org.springframework.util.DigestUtils;
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -68,7 +70,7 @@ public class ApiUserDomain {
         apiUserEntity.setEmail(this.getEmailInput());
         apiUserEntity.setCreateDateTime(date);
         apiUserEntity.setUpdateDateTime(date);
-        apiUserEntity.setPassword("000000");
+        apiUserEntity.setPassword(DigestUtils.md5DigestAsHex("000000".getBytes(Charset.forName("utf-8"))));
         return apiUserEntity;
     }
 
