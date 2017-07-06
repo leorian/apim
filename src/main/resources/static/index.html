@@ -150,11 +150,11 @@
                     <div class="form-group">
                         <label class="control-label" for="projectManager">项目经理：</label>
                         <select class="form-control" id="projectManager">
-                            <option>谢中贵</option>
                             <option>乐天</option>
                             <option>张三</option>
                             <option>李四</option>
                             <option>王五</option>
+                            <option>谢中贵</option>
                         </select>
                     </div>
                     <button type="button" class="btn btn-primary">搜索</button>
@@ -349,7 +349,61 @@
                 </h4>
             </div>
             <div class="modal-body">
-                点击关闭按钮检查事件功能。
+                <form class="form-horizontal" id="newProjectForm" role="form">
+                    <div class="form-group">
+                        <label for="projectNameInput" class="col-sm-3 control-label">项目名称：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="projectNameInput" name="projectNameInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescribeInput" class="col-sm-3 control-label">项目描述：</label>
+                        <div class="col-sm-9">
+                            <textarea id="projectDescribeInput" name="projectDescribeInput" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectManagerInput" class="col-sm-3 control-label">项目经理：</label>
+                        <div class="col-sm-9">
+                            <select id="projectManagerInput" name="projectManagerInput" class="form-control">
+                                <option>乐天</option>
+                                <option>张三</option>
+                                <option>李四</option>
+                                <option>王五</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectMemberInput" class="col-sm-3 control-label">组成成员：</label>
+                        <div class="col-sm-9" id="projectMemberInput">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox1" value="option1"> 乐天
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox2" value="option2"> 张三
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox3" value="option3"> 李四
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox4" value="option3"> 王五
+                            </label>
+                            <br/>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox5" value="option1"> 赵六
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox6" value="option2"> 谢中贵
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox7" value="option3"> 洛天
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox8" value="option3"> 洛溪
+                            </label>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
