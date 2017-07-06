@@ -18,7 +18,8 @@
 
             //用户列表
             $.get("apiUser/findApiUserList", null, function (data) {
-                if (data != null) {
+                if (data != null && data.length > 0) {
+                    var trElements = "";
                     for (var i = 0; i < data.length; i++) {
                         var trElement = "<tr>";
                         trElement += ("<td class='text-center'>" + data[i].userId + "</td>");
@@ -31,8 +32,11 @@
                         + "&nbsp;&nbsp;&nbsp;&nbsp;" +
                         "<button class=\"btn btn-danger btn-xs\">删除</button>" + "</td>");
                         trElement += "</tr>";
-                        $("#userTableTBody").append(trElement);
+                        trElements = trElements + trElement;
                     }
+                    $("#userTableTBody").html(trElements);
+                } else {
+                    $("#userTableTBody").html("<tr><td class='text-center' colspan='7'>没有记录！</td></tr>");
                 }
             }, "json");
 
@@ -42,6 +46,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#newUserModal").modal("hide");
+                        window.location.reload();
                     }
                 }, "json");
             });
