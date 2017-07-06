@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>在线尝试 Bootstrap 实例</title>
+    <title>API接口管理系统</title>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -30,8 +30,6 @@
 <br/>
 <br/>
 <br/>
-<br/>
-<br/>
 <div class="container">
     <div class="row">
         <!--用户管理-->
@@ -49,8 +47,8 @@
                         <input type="text" class="form-control" id="name">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="inputfile">手机号码/邮箱：</label>
-                        <input type="text" class="form-control" id="inputfile">
+                        <label class="control-label" for="contactWay">手机号码/邮箱：</label>
+                        <input type="text" class="form-control" id="contactWay">
                     </div>
                     <button type="button" class="btn btn-primary">搜索</button>
                 </form>
@@ -141,11 +139,119 @@
                 <h3 class="panel-title">项目管理</h3>
             </div>
             <div class="panel-body">
-                这是一个基本的面板
+                <div class="text-right">
+                    <button type="button" class="btn btn-info">新增项目</button>
+                </div>
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="control-label" for="projectName">项目名称：</label>
+                        <input type="text" class="form-control" id="projectName">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="projectManager">项目经理：</label>
+                        <select class="form-control" id="projectManager">
+                            <option>谢中贵</option>
+                            <option>乐天</option>
+                            <option>张三</option>
+                            <option>李四</option>
+                            <option>王五</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary">搜索</button>
+                </form>
+                <br/>
+                <table class="table table-bordered">
+                    <th class="text-center">项目ID</th>
+                    <th class="text-center">项目名称</th>
+                    <th class="text-center">接口总数</th>
+                    <th class="text-center">项目经理</th>
+                    <th class="text-center">项目组成员</th>
+                    <th class="text-center">项目描述</th>
+                    <th class="text-center">创建时间</th>
+                    <th class="text-center">操作</th>
+                    <tr>
+                        <td class="text-center">20170628084501</td>
+                        <td class="text-center">配置中心</td>
+                        <td class="text-center">接口总数</td>
+                        <td class="text-center">乐天</td>
+                        <td class="text-center">4</td>
+                        <td class="text-center">配置项管理平台</td>
+                        <td class="text-center">2017-06-28</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-success btn-xs">编辑</button>
+                            <button type="button" class="btn btn-danger btn-xs">删除</button>
+                            <button type="button" class="btn btn-info btn-xs">接口管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084502</td>
+                        <td class="text-center">文档转换</td>
+                        <td class="text-center">20</td>
+                        <td class="text-center">乐天</td>
+                        <td class="text-center">4</td>
+                        <td class="text-center">office文档转换成pdf</td>
+                        <td class="text-center">2017-06-28</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-success btn-xs">编辑</button>
+                            <button type="button" class="btn btn-danger btn-xs">删除</button>
+                            <button type="button" class="btn btn-info btn-xs">接口管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084503</td>
+                        <td class="text-center">开关平台</td>
+                        <td class="text-center">20</td>
+                        <td class="text-center">李四</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">修改应用静态字段值</td>
+                        <td class="text-center">2017-06-28</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-success btn-xs">编辑</button>
+                            <button type="button" class="btn btn-danger btn-xs">删除</button>
+                            <button type="button" class="btn btn-info btn-xs">接口管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084504</td>
+                        <td class="text-center">insist-RPC平台</td>
+                        <td class="text-center">3</td>
+                        <td class="text-center">李四</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">rpc服务注册情况查看</td>
+                        <td class="text-center">2017-06-28</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-success btn-xs">编辑</button>
+                            <button type="button" class="btn btn-danger btn-xs">删除</button>
+                            <button type="button" class="btn btn-info btn-xs">接口管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084505</td>
+                        <td class="text-center">BOSS平台</td>
+                        <td class="text-center">23</td>
+                        <td class="text-center">王五</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">API对外调用开放平台</td>
+                        <td class="text-center">2017-06-28</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-success btn-xs">编辑</button>
+                            <button type="button" class="btn btn-danger btn-xs">删除</button>
+                            <button type="button" class="btn btn-info btn-xs">接口管理</button>
+                        </td>
+                    </tr>
+                </table>
+                <ul class="pager">
+                    <li class="previous"><a href="#">&larr; 上一页</a></li>
+                    <li class="next"><a href="#">下一页 &rarr;</a></li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
 <!--底部导航-->
 <footer class="footer navbar navbar-default navbar-fixed-bottom">
     <div class="container">
