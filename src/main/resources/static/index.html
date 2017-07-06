@@ -9,6 +9,25 @@
     <script>
         $(function () {
 
+            //分页控制
+            function pagerControl(data) {
+                var previous = $("#userManagerPanel").find("ul.pager > li.previous > a");
+                var next = $("#userManagerPanel").find("ul.pager > li.next > a");
+                previous.attr("data-page", data.page).attr("data-total", data.total);
+                next.attr("data-page", data.page).attr("data-total", data.total);
+                if (previous.attr("data-page") == 1) {
+                    $("#userManagerPanel").find("ul.pager > li.previous").addClass("disabled");
+                } else {
+                    $("#userManagerPanel").find("ul.pager > li.previous").removeClass("disabled");
+                }
+
+                if (next.attr("data-page") == next.attr("data-total")) {
+                    $("#userManagerPanel").find("ul.pager > li.next").addClass("disabled");
+                } else {
+                    $("#userManagerPanel").find("ul.pager > li.next").removeClass("disabled");
+                }
+            }
+
             //用户角色枚举
             $.get("enum/userRoleEnums", null, function (data) {
                 for (var code in data) {
@@ -64,6 +83,7 @@
                 } else {
                     $("#userTableTBody").html("<tr><td class='text-center' colspan='7'>没有记录！</td></tr>");
                 }
+                pagerControl(data);
             }, "json");
 
             //新增用户提交按钮
@@ -105,7 +125,7 @@
 <div class="container">
     <div class="row">
         <!--用户管理-->
-        <div class="panel panel-info">
+        <div class="panel panel-info" id="userManagerPanel">
             <div class="panel-heading">
                 <h3 class="panel-title">用户管理</h3>
             </div>
