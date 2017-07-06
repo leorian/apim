@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="webFrame/bootstrap-3.3.7/dist/css/bootstrap.min.css">
     <script src="webFrame/jquery-2.1.1/jquery.min.js"></script>
     <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+
+        });
+    </script>
 </head>
 <body>
 <!--顶部导航-->
@@ -293,21 +298,21 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="newUserForm" role="form">
                     <div class="form-group">
-                        <label for="usName" class="col-sm-3 control-label">英文名称：</label>
+                        <label for="usNameInput" class="col-sm-3 control-label">英文名称：</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="usName" name="usName"/>
+                            <input type="text" class="form-control" id="usNameInput" name="usNameInput"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cnName" class="col-sm-3 control-label">中文名称：</label>
+                        <label for="cnNameInput" class="col-sm-3 control-label">中文名称：</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="cnName" name="cnName"/>
+                            <input type="text" class="form-control" id="cnNameInput" name="cnNameInput"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="userRole" class="col-sm-3 control-label">用户角色：</label>
+                        <label for="userRoleInput" class="col-sm-3 control-label">用户角色：</label>
                         <div class="col-sm-9">
-                            <select id="userRole" name="userRole" class="form-control">
+                            <select id="userRoleInput" name="userRoleInput" class="form-control">
                                 <option>系统管理员</option>
                                 <option>开发人员</option>
                                 <option>测试人员</option>
@@ -317,15 +322,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cellPhone" class="col-sm-3 control-label">手机号码：</label>
+                        <label for="cellPhoneInput" class="col-sm-3 control-label">手机号码：</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="cellPhone" name="cellPhone"/>
+                            <input type="text" class="form-control" id="cellPhoneInput" name="cellPhoneInput"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="col-sm-3 control-label">工作邮箱：</label>
+                        <label for="emailInput" class="col-sm-3 control-label">工作邮箱：</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email" name="email"/>
+                            <input type="text" class="form-control" id="emailInput" name="emailInput"/>
                         </div>
                     </div>
                 </form>

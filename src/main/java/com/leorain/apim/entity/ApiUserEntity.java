@@ -2,7 +2,7 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
-import java.io.Serializable;
+
 
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
