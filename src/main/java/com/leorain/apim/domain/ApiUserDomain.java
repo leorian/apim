@@ -66,6 +66,8 @@ public class ApiUserDomain {
         apiUserEntity.setUserRole(Integer.parseInt(this.getUserRoleInput()));
         apiUserEntity.setCellPhone(this.getCellPhoneInput());
         apiUserEntity.setEmail(this.getEmailInput());
+        apiUserEntity.setCreateDateTime(date);
+        apiUserEntity.setUpdateDateTime(date);
         return apiUserEntity;
     }
 
