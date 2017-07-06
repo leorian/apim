@@ -8,7 +8,12 @@
     <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script>
         $(function () {
-
+            //新增用户提交按钮
+            $("#newUserSubmitBtn").click(function () {
+                $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
+                    console.log(data);
+                }, "json");
+            });
         });
     </script>
 </head>
@@ -44,7 +49,8 @@
             </div>
             <div class="panel-body">
                 <div class="text-right">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newUserModal">新增用户</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newUserModal">新增用户
+                    </button>
                 </div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
@@ -145,7 +151,8 @@
             </div>
             <div class="panel-body">
                 <div class="text-right">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newProjectModal">新增项目</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newProjectModal">新增项目
+                    </button>
                 </div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
@@ -285,7 +292,8 @@
     </div>
 </footer>
 <!-- 新增用户模态框（Modal） -->
-<div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="newUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="newUserModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -339,7 +347,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" id="newUserSubmitBtn">
                     提交更改
                 </button>
             </div>
@@ -348,7 +356,8 @@
 </div><!-- /.modal -->
 
 <!-- 新增项目模态框（Modal） -->
-<div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+<div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="newProjectModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -369,7 +378,8 @@
                     <div class="form-group">
                         <label for="projectDescribeInput" class="col-sm-3 control-label">项目描述：</label>
                         <div class="col-sm-9">
-                            <textarea id="projectDescribeInput" name="projectDescribeInput" class="form-control"></textarea>
+                            <textarea id="projectDescribeInput" name="projectDescribeInput"
+                                      class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

@@ -32,4 +32,11 @@ public interface ApiUserService {
      * @return
      */
     JqPage<ApiUserEntity> findApiUserEntityPage(JqPage jqPage, ApiUserEntity apiUserEntity);
+
+    /**
+     * 新增用户
+     *
+     * @param apiUserEntity
+     */
+    void insertApiUserEntity(ApiUserEntity apiUserEntity);
 }

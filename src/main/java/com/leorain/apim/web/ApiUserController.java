@@ -1,5 +1,7 @@
 package com.leorain.apim.web;
 
+import com.leorain.apim.domain.ApiUserDomain;
+import com.leorain.apim.domain.ResultDomain;
 import com.leorain.apim.entity.ApiUserEntity;
 import com.leorain.apim.sevice.ApiUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +39,16 @@ public class ApiUserController {
     @RequestMapping("/findApiUserList")
     public List<ApiUserEntity> findApiUserList() {
         return apiUserService.findApiUserEntityList();
+    }
+
+    /**
+     * 新增用户
+     *
+     * @param apiUserDomain
+     */
+    @RequestMapping("/insertApiUser")
+    public ResultDomain insertApiUser(ApiUserDomain apiUserDomain) {
+        apiUserService.insertApiUserEntity(apiUserDomain.buildApiUserEntity());
+        return new ResultDomain();
     }
 }

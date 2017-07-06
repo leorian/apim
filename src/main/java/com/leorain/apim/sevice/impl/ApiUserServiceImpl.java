@@ -42,4 +42,9 @@ public class ApiUserServiceImpl implements ApiUserService {
         jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ApiUserEntityRowMapper()));
         return jqPage;
     }
+
+    @Override
+    public void insertApiUserEntity(ApiUserEntity apiUserEntity) {
+        apiUserMapper.insert(apiUserEntity);
+    }
 }
