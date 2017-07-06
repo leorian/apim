@@ -59,8 +59,8 @@ public class ApiUserServiceImpl implements ApiUserService {
         }
 
         if (!StringUtils.isEmpty(apiUserEntity.getEmail())) {
-            countSQL = countSQL + " (cellPhome LIKE ? OR email LIKE ?)";
-            resultSQL = resultSQL + " (cellPhome LIKE ? OR email LIKE ?)";
+            countSQL = countSQL + " (cellPhone LIKE ? OR email LIKE ?)";
+            resultSQL = resultSQL + " (cellPhone LIKE ? OR email LIKE ?)";
             objectList.add("%" + apiUserEntity.getCellPhone() + "%");
             objectList.add("%" + apiUserEntity.getEmail() + "%");
         }
