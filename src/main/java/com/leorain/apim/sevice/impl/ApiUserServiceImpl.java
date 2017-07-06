@@ -49,8 +49,8 @@ public class ApiUserServiceImpl implements ApiUserService {
         if (!StringUtils.isEmpty(apiUserEntity.getCnName())) {
             countSQL = countSQL + " (usName LIKE ? OR cnName LIKE ?)";
             resultSQL = resultSQL + " (usName LIKE ? OR cnName LIKE ?)";
-            objectList.add(apiUserEntity.getUsName());
-            objectList.add(apiUserEntity.getCnName());
+            objectList.add("%" + apiUserEntity.getUsName() + "%");
+            objectList.add("%" + apiUserEntity.getCnName() + "%");
         }
 
         if (!StringUtils.isEmpty(apiUserEntity.getCnName()) && !StringUtils.isEmpty(apiUserEntity.getEmail())) {
@@ -61,8 +61,8 @@ public class ApiUserServiceImpl implements ApiUserService {
         if (!StringUtils.isEmpty(apiUserEntity.getEmail())) {
             countSQL = countSQL + " (cellPhome LIKE ? OR email LIKE ?)";
             resultSQL = resultSQL + " (cellPhome LIKE ? OR email LIKE ?)";
-            objectList.add(apiUserEntity.getCellPhone());
-            objectList.add(apiUserEntity.getEmail());
+            objectList.add("%" + apiUserEntity.getCellPhone() + "%");
+            objectList.add("%" + apiUserEntity.getEmail() + "%");
         }
 
         resultSQL = resultSQL + " LIMIT ? , ? ";

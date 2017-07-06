@@ -30,7 +30,9 @@
 
             //用户分页函数
             function userPage(currentPage, pageSize) {
-                $.get("apiUser/findApiUserPage", {currentPage:currentPage, pageSize: pageSize}, function (data) {
+                $.get("apiUser/findApiUserPage", {currentPage:currentPage, pageSize: pageSize,
+                    userNameCondition:$("#userNameCondition").val(),
+                    contactWayCondition: $("#contactWayCondition").val()}, function (data) {
                     if (data != null && data.rows != null && data.rows.length > 0) {
                         var trElements = "";
                         for (var i = 0; i < data.rows.length; i++) {
@@ -54,6 +56,11 @@
                     pagerControl(data);
                 }, "json");
             }
+
+            //用户搜索
+            $("#userSearchBtn").click(function () {
+                userPage(null, null);
+            });
 
             //用户上一页单击事件
             $("#userManagerPanel").delegate("ul.pager > li.previous > a", "click", function () {
@@ -162,7 +169,7 @@
                         <label class="control-label" for="contactWayCondition">手机号码/邮箱：</label>
                         <input type="text" class="form-control" id="contactWayCondition">
                     </div>
-                    <button type="button" class="btn btn-primary">搜索</button>
+                    <button type="button" class="btn btn-primary" id="userSearchBtn">搜索</button>
                 </form>
                 <br/>
                 <table class="table table-bordered">
