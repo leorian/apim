@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>在线尝试 Bootstrap 实例</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--顶部导航-->
+<header id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse header-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:void(0);"> 登录者：xiezg</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="button button-little bg-red" href="login.htm">
+                        <span class="icon-power-off"></span>
+                        退出登录
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <!--用户管理-->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">用户管理</h3>
+            </div>
+            <div class="panel-body">
+                <div class="text-right">
+                    <button type="button" class="btn btn-info">新增用户</button>
+                </div>
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="control-label" for="name">中英文名称：</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputfile">手机号码/邮箱：</label>
+                        <input type="text" class="form-control" id="inputfile">
+                    </div>
+                    <button type="button" class="btn btn-primary">搜索</button>
+                </form>
+                <br/>
+                <table class="table table-bordered">
+                    <th class="text-center">用户ID</th>
+                    <th class="text-center">英文名称</th>
+                    <th class="text-center">中文名称</th>
+                    <th class="text-center">用户身份</th>
+                    <th class="text-center">手机号</th>
+                    <th class="text-center">工作邮箱</th>
+                    <th class="text-center">操作</th>
+                    <tr>
+                        <td class="text-center">20170628084501</td>
+                        <td class="text-center">xiezg</td>
+                        <td class="text-center">谢中贵</td>
+                        <td class="text-center">开发人员</td>
+                        <td class="text-center">18605569807</td>
+                        <td class="text-center">xiezg@317hu@2016</td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-xs">编辑</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger btn-xs">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084502</td>
+                        <td class="text-center">zs</td>
+                        <td class="text-center">张三</td>
+                        <td class="text-center">测试人员</td>
+                        <td class="text-center">18605569808</td>
+                        <td class="text-center">zs@317hu@2016</td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-xs">编辑</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger btn-xs">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084503</td>
+                        <td class="text-center">ls</td>
+                        <td class="text-center">李四</td>
+                        <td class="text-center">运维人员</td>
+                        <td class="text-center">18605569809</td>
+                        <td class="text-center">ls@317hu@2016</td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-xs">编辑</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger btn-xs">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084504</td>
+                        <td class="text-center">ww</td>
+                        <td class="text-center">王五</td>
+                        <td class="text-center">产品人员</td>
+                        <td class="text-center">18605569810</td>
+                        <td class="text-center">ww@317hu@2016</td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-xs">编辑</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger btn-xs">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">20170628084505</td>
+                        <td class="text-center">lt</td>
+                        <td class="text-center">乐天</td>
+                        <td class="text-center">开发人员</td>
+                        <td class="text-center">18605569811</td>
+                        <td class="text-center">lt@317hu@2016</td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-xs">编辑</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger btn-xs">删除</button>
+                        </td>
+                    </tr>
+                </table>
+                <ul class="pager">
+                    <li class="previous"><a href="#">&larr; 上一页</a></li>
+                    <li class="next"><a href="#">下一页 &rarr;</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--项目管理-->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">项目管理</h3>
+            </div>
+            <div class="panel-body">
+                这是一个基本的面板
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部导航-->
+<footer class="footer navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-collapse collapse header-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:void(0);"><img src="webFrame/timg.jpg" width="50px" height="30px"/>&nbsp;&nbsp;317护</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="button button-little bg-red" href="javascript:void(0);">
+                        <span class="icon-power-off"></span>
+                        杭州伯仲信息科技有限公司<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        云平台部
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>
