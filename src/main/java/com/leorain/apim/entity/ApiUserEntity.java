@@ -15,6 +15,11 @@ public class ApiUserEntity extends BaseEntity {
     private Long userId;
 
     /**
+     * 用户ID纯文本，防止long类型精度丢失
+     */
+    private String userIdText;
+
+    /**
      * 英文名称
      */
     private String usName;
@@ -68,6 +73,14 @@ public class ApiUserEntity extends BaseEntity {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getUserIdText() {
+        return userIdText;
+    }
+
+    public void setUserIdText(String userIdText) {
+        this.userIdText = userIdText;
     }
 
     public String getUsName() {

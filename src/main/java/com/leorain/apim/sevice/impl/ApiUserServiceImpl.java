@@ -89,4 +89,10 @@ public class ApiUserServiceImpl implements ApiUserService {
     public void deleteApiUserEntity(Long userId) {
         apiUserMapper.delete(userId);
     }
+
+    @Override
+    public void updateApiUserEntity(Long userId, ApiUserEntity apiUserEntity) {
+        apiUserEntity.setUserId(userId);
+        apiUserMapper.update(apiUserEntity);
+    }
 }

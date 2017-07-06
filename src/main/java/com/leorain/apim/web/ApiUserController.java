@@ -51,7 +51,7 @@ public class ApiUserController {
     @RequestMapping("/findApiUserPage")
     public JqPage<ApiUserEntity> findApiUserPage(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
                                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                 @RequestParam(value = "userNameCondition",required = false) String userNameCondition,
+                                                 @RequestParam(value = "userNameCondition", required = false) String userNameCondition,
                                                  @RequestParam(value = "contactWayCondition", required = false) String contactWayCondition) {
         JqPage jqPage = new JqPage();
         jqPage.setPage(currentPage);
@@ -75,9 +75,27 @@ public class ApiUserController {
         return new ResultDomain();
     }
 
+    /**
+     * 删除用户
+     *
+     * @param userId
+     * @return
+     */
     @RequestMapping("/deleteApiUser")
     public ResultDomain deleteApiUser(@RequestParam("userId") Long userId) {
         apiUserService.deleteApiUserEntity(userId);
+        return new ResultDomain();
+    }
+
+    /**
+     * 更新用户
+     *
+     * @param apiUserDomain
+     * @return
+     */
+    @RequestMapping("/updateApiUser")
+    public ResultDomain updateApiUser(ApiUserDomain apiUserDomain, @RequestParam("userIdInput") Long userId) {
+        apiUserService.updateApiUserEntity(userId, apiUserDomain.buildApiUserEntity());
         return new ResultDomain();
     }
 }

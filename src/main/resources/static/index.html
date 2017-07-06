@@ -39,16 +39,17 @@
                         var trElements = "";
                         for (var i = 0; i < data.rows.length; i++) {
                             var trElement = "<tr>";
-                            trElement += ("<td class='text-center'>" + data.rows[i].userId + "</td>");
+                            trElement += ("<td class='text-center'>" + data.rows[i].userIdText + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].usName + "</td>");
                             trElement += ("<td class='text-center' >" + data.rows[i].cnName + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].userRoleText + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].cellPhone + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].email + "</td>");
-                            trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\">编辑</button>"
+                            trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\" data-toggle='modal' " +
+                            "data-target='#newUserModal' data-userid='"+data.rows[i].userIdText+"'>编辑</button>"
                             + "&nbsp;&nbsp;&nbsp;&nbsp;" +
                             "<button class=\"btn btn-danger btn-xs\" data-toggle=\"modal\" " +
-                            "data-target=\"#deleteUserModal\" data-userid='" + data.rows[i].userId + "'>删除</button>" + "</td>");
+                            "data-target=\"#deleteUserModal\" data-userid='" + data.rows[i].userIdText + "'>删除</button>" + "</td>");
                             trElement += "</tr>";
                             trElements = trElements + trElement;
                         }
@@ -119,15 +120,39 @@
             $("#addUserBtn").click(function () {
                 $("#newUserForm")[0].reset();
             });
-            //新增用户提交按钮事件
+
+            //新增或者编辑用户提交按钮事件
             $("#newUserSubmitBtn").click(function () {
-                $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
-                    console.log(data);
-                    if (data.success) {
-                        $("#newUserModal").modal("hide");
-                        window.location.reload();
-                    }
-                }, "json");
+                if ($("#userIdInput").val()==null || $("#userIdInput").val()=="") {
+                    $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#newUserModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                } else {
+                    $.post("apiUser/updateApiUser", $("#newUserForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#newUserModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                }
+            });
+
+            //编辑按钮事件
+            $("#userTableTBody").delegate("button.btn-success", "click", function () {
+                var userId = $(this).attr("data-userid");
+                $.get("apiUser/findApiUser/"+userId, null, function (data) {
+                    $("#userIdInput").val(data.userId);
+                    $("#usNameInput").val(data.usName);
+                    $("#cnNameInput").val(data.cnName);
+                    $("#userRoleInput").val(data.userRole);
+                    $("#cellPhoneInput").val(data.cellPhone);
+                    $("#emailInput").val(data.email);
+                });
             });
 
             //删除按钮事件
@@ -438,6 +463,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="newUserForm" role="form">
+                    <input type="hidden" id="userIdInput" name="userIdInput" value="">
                     <div class="form-group">
                         <label for="usNameInput" class="col-sm-3 control-label">英文名称：</label>
                         <div class="col-sm-9">

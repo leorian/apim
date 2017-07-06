@@ -13,6 +13,7 @@ public class ApiUserEntityRowMapper implements RowMapper<ApiUserEntity> {
     public ApiUserEntity mapRow(ResultSet resultSet, int i) throws SQLException {
         ApiUserEntity apiUserEntity = new ApiUserEntity();
         apiUserEntity.setUserId(resultSet.getLong("userId"));
+        apiUserEntity.setUserIdText(String.valueOf(apiUserEntity.getUserId()));
         apiUserEntity.setUsName(resultSet.getString("usName"));
         apiUserEntity.setCnName(resultSet.getString("cnName"));
         apiUserEntity.setUserRole(resultSet.getInt("userRole"));

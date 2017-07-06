@@ -46,4 +46,12 @@ public interface ApiUserService {
      * @param userId
      */
     void deleteApiUserEntity(Long userId);
+
+    /**
+     * 更新用户
+     *
+     * @param userId
+     * @param apiUserEntity
+     */
+    void updateApiUserEntity(Long userId, ApiUserEntity apiUserEntity);
 }
