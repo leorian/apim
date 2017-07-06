@@ -115,7 +115,11 @@
             //用户分页
             userPage(null, null);
 
-            //新增用户提交按钮
+            //新增用户按钮事件
+            $("#addUserBtn").click(function () {
+                $("#newUserForm")[0].reset();
+            });
+            //新增用户提交按钮事件
             $("#newUserSubmitBtn").click(function () {
                 $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
                     console.log(data);
@@ -126,11 +130,12 @@
                 }, "json");
             });
 
-            //删除用户提交按钮
+            //删除按钮事件
             $("#userTableTBody").delegate("button.btn-danger", "click", function () {
                 var userId = $(this).attr("data-userid");
                 $("#deleteUserModal").find("button.btn-primary").attr("data-userid", userId);
             });
+            //删除用户提交按钮
             $("#deleteUserModal").delegate("button.btn-primary", "click", function () {
                 var userId = $(this).attr("data-userid");
                 $.post("apiUser/deleteApiUser", {userId: userId}, function (data) {
@@ -175,8 +180,7 @@
             </div>
             <div class="panel-body">
                 <div class="text-right">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newUserModal">新增用户
-                    </button>
+                    <button type="button" id="addUserBtn" class="btn btn-info" data-toggle="modal" data-target="#newUserModal">新增用户</button>
                 </div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
