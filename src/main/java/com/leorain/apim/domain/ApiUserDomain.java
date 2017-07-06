@@ -68,6 +68,7 @@ public class ApiUserDomain {
         apiUserEntity.setEmail(this.getEmailInput());
         apiUserEntity.setCreateDateTime(date);
         apiUserEntity.setUpdateDateTime(date);
+        apiUserEntity.setPassword("000000");
         return apiUserEntity;
     }
 

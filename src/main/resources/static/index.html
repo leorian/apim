@@ -12,6 +12,9 @@
             $("#newUserSubmitBtn").click(function () {
                 $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
                     console.log(data);
+                    if (data.success) {
+                        $("#newUserModal").modal("hide");
+                    }
                 }, "json");
             });
         });

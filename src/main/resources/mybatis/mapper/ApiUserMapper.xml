@@ -37,9 +37,11 @@
     <insert id="insert" parameterType="com.leorain.apim.entity.ApiUserEntity">
        INSERT INTO 
        		T_API_USER
-       		(userId, usName, cnName, userRole, cellPhone, email, password)
+       		(userId, usName, cnName, userRole, cellPhone, email, password
+       		, createUserId, createDateTime, updateUserId, updateDateTime)
        	VALUES
-       		(#{userId}, #{usName}, #{cnName}, #{userRole}, #{cellPhone}, #{email}, #{password})
+       		(#{userId}, #{usName}, #{cnName}, #{userRole}, #{cellPhone}, #{email}, #{password}
+       		, #{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
     </insert>
 
     <update id="update" parameterType="com.leorain.apim.entity.ApiUserEntity">
