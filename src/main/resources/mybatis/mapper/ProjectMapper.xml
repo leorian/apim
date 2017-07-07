@@ -7,6 +7,7 @@
         <result column="projectDescribe" property="projectDescribe" jdbcType="VARCHAR"/>
         <result column="projectManager" property="projectManager" jdbcType="BIGINT"/>
         <result column="projectManagerText" property="projectManagerText" jdbcType="VARCHAR"/>
+        <result column="memberCount" property="memberCount" jdbcType="INTEGER"/>
         <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
         <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
         <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
@@ -29,7 +30,17 @@
         SELECT tap.projectId AS  projectId, tap.projectName AS projectName, tap.projectDescribe AS projectDescribe,
          tap.projectManager AS projectManager, tap.createUserId AS createUserId, tap.createDateTime AS createDateTime,
          tap.updateUserId AS updateUserId, tap.updateDateTime AS updateDateTime, tau.cnName AS projectManagerText
-        FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau on tap.projectManager = tau.userId
+        FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId
+    </select>
+
+    <select id="getMemberCountByProjectList" resultMap="BaseResultMap">
+        SELECT tap.projectId AS projectId, COUNT(tapm.userId) AS memberCount
+        FROM T_API_PROJECT tap LEFT JOIN T_API_PROJECT_MEMBER tapm ON tap.projectId = tapm.projectId
+        WHERE tap.projectId IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY tap.projectId;
     </select>
 
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">

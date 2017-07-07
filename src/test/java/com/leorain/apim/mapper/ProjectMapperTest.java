@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -48,6 +49,18 @@ public class ProjectMapperTest {
     @Test
     public void testQuery2() throws Exception {
         List<ProjectEntity> projectEntities = projectMapper.getAllWithDetail();
+        if (projectEntities == null || projectEntities.size() == 0) {
+            System.out.println("is null");
+        } else {
+            System.out.println(projectEntities.toString());
+        }
+    }
+
+    @Test
+    public void testQuery3() throws Exception {
+        List<Long> projectIdList= new ArrayList<>();
+        projectIdList.add(20170707093615909l);
+        List<ProjectEntity> projectEntities = projectMapper.getMemberCountByProjectList(projectIdList);
         if (projectEntities == null || projectEntities.size() == 0) {
             System.out.println("is null");
         } else {

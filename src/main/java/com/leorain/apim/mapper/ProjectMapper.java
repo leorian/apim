@@ -9,5 +9,14 @@ import java.util.List;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  */
 public interface ProjectMapper extends BaseMapper<ProjectEntity> {
+    /**
+     * @return
+     */
     List<ProjectEntity> getAllWithDetail();
+
+    /**
+     * @param projectIdList
+     * @return
+     */
+    List<ProjectEntity> getMemberCountByProjectList(List<Long> projectIdList);
 }
