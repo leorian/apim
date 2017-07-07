@@ -82,7 +82,10 @@
         <!--机器管理-->
         <div class="panel panel-info" id="userManagerPanel">
             <div class="panel-heading">
-                <h3 class="panel-title">机器管理<div style="display:inline;float:right"><a href="index.html"><span class="glyphicon glyphicon-home"></span></a></div></h3>
+                <h3 class="panel-title">机器管理
+                    <div style="display:inline;float:right"><a href="index.html"><span
+                            class="glyphicon glyphicon-home"></span></a></div>
+                </h3>
             </div>
             <div class="panel-body">
                 <div class="panel panel-default">
@@ -175,6 +178,63 @@
         </div>
     </div>
 </footer>
+
+<!-- 新增机器模态框（Modal） -->
+<div class="modal fade" id="newMachineModal" tabindex="-1" role="dialog" aria-labelledby="newMachineModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="newMachineModalLabel">
+                    新增机器
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="newMachineForm" role="form">
+                    <div class="form-group">
+                        <label for="envInput" class="col-sm-3 control-label">机器环境：</label>
+                        <div class="col-sm-9">
+                            <select id="envInput" name="envInput" class="form-control">
+                                <option value="dev">开发</option>
+                                <option value="sit">测试</option>
+                                <option value="uat">预发</option>
+                                <option value="prd">线上</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ipInput" class="col-sm-3 control-label">机器IP：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="ipInput" name="ipInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="portInput" class="col-sm-3 control-label">端口号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="portInput" name="portInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pathInput" class="col-sm-3 control-label">路径</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="pathInput" name="pathInput"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="newMachineSubmitBtn">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 </body>
