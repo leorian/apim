@@ -3,6 +3,8 @@ package com.leorain.apim.sevice.impl;
 import com.leorain.apim.entity.ProjectEntity;
 import com.leorain.apim.entity.ProjectEntityRowMapper;
 import com.leorain.apim.mapper.ProjectMapper;
+import com.leorain.apim.mapper.ProjectMemberMapper;
+import com.leorain.apim.sevice.ProjectMemberService;
 import com.leorain.apim.sevice.ProjectService;
 import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,16 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectMapper projectMapper;
 
     @Autowired
+    private ProjectMemberMapper projectMemberMapper;
+
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
     public ProjectEntity findProjectEntity(Long projectId) {
         ProjectEntity projectEntity = projectMapper.getOne(projectId);
         projectEntity.setProjectIdText(String.valueOf(projectEntity.getProjectId()));
+        projectEntity.setProjectMemberEntities(projectMemberMapper.getAllByProjectId(projectEntity.getProjectId()));
         return projectEntity;
     }
 

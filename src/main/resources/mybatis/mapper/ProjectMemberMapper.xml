@@ -23,6 +23,13 @@
         FROM T_API_PROJECT_MEMBER
     </select>
 
+    <select id="getAllByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT_MEMBER
+        WHERE projectId = #{projectId}
+    </select>
+
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

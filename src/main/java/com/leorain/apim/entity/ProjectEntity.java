@@ -2,6 +2,8 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.List;
+
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 项目表
@@ -47,6 +49,11 @@ public class ProjectEntity extends BaseEntity {
      * 组内人员总数
      */
     private Integer memberCount = 0;
+
+    /**
+     * 组内成员
+     */
+    private List<ProjectMemberEntity> projectMemberEntities;
 
     public ProjectEntity() {
     }
@@ -120,6 +127,14 @@ public class ProjectEntity extends BaseEntity {
 
     public void setMemberCount(Integer memberCount) {
         this.memberCount = memberCount;
+    }
+
+    public List<ProjectMemberEntity> getProjectMemberEntities() {
+        return projectMemberEntities;
+    }
+
+    public void setProjectMemberEntities(List<ProjectMemberEntity> projectMemberEntities) {
+        this.projectMemberEntities = projectMemberEntities;
     }
 
     @Override
