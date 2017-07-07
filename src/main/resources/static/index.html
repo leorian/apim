@@ -100,6 +100,11 @@
                 userPage(null, null);
             });
 
+            //项目搜索
+            $("#projectSearchBtn").click(function () {
+                projectPage(null, null);
+            });
+
             //用户上一页单击事件
             $("#userManagerPanel").delegate("ul.pager > li.previous > a", "click", function () {
                 if (!$("#userManagerPanel").find("ul.pager > li.previous").hasClass("disabled")) {
@@ -107,10 +112,24 @@
                 }
             });
 
+            //项目上一页单击事件
+            $("#projectManagerPanel").delegate("ul.pager > li.previous > a", "click", function () {
+                if (!$("#projectManagerPanel").find("ul.pager > li.previous").hasClass("disabled")) {
+                    projectPage(parseInt($("#projectManagerPanel").find("ul.pager > li.previous > a").attr("data-page")) - 1, null);
+                }
+            });
+
             //用户下一页单击事件
             $("#userManagerPanel").delegate("ul.pager > li.next > a", "click", function () {
                 if (!$("#userManagerPanel").find("ul.pager > li.next").hasClass("disabled")) {
                     userPage(parseInt($("#userManagerPanel").find("ul.pager > li.next > a").attr("data-page")) + 1, null);
+                }
+            });
+
+            //项目下一页单击事件
+            $("#projectManagerPanel").delegate("ul.pager > li.next > a", "click", function () {
+                if (!$("#projectManagerPanel").find("ul.pager > li.next").hasClass("disabled")) {
+                    projectPage(parseInt($("#projectManagerPanel").find("ul.pager > li.next > a").attr("data-page")) + 1, null);
                 }
             });
 
@@ -298,7 +317,7 @@
                             <!--项目经理下拉列表-->
                         </select>
                     </div>
-                    <button type="button" class="btn btn-primary">搜索</button>
+                    <button type="button" class="btn btn-primary" id="projectSearchBtn">搜索</button>
                 </form>
                 <br/>
                 <table class="table table-bordered">
@@ -311,7 +330,7 @@
                     <th class="text-center">创建时间</th>
                     <th class="text-center">操作</th>
                     <tbody id="projectTableTBody">
-                    <!--用户列表-->
+                    <!--项目列表-->
                     </tbody>
                     <!--  <tr>
                           <td class="text-center">20170628084501</td>
