@@ -51,6 +51,13 @@
                     $("#projectMembersTd").html(content);
                 }
             });
+
+            //环境枚举
+            $.get("enum/envEnums", null, function (data) {
+                for (var code in data) {
+                    $("#envInput").append("<option value='" + code + "'>" + data[code] + "</option>");
+                }
+            });
         });
     </script>
 </head>
@@ -197,10 +204,7 @@
                         <label for="envInput" class="col-sm-3 control-label">机器环境：</label>
                         <div class="col-sm-9">
                             <select id="envInput" name="envInput" class="form-control">
-                                <option value="dev">开发</option>
-                                <option value="sit">测试</option>
-                                <option value="uat">预发</option>
-                                <option value="prd">线上</option>
+                                <!--环境枚举-->
                             </select>
                         </div>
                     </div>
