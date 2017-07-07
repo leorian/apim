@@ -130,4 +130,10 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteProjectEntity(Long projectId) {
         projectMapper.delete(projectId);
     }
+
+    @Override
+    public void updateProjectEntity(ProjectEntity projectEntity, Long projectId) {
+        projectEntity.setProjectId(projectId);
+        projectMapper.update(projectEntity);
+    }
 }

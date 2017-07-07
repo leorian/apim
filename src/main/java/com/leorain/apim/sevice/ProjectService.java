@@ -40,4 +40,12 @@ public interface ProjectService {
      * @param projectId
      */
     void deleteProjectEntity(Long projectId);
+
+    /**
+     * 更新项目实体信息
+     *
+     * @param projectEntity
+     * @param projectId
+     */
+    void updateProjectEntity(ProjectEntity projectEntity, Long projectId);
 }

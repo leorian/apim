@@ -47,4 +47,9 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     public void insertProjectMemberEntity(ProjectMemberEntity projectMemberEntity) {
         projectMemberMapper.insert(projectMemberEntity);
     }
+
+    @Override
+    public void deleteProjectMemberEntityByProjectId(Long projectId) {
+        projectMemberMapper.deleteProjectMemberByProjectId(projectId);
+    }
 }

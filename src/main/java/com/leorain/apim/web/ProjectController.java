@@ -103,4 +103,22 @@ public class ProjectController {
         return new ResultDomain();
     }
 
+    /**
+     * 更新项目信息
+     *
+     * @return
+     */
+    @RequestMapping("/updateProject")
+    public ResultDomain updateProject(ProjectDomain projectDomain, @RequestParam("projectIdInput") Long projectId) {
+        projectMemberService.deleteProjectMemberEntityByProjectId(projectId);
+        projectService.updateProjectEntity(projectDomain.buildProjectEntity(), projectId);
+        List<ProjectMemberEntity> projectMemberEntityList = projectDomain.buildProjectMemberEntity(projectId);
+        if (!CollectionUtils.isEmpty(projectMemberEntityList)) {
+            for (ProjectMemberEntity projectMemberEntity : projectMemberEntityList) {
+                projectMemberService.insertProjectMemberEntity(projectMemberEntity);
+            }
+        }
+        return new ResultDomain();
+    }
+
 }

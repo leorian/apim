@@ -40,4 +40,9 @@ public interface ProjectMemberService {
      * @param projectMemberEntity
      */
     void insertProjectMemberEntity(ProjectMemberEntity projectMemberEntity);
+
+    /**
+     * @param projectId
+     */
+    void deleteProjectMemberEntityByProjectId(Long projectId);
 }

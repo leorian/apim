@@ -30,6 +30,11 @@
         WHERE projectId = #{projectId}
     </select>
 
+    <delete id="deleteProjectMemberByProjectId" parameterType="java.lang.Long">
+        DELETE FROM T_API_PROJECT_MEMBER
+        WHERE projectId = #{projectId}
+    </delete>
+
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

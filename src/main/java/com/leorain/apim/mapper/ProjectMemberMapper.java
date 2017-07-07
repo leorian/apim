@@ -17,4 +17,11 @@ public interface ProjectMemberMapper extends BaseMapper<ProjectMemberEntity> {
      * @return
      */
     List<ProjectMemberEntity> getAllByProjectId(Long projectId);
+
+    /**
+     * 根据项目ID删除项目成员
+     *
+     * @param projectId
+     */
+    void deleteProjectMemberByProjectId(Long projectId);
 }
