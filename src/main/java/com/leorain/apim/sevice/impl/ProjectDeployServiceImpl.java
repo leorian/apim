@@ -8,6 +8,9 @@ import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * Created by xiezg@317hu.com on 2017/7/7 0007.
@@ -34,5 +37,17 @@ public class ProjectDeployServiceImpl implements ProjectDeployService {
     @Override
     public void insertProjectDeployEntity(ProjectDeployEntity projectDeployEntity) {
         projectDeployMapper.insert(projectDeployEntity);
+    }
+
+    @Override
+    public List<ProjectDeployEntity> getProjectDeployEntityListByProjectId(Long projectId) {
+        List<ProjectDeployEntity> projectDeployEntities = projectDeployMapper.getAllByProjectId(projectId);
+        if (!CollectionUtils.isEmpty(projectDeployEntities)) {
+            for (ProjectDeployEntity projectDeployEntity : projectDeployEntities) {
+                projectDeployEntity.setDeployIdText(String.valueOf(projectDeployEntity.getDeployId()));
+                projectDeployEntity.setProjectIdText(String.valueOf(projectDeployEntity.getProjectId()));
+            }
+        }
+        return projectDeployEntities;
     }
 }

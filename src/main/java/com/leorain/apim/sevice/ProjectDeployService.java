@@ -3,6 +3,8 @@ package com.leorain.apim.sevice;
 import com.leorain.apim.entity.ProjectDeployEntity;
 import com.leorain.apim.tools.JqPage;
 
+import java.util.List;
+
 /**
  * Created by xiezg@317hu.com on 2017/7/7 0007.
  */
@@ -22,4 +24,12 @@ public interface ProjectDeployService {
      * @param projectDeployEntity
      */
     void insertProjectDeployEntity(ProjectDeployEntity projectDeployEntity);
+
+    /**
+     * 根据项目ID获取机器列表信息
+     *
+     * @param projectId
+     * @return
+     */
+    List<ProjectDeployEntity> getProjectDeployEntityListByProjectId(Long projectId);
 }

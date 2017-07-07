@@ -11,6 +11,8 @@ public class ProjectDeployEntity extends BaseEntity {
     private String deployIdText;
 
     private Long projectId;
+    private String projectIdText;
+
     private String env;
     private String ip;
     private Integer port;
@@ -50,6 +52,14 @@ public class ProjectDeployEntity extends BaseEntity {
 
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public String getProjectIdText() {
+        return projectIdText;
+    }
+
+    public void setProjectIdText(String projectIdText) {
+        this.projectIdText = projectIdText;
     }
 
     public String getEnv() {

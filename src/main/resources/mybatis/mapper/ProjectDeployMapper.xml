@@ -26,6 +26,13 @@
         FROM T_API_PROJECT_DEPLOY
     </select>
 
+    <select id="getAllByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT_DEPLOY
+        WHERE projectId = #{projectId}
+    </select>
+
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
