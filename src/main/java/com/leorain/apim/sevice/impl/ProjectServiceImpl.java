@@ -5,7 +5,6 @@ import com.leorain.apim.entity.ProjectEntityRowMapper;
 import com.leorain.apim.entity.ProjectMemberEntity;
 import com.leorain.apim.mapper.ProjectMapper;
 import com.leorain.apim.mapper.ProjectMemberMapper;
-import com.leorain.apim.sevice.ProjectMemberService;
 import com.leorain.apim.sevice.ProjectService;
 import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
