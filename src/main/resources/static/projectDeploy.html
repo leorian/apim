@@ -74,6 +74,8 @@
                         trElements += trElement;
                     }
                     $("#machineTableTBody").html(trElements);
+                } else {
+                    $("#machineTableTBody").html("<tr><td colspan='6' class='text-center'>没有记录！</td></tr>")
                 }
             });
 
