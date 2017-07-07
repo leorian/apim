@@ -26,6 +26,14 @@ public interface ProjectDeployService {
     void insertProjectDeployEntity(ProjectDeployEntity projectDeployEntity);
 
     /**
+     * 更新机器
+     *
+     * @param projectDeployEntity
+     * @param deployId
+     */
+    void updateProjectDeployEntity(ProjectDeployEntity projectDeployEntity, Long deployId);
+
+    /**
      * 根据项目ID获取机器列表信息
      *
      * @param projectId

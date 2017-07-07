@@ -33,6 +33,20 @@ public class ProjectDeployController {
     }
 
     /**
+     * 更新机器信息
+     *
+     * @param projectDeployDomain
+     * @param deployId
+     * @return
+     */
+    @RequestMapping("/updateProjectDeploy")
+    public ResultDomain updateProjectDeploy(ProjectDeployDomain projectDeployDomain,
+                                            @RequestParam("deployIdInput") Long deployId) {
+        projectDeployService.updateProjectDeployEntity(projectDeployDomain.buildProjectDeployEntity(), deployId);
+        return new ResultDomain();
+    }
+
+    /**
      * 根据项目ID获取机器列表信息
      *
      * @param projectId

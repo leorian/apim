@@ -40,6 +40,12 @@ public class ProjectDeployServiceImpl implements ProjectDeployService {
     }
 
     @Override
+    public void updateProjectDeployEntity(ProjectDeployEntity projectDeployEntity, Long deployId) {
+        projectDeployEntity.setDeployId(deployId);
+        projectDeployMapper.update(projectDeployEntity);
+    }
+
+    @Override
     public List<ProjectDeployEntity> getProjectDeployEntityListByProjectId(Long projectId) {
         List<ProjectDeployEntity> projectDeployEntities = projectDeployMapper.getAllByProjectId(projectId);
         if (!CollectionUtils.isEmpty(projectDeployEntities)) {
