@@ -6,11 +6,16 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 项目成员表
  */
-public class ProjectMemberEntity  extends BaseEntity{
+public class ProjectMemberEntity extends BaseEntity {
     /**
      * 项目成员Id
      */
     private Long projectMemberId;
+
+    /**
+     * 项目成员ID 防止long精度丢失
+     */
+    private String projectMemberIdText;
 
     /**
      * 项目ID
@@ -18,9 +23,19 @@ public class ProjectMemberEntity  extends BaseEntity{
     private Long projectId;
 
     /**
+     * 项目ID 防止long精度丢失
+     */
+    private String projectIdText;
+
+    /**
      * 用户ID
      */
     private Long userId;
+
+    /**
+     * 用户ID 防止long精度丢失
+     */
+    private String userIdText;
 
     public ProjectMemberEntity() {
     }
@@ -55,6 +70,30 @@ public class ProjectMemberEntity  extends BaseEntity{
         this.userId = userId;
     }
 
+
+    public String getProjectMemberIdText() {
+        return projectMemberIdText;
+    }
+
+    public void setProjectMemberIdText(String projectMemberIdText) {
+        this.projectMemberIdText = projectMemberIdText;
+    }
+
+    public String getProjectIdText() {
+        return projectIdText;
+    }
+
+    public void setProjectIdText(String projectIdText) {
+        this.projectIdText = projectIdText;
+    }
+
+    public String getUserIdText() {
+        return userIdText;
+    }
+
+    public void setUserIdText(String userIdText) {
+        this.userIdText = userIdText;
+    }
 
     @Override
     public String toString() {

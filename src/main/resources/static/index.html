@@ -225,6 +225,23 @@
                     $("#projectNameInput").val(data.projectName);
                     $("#projectDescribeInput").val(data.projectDescribe);
                     $("#projectManagerInput").val(data.projectManager);
+                    if (data.projectMemberEntities != null && data.projectMemberEntities.length > 0) {
+                        var projectMembersInput = $("#projectMembersInput").find("input[type='checkbox']");
+                        for (var i = 0; i < projectMembersInput.length; i++) {
+                            var projectMemberInput = projectMembersInput[i];
+                            $(projectMemberInput).prop("checked",false);
+                        }
+
+                        for (var i = 0; i < projectMembersInput.length; i++) {
+                            var projectMemberInput = projectMembersInput[i];
+                            for (var j = 0; j < data.projectMemberEntities.length; j++) {
+                                if ($(projectMemberInput).val() == data.projectMemberEntities[j].userIdText) {
+                                    $(projectMemberInput).prop("checked", true);
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }, "json");
                 $("#newProjectModalLabel").html("编辑项目");
             });

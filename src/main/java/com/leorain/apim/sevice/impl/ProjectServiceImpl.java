@@ -2,6 +2,7 @@ package com.leorain.apim.sevice.impl;
 
 import com.leorain.apim.entity.ProjectEntity;
 import com.leorain.apim.entity.ProjectEntityRowMapper;
+import com.leorain.apim.entity.ProjectMemberEntity;
 import com.leorain.apim.mapper.ProjectMapper;
 import com.leorain.apim.mapper.ProjectMemberMapper;
 import com.leorain.apim.sevice.ProjectMemberService;
@@ -38,7 +39,15 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectEntity findProjectEntity(Long projectId) {
         ProjectEntity projectEntity = projectMapper.getOne(projectId);
         projectEntity.setProjectIdText(String.valueOf(projectEntity.getProjectId()));
-        projectEntity.setProjectMemberEntities(projectMemberMapper.getAllByProjectId(projectEntity.getProjectId()));
+        List<ProjectMemberEntity> projectMemberEntityList = projectMemberMapper.getAllByProjectId(projectEntity.getProjectId());
+        if (!CollectionUtils.isEmpty(projectMemberEntityList)) {
+            for (ProjectMemberEntity projectMemberEntity : projectMemberEntityList) {
+                projectMemberEntity.setProjectMemberIdText(String.valueOf(projectMemberEntity.getProjectMemberId()));
+                projectMemberEntity.setProjectIdText(String.valueOf(projectMemberEntity.getProjectId()));
+                projectMemberEntity.setUserIdText(String.valueOf(projectMemberEntity.getUserId()));
+            }
+        }
+        projectEntity.setProjectMemberEntities(projectMemberEntityList);
         return projectEntity;
     }
 
