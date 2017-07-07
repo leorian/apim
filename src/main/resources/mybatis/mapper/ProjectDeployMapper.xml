@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.ProjectDeployMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.ProjectDeployEntity">
+        <id column="deployId" property="deployId" jdbcType="BIGINT"/>
+        <result column="projectId" property="projectId" jdbcType="BIGINT"/>
+        <result column="env" property="env" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="port" property="port" jdbcType="INTEGER"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        deployId, projectId, env, ip, port, path, createUserId, createDateTime, updateUserId, updateDateTime
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT_DEPLOY
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_PROJECT_DEPLOY
+        WHERE deployId = #{deployId}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceEntity">
+       INSERT INTO 
+       		T_API_PROJECT_DEPLOY
+       		(deployId, projectId, env, ip, port, path, createUserId, createDateTime, updateUserId, updateDateTime)
+       	VALUES
+       		(#{deployId}, #{projectId}, #{env}, #{ip}, #{port}, #{path}, #{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceEntity">
+        UPDATE
+        T_API_PROJECT_DEPLOY
+        SET
+        <if test="projectId != null">projectId = #{projectId},</if>
+        <if test="env != null">env = #{env},</if>
+        <if test="ip != null">ip = #{ip},</if>
+        <if test="port != null">port = #{port},</if>
+        <if test="path != null">path = #{path},</if>
+        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        WHERE
+        deployId = #{deployId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_PROJECT_DEPLOY
+       WHERE 
+       		 deployId =#{deployId}
+    </delete>
+
+</mapper>
