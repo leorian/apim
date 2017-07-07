@@ -47,4 +47,12 @@ public interface ProjectDeployService {
      * @param deployId
      */
     void deleteProjectDeployEntity(Long deployId);
+
+    /**
+     * 查询机器信息
+     *
+     * @param deployId
+     * @return
+     */
+    ProjectDeployEntity findProjectDeployEntity(Long deployId);
 }

@@ -47,6 +47,16 @@ public class ProjectDeployController {
     }
 
     /**
+     * 根据机器ID查询机器信息
+     *
+     * @return
+     */
+    @RequestMapping("/findProjectDeploy/{deployId}")
+    public ProjectDeployEntity findProjectDeploy(@PathVariable("deployId") Long deployId) {
+        return projectDeployService.findProjectDeployEntity(deployId);
+    }
+
+    /**
      * 根据项目ID获取机器列表信息
      *
      * @param projectId

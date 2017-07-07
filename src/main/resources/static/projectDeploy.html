@@ -67,7 +67,9 @@
                         trElement += ("<td class='text-center'>" + data[i].port + "</td>");
                         trElement += ("<td class='text-center'>" + data[i].path + "</td>");
                         trElement += ("<td class='text-center'>"
-                        + "<button class='btn btn-success btn-xs' data-deployid='" + data[i].deployIdText + "'>编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;"
+                        + "<button data-toggle=\"modal\" data-target=\"#newMachineModal\""
+                        + " class='btn btn-success btn-xs' data-deployid='" + data[i].deployIdText + "'>编辑</button>"
+                        + "&nbsp;&nbsp;&nbsp;&nbsp;"
                         + "<button data-toggle=\"modal\" data-target=\"#deleteMachineModal\" " +
                         "class='btn btn-danger btn-xs' data-deployid='" + data[i].deployIdText + "'>删除</button>" +
                         "</td>");
@@ -95,13 +97,39 @@
 
             //新增或者编辑机器提交按钮事件
             $("#newMachineSubmitBtn").click(function () {
-                $.post("projectDeploy/insertProjectDeploy", $("#newMachineForm").serialize(), function (data) {
-                    console.log(data);
-                    if (data.success) {
-                        $("#newMachineModal").modal("hide");
-                        window.location.reload();
-                    }
-                }, "json");
+                if ($("#deployIdInput").val() == null || $("#deployIdInput").val() == "") {
+                    $.post("projectDeploy/insertProjectDeploy", $("#newMachineForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#newMachineModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                } else {
+                    $.post("projectDeploy/updateProjectDeploy", $("#newMachineForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#newMachineModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                }
+
+            });
+
+            //机器编辑按钮事件
+            $("#machineTableTBody").delegate("button.btn-success", "click", function () {
+                var deployId = $(this).attr("data-deployid");
+                $.get("projectDeploy/findProjectDeploy/" + deployId, null, function (data) {
+                    $("#deployIdInput").val(data.deployIdText);
+                    $("#projectIdInput").val(data.projectIdText);
+                    $("#envInput").val(data.env);
+                    $("#ipInput").val(data.ip);
+                    $("#portInput").val(data.port);
+                    $("#pathInput").val(data.path);
+                });
+
+                $("#newMachineModalLabel").html("编辑机器");
             });
 
             //机器删除按钮事件
@@ -264,6 +292,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="newMachineForm" role="form">
+                    <input type="hidden" id="deployIdInput" name="deployIdInput" value=""/>
                     <input type="hidden" id="projectIdInput" name="projectIdInput" value=""/>
                     <div class="form-group">
                         <label for="envInput" class="col-sm-3 control-label">机器环境：</label>

@@ -61,4 +61,12 @@ public class ProjectDeployServiceImpl implements ProjectDeployService {
     public void deleteProjectDeployEntity(Long deployId) {
         projectDeployMapper.delete(deployId);
     }
+
+    @Override
+    public ProjectDeployEntity findProjectDeployEntity(Long deployId) {
+        ProjectDeployEntity projectDeployEntity = projectDeployMapper.getOne(deployId);
+        projectDeployEntity.setDeployIdText(String.valueOf(projectDeployEntity.getDeployId()));
+        projectDeployEntity.setProjectIdText(String.valueOf(projectDeployEntity.getProjectId()));
+        return projectDeployEntity;
+    }
 }
