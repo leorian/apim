@@ -8,6 +8,7 @@ import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -34,7 +35,13 @@ public class ApiUserServiceImpl implements ApiUserService {
 
     @Override
     public List<ApiUserEntity> findApiUserEntityList() {
-        return apiUserMapper.getAll();
+        List<ApiUserEntity> apiUserEntityList = apiUserMapper.getAll();
+        if (!CollectionUtils.isEmpty(apiUserEntityList)) {
+            for (ApiUserEntity apiUserEntity : apiUserEntityList) {
+                apiUserEntity.setUserIdText(String.valueOf(apiUserEntity.getUserId()));
+            }
+        }
+        return apiUserEntityList;
     }
 
     @Override

@@ -87,6 +87,15 @@
                 }
             }, "json");
 
+            //项目经理搜索框下拉列表框
+            $.get("apiUser/findApiUserList", null, function (data) {
+                if (data != null && data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        $("#projectManager").append("<option value='" + data[i].userIdText + "'>" + data[i].cnName + "</option>")
+                    }
+                }
+            });
+
             //用户分页
             userPage(null, null);
 
@@ -233,11 +242,8 @@
                     <div class="form-group">
                         <label class="control-label" for="projectManager">项目经理：</label>
                         <select class="form-control" id="projectManager">
-                            <option>乐天</option>
-                            <option>张三</option>
-                            <option>李四</option>
-                            <option>王五</option>
-                            <option>谢中贵</option>
+                            <option selected="selected" value="">全部</option>
+                            <!--项目经理下拉列表-->
                         </select>
                     </div>
                     <button type="button" class="btn btn-primary">搜索</button>
