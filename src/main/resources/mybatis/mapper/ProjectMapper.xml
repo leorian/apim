@@ -15,7 +15,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        projectId, projectName, projectDescribe, projectManager
+        projectId, projectName, projectDescribe, projectManager, createUserId, createDateTime,
+        updateUserId, updateDateTime
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap">
@@ -34,9 +35,11 @@
     <insert id="insert" parameterType="com.leorain.apim.entity.ProjectEntity">
        INSERT INTO 
        		T_API_PROJECT
-       		(projectId, projectName, projectDescribe, projectManager)
+       		(projectId, projectName, projectDescribe, projectManager,
+       		 createUserId, createDateTime, updateUserId, updateDateTime)
        	VALUES
-       		(#{projectId}, #{projectName}, #{projectDescribe}, #{projectManager})
+       		(#{projectId}, #{projectName}, #{projectDescribe}, #{projectManager},
+       		 #{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
     </insert>
 
     <update id="update" parameterType="com.leorain.apim.entity.ProjectEntity">
@@ -45,7 +48,9 @@
         SET
         <if test="projectName != null">projectName = #{projectName},</if>
         <if test="projectDescribe != null">projectDescribe = #{projectDescribe},</if>
-        <if test="projectManager != null">projectManager = #{projectManager}</if>
+        <if test="projectManager != null">projectManager = #{projectManager},</if>
+        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
         WHERE
         projectId = #{projectId}
     </update>
