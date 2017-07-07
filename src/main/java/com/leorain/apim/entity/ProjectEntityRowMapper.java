@@ -16,6 +16,7 @@ public class ProjectEntityRowMapper implements RowMapper<ProjectEntity> {
         projectEntity.setProjectName(resultSet.getString("projectName"));
         projectEntity.setProjectDescribe(resultSet.getString("projectDescribe"));
         projectEntity.setProjectManager(resultSet.getLong("projectManager"));
+        projectEntity.setProjectManagerText(resultSet.getString("projectManagerText"));
         projectEntity.setCreateUserId(resultSet.getLong("createUserId"));
         projectEntity.setCreateDateTime(resultSet.getDate("createDateTime"));
         projectEntity.setUpdateUserId(resultSet.getLong("updateUserId"));

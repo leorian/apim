@@ -35,8 +35,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public JqPage<ProjectEntity> findProjectEntityPage(JqPage jqPage, ProjectEntity projectEntity) {
-        String countSQL = " SELECT COUNT(*) FROM T_API_PROJECT ";
-        String resultSQL = " SELECT * FROM T_API_PROJECT LIMIT ?, ? ";
+        String countSQL = " SELECT COUNT(*) FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId ";
+        String resultSQL = " SELECT tap.projectId AS  projectId, tap.projectName AS projectName, tap.projectDescribe AS projectDescribe, " +
+                " tap.projectManager AS projectManager, tap.createUserId AS createUserId, tap.createDateTime AS createDateTime, " +
+                " tap.updateUserId AS updateUserId, tap.updateDateTime AS updateDateTime, tau.cnName AS projectManagerText " +
+                " FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId LIMIT ?, ? ";
         jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, int.class));
         Object[] args = {jqPage.getFromIndex(), jqPage.getPageSize()};
         jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectEntityRowMapper()));
