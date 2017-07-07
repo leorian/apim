@@ -9,6 +9,7 @@ import com.leorain.apim.sevice.ProjectService;
 import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,7 +65,9 @@ public class ProjectController {
         jqPage.setPageSize(pageSize);
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setProjectName(projectNameCondition);
-        projectEntity.setProjectManager(Long.valueOf(projectManagerCondition));
+        if (!StringUtils.isEmpty(projectManagerCondition)) {
+            projectEntity.setProjectManager(Long.valueOf(projectManagerCondition));
+        }
         return projectService.findProjectEntityPage(jqPage, projectEntity);
     }
 
