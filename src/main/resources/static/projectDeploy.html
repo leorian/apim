@@ -8,6 +8,49 @@
     <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script>
         $(function () {
+            function add0(m) {
+                return m < 10 ? '0' + m : m
+            }
+
+            function format(timestamp) {
+                //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+
+                var time = new Date(timestamp);
+                var year = time.getFullYear();
+                var month = time.getMonth() + 1;
+                var date = time.getDate();
+                var hours = time.getHours();
+                var minutes = time.getMinutes();
+                var seconds = time.getSeconds();
+                return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+            }
+
+            function getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+
+            var projectId = getQueryString("projectId");
+            $.get("project/findProject/" + projectId, null, function (data) {
+                console.log(data);
+                $("#projectNameTd").html(data.projectName);
+                $("#projectManagerTd").html(data.projectManagerText);
+                $("#createDateTimeTd").html(format(data.createDateTime));
+                $("#projectDescribeTd").html(data.projectDescribe);
+                var projectMemberEntities = data.projectMemberEntities;
+                if (projectMemberEntities != null && projectMemberEntities.length > 0) {
+                    var content = "";
+                    for (var i = 0; i < projectMemberEntities.length; i++) {
+                        if (i != 0) {
+                            content = content + ", ";
+                        }
+                        content = content + projectMemberEntities[i].userName;
+                    }
+                    $("#projectMembersTd").html(content);
+                }
+            });
         });
     </script>
 </head>
@@ -36,7 +79,74 @@
 <br/>
 <div class="container">
     <div class="row">
-        部署管理
+        <!--机器管理-->
+        <div class="panel panel-info" id="userManagerPanel">
+            <div class="panel-heading">
+                <h3 class="panel-title">机器管理</h3>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    项目名称：
+                                </th>
+                                <td id="projectNameTd">
+                                    <!--配置中心-->
+                                </td>
+                                <th>
+                                    项目经理：
+                                </th>
+                                <td id="projectManagerTd">
+                                    <!--张三-->
+                                </td>
+                                <th>
+                                    创建时间：
+                                </th>
+                                <td id="createDateTimeTd">
+                                    <!--2017-06-28-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    组内成员：
+                                </th>
+                                <td colspan="5" id="projectMembersTd">
+                                    <!--张三，李四，王五，赵六-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    项目描述：
+                                </th>
+                                <td colspan="5" id="projectDescribeTd">
+                                    <!--配置项管理平台-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <div class="text-right">
+                    <button type="button" id="addUserBtn" class="btn btn-info" data-toggle="modal"
+                            data-target="#newMachineModal">新增机器
+                    </button>
+                </div>
+                <br/>
+                <table class="table table-bordered">
+                    <th class="text-center">机器ID</th>
+                    <th class="text-center">环境</th>
+                    <th class="text-center">IP地址</th>
+                    <th class="text-center">端口号</th>
+                    <th class="text-center">路径</th>
+                    <th class="text-center">操作</th>
+                    <tbody id="machineTableTBody">
+                    <!--用户列表-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <br/>

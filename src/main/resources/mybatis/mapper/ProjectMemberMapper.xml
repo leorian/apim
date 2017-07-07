@@ -5,6 +5,7 @@
         <id column="projectMemberId" property="projectMemberId" jdbcType="BIGINT"/>
         <result column="projectId" property="projectId" jdbcType="BIGINT"/>
         <result column="userId" property="userId" jdbcType="BIGINT"/>
+        <result column="userName" property="userName" jdbcType="VARCHAR"/>
 
         <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
         <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
@@ -25,9 +26,11 @@
 
     <select id="getAllByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
-        FROM T_API_PROJECT_MEMBER
-        WHERE projectId = #{projectId}
+        tapm.projectMemberId AS projectMemberId, tapm.projectId AS projectId, tapm.userId AS userId,
+        tapm.createUserId AS createUserId, tapm.createDateTime AS createDateTime, tapm.updateUserId AS updateUserId,
+        tapm.updateDateTime AS updateDateTime, tau.cnName AS userName
+        FROM T_API_PROJECT_MEMBER tapm LEFT JOIN T_API_USER tau ON tapm.userId = tau.userId
+        WHERE tapm.projectId = #{projectId}
     </select>
 
     <delete id="deleteProjectMemberByProjectId" parameterType="java.lang.Long">

@@ -44,10 +44,11 @@
     </select>
 
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM T_API_PROJECT
-        WHERE projectId = #{projectId}
+        SELECT tap.projectId AS  projectId, tap.projectName AS projectName, tap.projectDescribe AS projectDescribe,
+         tap.projectManager AS projectManager, tap.createUserId AS createUserId, tap.createDateTime AS createDateTime,
+         tap.updateUserId AS updateUserId, tap.updateDateTime AS updateDateTime, tau.cnName AS projectManagerText
+        FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId
+        WHERE tap.projectId = #{projectId}
     </select>
 
     <insert id="insert" parameterType="com.leorain.apim.entity.ProjectEntity">

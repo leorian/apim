@@ -37,6 +37,11 @@ public class ProjectMemberEntity extends BaseEntity {
      */
     private String userIdText;
 
+    /**
+     * 用户名称
+     */
+    private String userName;
+
     public ProjectMemberEntity() {
     }
 
@@ -93,6 +98,14 @@ public class ProjectMemberEntity extends BaseEntity {
 
     public void setUserIdText(String userIdText) {
         this.userIdText = userIdText;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
