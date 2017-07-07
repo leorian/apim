@@ -91,7 +91,8 @@
             $.get("apiUser/findApiUserList", null, function (data) {
                 if (data != null && data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
-                        $("#projectManager").append("<option value='" + data[i].userIdText + "'>" + data[i].cnName + "</option>")
+                        $("#projectManagerCondition").append("<option value='" + data[i].userIdText + "'>" + data[i].cnName + "</option>");
+                        $("#projectManagerInput").append("<option value='" + data[i].userIdText + "'>" + data[i].cnName + "</option>")
                     }
                 }
             });
@@ -240,8 +241,8 @@
                         <input type="text" class="form-control" id="projectName">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="projectManager">项目经理：</label>
-                        <select class="form-control" id="projectManager">
+                        <label class="control-label" for="projectManagerCondition">项目经理：</label>
+                        <select class="form-control" id="projectManagerCondition">
                             <option selected="selected" value="">全部</option>
                             <!--项目经理下拉列表-->
                         </select>
@@ -460,10 +461,7 @@
                         <label for="projectManagerInput" class="col-sm-3 control-label">项目经理：</label>
                         <div class="col-sm-9">
                             <select id="projectManagerInput" name="projectManagerInput" class="form-control">
-                                <option>乐天</option>
-                                <option>张三</option>
-                                <option>李四</option>
-                                <option>王五</option>
+                                <!--项目经理下拉列表选择框-->
                             </select>
                         </div>
                     </div>
