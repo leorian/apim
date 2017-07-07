@@ -33,6 +33,7 @@
             }
 
             var projectId = getQueryString("projectId");
+            $("#projectIdInput").val(projectId);
             $.get("project/findProject/" + projectId, null, function (data) {
                 console.log(data);
                 $("#projectNameTd").html(data.projectName);
@@ -200,6 +201,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="newMachineForm" role="form">
+                    <input type="hidden" id="projectIdInput" name="projectIdInput" value=""/>
                     <div class="form-group">
                         <label for="envInput" class="col-sm-3 control-label">机器环境：</label>
                         <div class="col-sm-9">
