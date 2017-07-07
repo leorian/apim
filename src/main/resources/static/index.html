@@ -165,6 +165,12 @@
                 $("#newUserModalLabel").html("新增用户");
             });
 
+            //新增项目按钮事件
+            $("#addProjectBtn").click(function () {
+                $("#newProjectForm")[0].reset();
+                $("#newProjectModalLabel").html("新增项目");
+            });
+
             //新增或者编辑用户提交按钮事件
             $("#newUserSubmitBtn").click(function () {
                 if ($("#userIdInput").val() == null || $("#userIdInput").val() == "") {
@@ -207,8 +213,20 @@
                     $("#userRoleInput").val(data.userRole);
                     $("#cellPhoneInput").val(data.cellPhone);
                     $("#emailInput").val(data.email);
-                });
+                }, "json");
                 $("#newUserModalLabel").html("编辑用户");
+            });
+
+            //项目编辑按钮事件
+            $("#projectTableTBody").delegate("button.btn-success", "click", function () {
+                var projectId = $(this).attr("data-projectid");
+                $.get("project/findProject/" + projectId, null, function (data) {
+                    $("#projectIdInput").val(data.projectIdText);
+                    $("#projectNameInput").val(data.projectName);
+                    $("#projectDescribeInput").val(data.projectDescribe);
+                    $("#projectManagerInput").val(data.projectManager);
+                }, "json");
+                $("#newProjectModalLabel").html("编辑项目");
             });
 
             //用户删除按钮事件
@@ -236,13 +254,13 @@
 
             //删除项目提交按钮事件
             $("#deleteProjectModal").delegate("button.btn-primary", "click", function () {
-               var projectId = $(this).attr("data-projectid");
-               $.post("project/deleteProject",{projectId:projectId}, function (data) {
-                   console.log(data);
-                   if (data.success) {
-                       window.location.reload();
-                   }
-               }, "json");
+                var projectId = $(this).attr("data-projectid");
+                $.post("project/deleteProject", {projectId: projectId}, function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        window.location.reload();
+                    }
+                }, "json");
             });
         });
     </script>
@@ -320,7 +338,8 @@
             </div>
             <div class="panel-body">
                 <div class="text-right">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newProjectModal">新增项目
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newProjectModal"
+                            id="addProjectBtn">新增项目
                     </button>
                 </div>
                 <form class="form-inline" role="form">
@@ -460,6 +479,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="newProjectForm" role="form">
+                    <input type="hidden" name="projectIdInput" id="projectIdInput" value="">
                     <div class="form-group">
                         <label for="projectNameInput" class="col-sm-3 control-label">项目名称：</label>
                         <div class="col-sm-9">
