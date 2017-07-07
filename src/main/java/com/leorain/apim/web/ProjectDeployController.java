@@ -43,6 +43,12 @@ public class ProjectDeployController {
         return projectDeployService.getProjectDeployEntityListByProjectId(projectId);
     }
 
+    /**
+     * 删除机器信息
+     *
+     * @param deployId
+     * @return
+     */
     @RequestMapping("/deleteProjectDeploy")
     public ResultDomain deleteProjectDeploy(@RequestParam("deployId") Long deployId) {
         projectDeployService.deleteProjectDeployEntity(deployId);
