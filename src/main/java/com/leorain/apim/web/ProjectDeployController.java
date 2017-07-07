@@ -7,6 +7,7 @@ import com.leorain.apim.sevice.ProjectDeployService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -41,4 +42,12 @@ public class ProjectDeployController {
     public List<ProjectDeployEntity> findProjectDeployList(@PathVariable("projectId") Long projectId) {
         return projectDeployService.getProjectDeployEntityListByProjectId(projectId);
     }
+
+    @RequestMapping("/deleteProjectDeploy")
+    public ResultDomain deleteProjectDeploy(@RequestParam("deployId") Long deployId) {
+        projectDeployService.deleteProjectDeployEntity(deployId);
+        return new ResultDomain();
+    }
+
+    ;
 }

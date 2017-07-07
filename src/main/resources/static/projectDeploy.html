@@ -104,6 +104,23 @@
                 }, "json");
             });
 
+            //机器删除按钮事件
+            $("#machineTableTBody").delegate("button.btn-danger", "click", function () {
+                var deployId = $(this).attr("data-deployid");
+                $("#deleteMachineModal").find("button.btn-primary").attr("data-deployid", deployId);
+            });
+
+            //删除机器提交按钮事件
+            $("#deleteMachineModal").delegate("button.btn-primary", "click", function () {
+                var deployId = $(this).attr("data-deployid");
+                $.post("projectDeploy/deleteProjectDeploy", {deployId: deployId}, function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        window.location.reload();
+                    }
+                }, "json");
+            });
+
 
         });
     </script>

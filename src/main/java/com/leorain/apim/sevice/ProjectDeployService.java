@@ -32,4 +32,11 @@ public interface ProjectDeployService {
      * @return
      */
     List<ProjectDeployEntity> getProjectDeployEntityListByProjectId(Long projectId);
+
+    /**
+     * 删除机器信息
+     *
+     * @param deployId
+     */
+    void deleteProjectDeployEntity(Long deployId);
 }

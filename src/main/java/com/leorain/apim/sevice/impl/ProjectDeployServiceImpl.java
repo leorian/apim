@@ -50,4 +50,9 @@ public class ProjectDeployServiceImpl implements ProjectDeployService {
         }
         return projectDeployEntities;
     }
+
+    @Override
+    public void deleteProjectDeployEntity(Long deployId) {
+        projectDeployMapper.delete(deployId);
+    }
 }
