@@ -105,7 +105,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void insertProject(ProjectEntity projectEntity) {
+    public void insertProjectEntity(ProjectEntity projectEntity) {
         projectMapper.insert(projectEntity);
+    }
+
+    @Override
+    public void deleteProjectEntity(Long projectId) {
+        projectMapper.delete(projectId);
     }
 }

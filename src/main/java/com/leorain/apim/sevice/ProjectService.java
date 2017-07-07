@@ -32,5 +32,12 @@ public interface ProjectService {
      *
      * @param projectEntity
      */
-    void insertProject(ProjectEntity projectEntity);
+    void insertProjectEntity(ProjectEntity projectEntity);
+
+    /**
+     * 删除项目实体信息
+     *
+     * @param projectId
+     */
+    void deleteProjectEntity(Long projectId);
 }

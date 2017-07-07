@@ -80,10 +80,10 @@
                             trElement += ("<td class='text-center'>" + data.rows[i].projectDescribe + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].createDateTime + "</td>");
                             trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\" data-toggle='modal' " +
-                            "data-target='#newProjectModal' data-userid='" + data.rows[i].projectIdText + "'>编辑</button>"
+                            "data-target='#newProjectModal' data-projectid='" + data.rows[i].projectIdText + "'>编辑</button>"
                             + "&nbsp;&nbsp;&nbsp;&nbsp;" +
                             "<button class=\"btn btn-danger btn-xs\" data-toggle=\"modal\" " +
-                            "data-target=\"#deleteProjectModal\" data-userid='" + data.rows[i].projectIdText + "'>删除</button>" + "</td>");
+                            "data-target=\"#deleteProjectModal\" data-projectid='" + data.rows[i].projectIdText + "'>删除</button>" + "</td>");
                             trElement += "</tr>";
                             trElements = trElements + trElement;
                         }
@@ -197,7 +197,7 @@
                 }, "json");
             });
 
-            //编辑按钮事件
+            //用户编辑按钮事件
             $("#userTableTBody").delegate("button.btn-success", "click", function () {
                 var userId = $(this).attr("data-userid");
                 $.get("apiUser/findApiUser/" + userId, null, function (data) {
@@ -211,12 +211,19 @@
                 $("#newUserModalLabel").html("编辑用户");
             });
 
-            //删除按钮事件
+            //用户删除按钮事件
             $("#userTableTBody").delegate("button.btn-danger", "click", function () {
                 var userId = $(this).attr("data-userid");
                 $("#deleteUserModal").find("button.btn-primary").attr("data-userid", userId);
             });
-            //删除用户提交按钮
+
+            //项目删除按钮事件
+            $("#projectTableTBody").delegate("button.btn-danger", "click", function () {
+                var projectId = $(this).attr("data-projectid");
+                $("#deleteProjectModal").find("button.btn-primary").attr("data-projectid", projectId);
+            });
+
+            //删除用户提交按钮事件
             $("#deleteUserModal").delegate("button.btn-primary", "click", function () {
                 var userId = $(this).attr("data-userid");
                 $.post("apiUser/deleteApiUser", {userId: userId}, function (data) {
@@ -225,6 +232,17 @@
                         window.location.reload();
                     }
                 }, "json");
+            });
+
+            //删除项目提交按钮事件
+            $("#deleteProjectModal").delegate("button.btn-primary", "click", function () {
+               var projectId = $(this).attr("data-projectid");
+               $.post("project/deleteProject",{projectId:projectId}, function (data) {
+                   console.log(data);
+                   if (data.success) {
+                       window.location.reload();
+                   }
+               }, "json");
             });
         });
     </script>

@@ -82,12 +82,24 @@ public class ProjectController {
     public ResultDomain insertProject(ProjectDomain projectDomain) {
         ProjectEntity projectEntity = projectDomain.buildProjectEntity();
         List<ProjectMemberEntity> projectMemberEntityList = projectDomain.buildProjectMemberEntity(projectEntity.getProjectId());
-        projectService.insertProject(projectEntity);
+        projectService.insertProjectEntity(projectEntity);
         if (!CollectionUtils.isEmpty(projectMemberEntityList)) {
             for (ProjectMemberEntity projectMemberEntity : projectMemberEntityList) {
                 projectMemberService.insertProjectMemberEntity(projectMemberEntity);
             }
         }
+        return new ResultDomain();
+    }
+
+    /**
+     * 删除项目信息
+     *
+     * @param projectId
+     * @return
+     */
+    @RequestMapping("/deleteProject")
+    public ResultDomain deleteProject(@RequestParam("projectId") Long projectId) {
+        projectService.deleteProjectEntity(projectId);
         return new ResultDomain();
     }
 
