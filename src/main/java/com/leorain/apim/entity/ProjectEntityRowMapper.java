@@ -13,6 +13,7 @@ public class ProjectEntityRowMapper implements RowMapper<ProjectEntity> {
     public ProjectEntity mapRow(ResultSet resultSet, int i) throws SQLException {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setProjectId(resultSet.getLong("projectId"));
+        projectEntity.setProjectIdText(String.valueOf(projectEntity.getProjectId()));
         projectEntity.setProjectName(resultSet.getString("projectName"));
         projectEntity.setProjectDescribe(resultSet.getString("projectDescribe"));
         projectEntity.setProjectManager(resultSet.getLong("projectManager"));

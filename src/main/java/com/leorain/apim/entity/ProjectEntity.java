@@ -14,6 +14,11 @@ public class ProjectEntity extends BaseEntity {
     private Long projectId;
 
     /**
+     * 项目ID纯文本，防止long类型精度丢失
+     */
+    private String projectIdText;
+
+    /**
      * 项目名称
      */
     private String projectName;
@@ -59,6 +64,14 @@ public class ProjectEntity extends BaseEntity {
 
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public String getProjectIdText() {
+        return projectIdText;
+    }
+
+    public void setProjectIdText(String projectIdText) {
+        this.projectIdText = projectIdText;
     }
 
     public String getProjectName() {
