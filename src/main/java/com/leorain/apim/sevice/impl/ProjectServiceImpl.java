@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+import sun.rmi.log.LogInputStream;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,10 +45,42 @@ public class ProjectServiceImpl implements ProjectService {
         String resultSQL = " SELECT tap.projectId AS  projectId, tap.projectName AS projectName, tap.projectDescribe AS projectDescribe, " +
                 " tap.projectManager AS projectManager, tap.createUserId AS createUserId, tap.createDateTime AS createDateTime, " +
                 " tap.updateUserId AS updateUserId, tap.updateDateTime AS updateDateTime, tau.cnName AS projectManagerText " +
-                " FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId LIMIT ?, ? ";
-        jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, int.class));
-        Object[] args = {jqPage.getFromIndex(), jqPage.getPageSize()};
-        jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectEntityRowMapper()));
+                " FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId ";
+        List<Object> list = new ArrayList<>();
+        if (!StringUtils.isEmpty(projectEntity.getProjectName()) || !(projectEntity.getProjectManager() == null)) {
+            countSQL = countSQL + " WHERE ";
+            resultSQL = resultSQL + " WHERE ";
+        }
+
+        if (!StringUtils.isEmpty(projectEntity.getProjectName())) {
+            countSQL = countSQL + " (tap.projectName LIKE ?) ";
+            resultSQL = resultSQL + " (tap.projectName LIKE  ?) ";
+            list.add(projectEntity.getProjectName());
+        }
+
+        if (!StringUtils.isEmpty(projectEntity.getProjectName()) && !(projectEntity.getProjectManager() == null)) {
+            countSQL = countSQL + " AND ";
+            resultSQL = resultSQL + " AND ";
+        }
+
+        if (!(projectEntity.getProjectManager() == null)) {
+            countSQL = countSQL + " (tap.projectManager = ?) ";
+            resultSQL = resultSQL + " (tap.projectManager = ?) ";
+            list.add(projectEntity.getProjectManager());
+        }
+
+        resultSQL = resultSQL + " LIMIT ?, ? ";
+        if (CollectionUtils.isEmpty(list)) {
+            jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, int.class));
+            Object[] args = {jqPage.getFromIndex(), jqPage.getPageSize()};
+            jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectEntityRowMapper()));
+        } else {
+            jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, list.toArray(), int.class));
+            list.add(jqPage.getFromIndex());
+            list.add(jqPage.getPageSize());
+            jqPage.setRows(jdbcTemplate.query(resultSQL, list.toArray(), new ProjectEntityRowMapper()));
+        }
+
         List<ProjectEntity> projectEntityList = jqPage.getRows();
         if (!CollectionUtils.isEmpty(projectEntityList)) {
             List<Long> projectIds = new ArrayList<>(projectEntityList.size());
