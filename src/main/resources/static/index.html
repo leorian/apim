@@ -81,9 +81,12 @@
                             trElement += ("<td class='text-center'>" + data.rows[i].createDateTime + "</td>");
                             trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\" data-toggle='modal' " +
                             "data-target='#newProjectModal' data-projectid='" + data.rows[i].projectIdText + "'>编辑</button>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;" +
-                            "<button class=\"btn btn-danger btn-xs\" data-toggle=\"modal\" " +
-                            "data-target=\"#deleteProjectModal\" data-projectid='" + data.rows[i].projectIdText + "'>删除</button>" + "</td>");
+                            + "&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + "<button class=\"btn btn-danger btn-xs\" data-toggle=\"modal\" " +
+                            "data-target=\"#deleteProjectModal\" data-projectid='" + data.rows[i].projectIdText + "'>删除</button>"
+                            + "&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + "<button class='btn btn-warning btn-xs' data-projectid='" + data.rows[i].projectIdText + "'>机器管理</button>"
+                            + "</td>");
                             trElement += "</tr>";
                             trElements = trElements + trElement;
                         }
