@@ -6,7 +6,7 @@
         <result column="projectName" property="projectName" jdbcType="VARCHAR"/>
         <result column="projectDescribe" property="projectDescribe" jdbcType="VARCHAR"/>
         <result column="projectManager" property="projectManager" jdbcType="BIGINT"/>
-
+        <result column="projectManagerText" property="projectManagerText" jdbcType="VARCHAR"/>
         <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
         <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
         <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
@@ -23,6 +23,13 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM T_API_PROJECT
+    </select>
+
+    <select id="getAllWithDetail" resultMap="BaseResultMap">
+        SELECT tap.projectId AS  projectId, tap.projectName AS projectName, tap.projectDescribe AS projectDescribe,
+         tap.projectManager AS projectManager, tap.createUserId AS createUserId, tap.createDateTime AS createDateTime,
+         tap.updateUserId AS updateUserId, tap.updateDateTime AS updateDateTime, tau.cnName AS projectManagerText
+        FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau on tap.projectManager = tau.userId
     </select>
 
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">

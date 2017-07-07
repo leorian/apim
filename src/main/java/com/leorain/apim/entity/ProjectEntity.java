@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/6/30 0030.
  * 项目表
  */
-public class ProjectEntity extends BaseEntity{
+public class ProjectEntity extends BaseEntity {
 
     /**
      * 项目ID
@@ -24,9 +24,24 @@ public class ProjectEntity extends BaseEntity{
     private String projectDescribe;
 
     /**
-     * 项目描述
+     * 项目经理
      */
     private Long projectManager;
+
+    /**
+     * 项目经理名称
+     */
+    private String projectManagerText;
+
+    /**
+     * 接口总数
+     */
+    private Integer interfaceCount;
+
+    /**
+     * 组内人员总数
+     */
+    private Integer memberCount;
 
     public ProjectEntity() {
     }
@@ -70,6 +85,29 @@ public class ProjectEntity extends BaseEntity{
         this.projectManager = projectManager;
     }
 
+    public String getProjectManagerText() {
+        return projectManagerText;
+    }
+
+    public void setProjectManagerText(String projectManagerText) {
+        this.projectManagerText = projectManagerText;
+    }
+
+    public Integer getInterfaceCount() {
+        return interfaceCount;
+    }
+
+    public void setInterfaceCount(Integer interfaceCount) {
+        this.interfaceCount = interfaceCount;
+    }
+
+    public Integer getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(Integer memberCount) {
+        this.memberCount = memberCount;
+    }
 
     @Override
     public String toString() {

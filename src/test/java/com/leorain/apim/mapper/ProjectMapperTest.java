@@ -45,6 +45,16 @@ public class ProjectMapperTest {
         }
     }
 
+    @Test
+    public void testQuery2() throws Exception {
+        List<ProjectEntity> projectEntities = projectMapper.getAllWithDetail();
+        if (projectEntities == null || projectEntities.size() == 0) {
+            System.out.println("is null");
+        } else {
+            System.out.println(projectEntities.toString());
+        }
+    }
+
 
     @Test
     public void testUpdate() throws Exception {
