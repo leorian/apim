@@ -81,6 +81,11 @@ public class ProjectDomain implements Serializable {
             String[] projectMemberArray = this.getProjectMembersInput().split(",");
             List<ProjectMemberEntity> projectMemberEntityList = new ArrayList<>(projectMemberArray.length);
             for (String projectMember : projectMemberArray) {
+                try {
+                    Thread.sleep(10l);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Date date = new Date();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
                 ProjectMemberEntity projectMemberEntity = new ProjectMemberEntity();
