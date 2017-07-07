@@ -62,7 +62,7 @@
 	  <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
                 <excludes>
 					<exclude>bootstrap-test.properties</exclude>
                     <exclude>bootstrap-dev.properties</exclude>
@@ -72,7 +72,7 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
                 <includes>
                     <include>bootstrap-${env}.properties</include>
                     <include>bootstrap.properties</include>
