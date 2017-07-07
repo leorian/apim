@@ -67,6 +67,8 @@ public class ProjectDeployDomain implements Serializable {
         projectDeployEntity.setIp(this.getIpInput());
         projectDeployEntity.setPort(Integer.valueOf(this.getPortInput()));
         projectDeployEntity.setPath(this.getPathInput());
+        projectDeployEntity.setCreateDateTime(date);
+        projectDeployEntity.setUpdateDateTime(date);
         return projectDeployEntity;
     }
 
