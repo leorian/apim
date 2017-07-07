@@ -46,7 +46,7 @@
                             trElement += ("<td class='text-center'>" + data.rows[i].cellPhone + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].email + "</td>");
                             trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\" data-toggle='modal' " +
-                            "data-target='#newUserModal' data-userid='"+data.rows[i].userIdText+"'>编辑</button>"
+                            "data-target='#newUserModal' data-userid='" + data.rows[i].userIdText + "'>编辑</button>"
                             + "&nbsp;&nbsp;&nbsp;&nbsp;" +
                             "<button class=\"btn btn-danger btn-xs\" data-toggle=\"modal\" " +
                             "data-target=\"#deleteUserModal\" data-userid='" + data.rows[i].userIdText + "'>删除</button>" + "</td>");
@@ -87,43 +87,18 @@
                 }
             }, "json");
 
-            //用户列表
-            /*
-             $.get("apiUser/findApiUserList", null, function (data) {
-             if (data != null && data.length > 0) {
-             var trElements = "";
-             for (var i = 0; i < data.length; i++) {
-             var trElement = "<tr>";
-             trElement += ("<td class='text-center'>" + data[i].userId + "</td>");
-             trElement += ("<td class='text-center'>" + data[i].usName + "</td>");
-             trElement += ("<td class='text-center' >" + data[i].cnName + "</td>");
-             trElement += ("<td class='text-center'>" + data[i].userRoleText + "</td>");
-             trElement += ("<td class='text-center'>" + data[i].cellPhone + "</td>");
-             trElement += ("<td class='text-center'>" + data[i].email + "</td>");
-             trElement += ("<td class='text-center'>" + "<button class=\"btn btn-success btn-xs\">编辑</button>"
-             + "&nbsp;&nbsp;&nbsp;&nbsp;" +
-             "<button class=\"btn btn-danger btn-xs\">删除</button>" + "</td>");
-             trElement += "</tr>";
-             trElements = trElements + trElement;
-             }
-             $("#userTableTBody").html(trElements);
-             } else {
-             $("#userTableTBody").html("<tr><td class='text-center' colspan='7'>没有记录！</td></tr>");
-             }
-             }, "json");
-             */
-
             //用户分页
             userPage(null, null);
 
             //新增用户按钮事件
             $("#addUserBtn").click(function () {
                 $("#newUserForm")[0].reset();
+                $("#newUserModalLabel").html("新增用户");
             });
 
             //新增或者编辑用户提交按钮事件
             $("#newUserSubmitBtn").click(function () {
-                if ($("#userIdInput").val()==null || $("#userIdInput").val()=="") {
+                if ($("#userIdInput").val() == null || $("#userIdInput").val() == "") {
                     $.post("apiUser/insertApiUser", $("#newUserForm").serialize(), function (data) {
                         console.log(data);
                         if (data.success) {
@@ -145,7 +120,7 @@
             //编辑按钮事件
             $("#userTableTBody").delegate("button.btn-success", "click", function () {
                 var userId = $(this).attr("data-userid");
-                $.get("apiUser/findApiUser/"+userId, null, function (data) {
+                $.get("apiUser/findApiUser/" + userId, null, function (data) {
                     $("#userIdInput").val(data.userIdText);
                     $("#usNameInput").val(data.usName);
                     $("#cnNameInput").val(data.cnName);
@@ -153,6 +128,7 @@
                     $("#cellPhoneInput").val(data.cellPhone);
                     $("#emailInput").val(data.email);
                 });
+                $("#newUserModalLabel").html("编辑用户");
             });
 
             //删除按钮事件
@@ -205,7 +181,9 @@
             </div>
             <div class="panel-body">
                 <div class="text-right">
-                    <button type="button" id="addUserBtn" class="btn btn-info" data-toggle="modal" data-target="#newUserModal">新增用户</button>
+                    <button type="button" id="addUserBtn" class="btn btn-info" data-toggle="modal"
+                            data-target="#newUserModal">新增用户
+                    </button>
                 </div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
@@ -228,73 +206,8 @@
                     <th class="text-center">工作邮箱</th>
                     <th class="text-center">操作</th>
                     <tbody id="userTableTBody">
-
+                    <!--用户列表-->
                     </tbody>
-                    <!--<tr>
-                        <td class="text-center">20170628084501</td>
-                        <td class="text-center">xiezg</td>
-                        <td class="text-center">谢中贵</td>
-                        <td class="text-center">开发人员</td>
-                        <td class="text-center">18605569807</td>
-                        <td class="text-center">xiezg@317hu@2016</td>
-                        <td class="text-center">
-                            <button class="btn btn-success btn-xs">编辑</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger btn-xs">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">20170628084502</td>
-                        <td class="text-center">zs</td>
-                        <td class="text-center">张三</td>
-                        <td class="text-center">测试人员</td>
-                        <td class="text-center">18605569808</td>
-                        <td class="text-center">zs@317hu@2016</td>
-                        <td class="text-center">
-                            <button class="btn btn-success btn-xs">编辑</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger btn-xs">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">20170628084503</td>
-                        <td class="text-center">ls</td>
-                        <td class="text-center">李四</td>
-                        <td class="text-center">运维人员</td>
-                        <td class="text-center">18605569809</td>
-                        <td class="text-center">ls@317hu@2016</td>
-                        <td class="text-center">
-                            <button class="btn btn-success btn-xs">编辑</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger btn-xs">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">20170628084504</td>
-                        <td class="text-center">ww</td>
-                        <td class="text-center">王五</td>
-                        <td class="text-center">产品人员</td>
-                        <td class="text-center">18605569810</td>
-                        <td class="text-center">ww@317hu@2016</td>
-                        <td class="text-center">
-                            <button class="btn btn-success btn-xs">编辑</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger btn-xs">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">20170628084505</td>
-                        <td class="text-center">lt</td>
-                        <td class="text-center">乐天</td>
-                        <td class="text-center">开发人员</td>
-                        <td class="text-center">18605569811</td>
-                        <td class="text-center">lt@317hu@2016</td>
-                        <td class="text-center">
-                            <button class="btn btn-success btn-xs">编辑</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger btn-xs">删除</button>
-                        </td>
-                    </tr>-->
                 </table>
                 <ul class="pager">
                     <li class="previous"><a href="#">&larr; 上一页</a></li>
@@ -480,11 +393,7 @@
                         <label for="userRoleInput" class="col-sm-3 control-label">用户角色：</label>
                         <div class="col-sm-9">
                             <select id="userRoleInput" name="userRoleInput" class="form-control">
-                                <!--<option value="1">系统管理员</option>-->
-                                <!--<option value="2">开发人员</option>-->
-                                <!--<option value="3">测试人员</option>-->
-                                <!--<option value="4">运维人员</option>-->
-                                <!--<option value="5">产品人员</option>-->
+                                <!--用户角色-->
                             </select>
                         </div>
                     </div>
