@@ -65,6 +65,7 @@ public class ApiUserServiceImpl implements ApiUserService {
             objectList.add("%" + apiUserEntity.getEmail() + "%");
         }
 
+        resultSQL = resultSQL + " ORDER BY updateDateTime DESC ";
         resultSQL = resultSQL + " LIMIT ? , ? ";
         if (objectList.size() > 0) {
             jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, objectList.toArray(), int.class));
