@@ -8,6 +8,8 @@ import com.alibaba.fastjson.JSON;
  */
 public class ProjectDeployEntity extends BaseEntity {
     private Long deployId;
+    private String deployIdText;
+
     private Long projectId;
     private String env;
     private String ip;
@@ -32,6 +34,14 @@ public class ProjectDeployEntity extends BaseEntity {
 
     public void setDeployId(Long deployId) {
         this.deployId = deployId;
+    }
+
+    public String getDeployIdText() {
+        return deployIdText;
+    }
+
+    public void setDeployIdText(String deployIdText) {
+        this.deployIdText = deployIdText;
     }
 
     public Long getProjectId() {

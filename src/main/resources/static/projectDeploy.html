@@ -59,6 +59,25 @@
                     $("#envInput").append("<option value='" + code + "'>" + data[code] + "</option>");
                 }
             });
+
+            //新增机器按钮事件
+            $("#addMachineBtn").click(function () {
+                $("#newMachineForm")[0].reset();
+                $("#newMachineModalLabel").html("新增机器");
+            });
+
+            //新增或者编辑机器提交按钮事件
+            $("#newMachineSubmitBtn").click(function () {
+                $.post("projectDeploy/insertProjectDeploy", $("#newMachineForm").serialize(), function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        $("#newMachineModal").modal("hide");
+                        window.location.reload();
+                    }
+                }, "json");
+            });
+
+
         });
     </script>
 </head>
@@ -140,7 +159,7 @@
                 </div>
                 <br/>
                 <div class="text-right">
-                    <button type="button" id="addUserBtn" class="btn btn-info" data-toggle="modal"
+                    <button type="button" id="addMachineBtn" class="btn btn-info" data-toggle="modal"
                             data-target="#newMachineModal">新增机器
                     </button>
                 </div>

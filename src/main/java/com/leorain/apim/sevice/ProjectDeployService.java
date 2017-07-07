@@ -15,4 +15,11 @@ public interface ProjectDeployService {
      * @return
      */
     JqPage<ProjectDeployEntity> findProjectDeployEntityPage(JqPage jqPage, ProjectDeployEntity projectDeployEntity);
+
+    /**
+     * 新增机器
+     *
+     * @param projectDeployEntity
+     */
+    void insertProjectDeployEntity(ProjectDeployEntity projectDeployEntity);
 }
