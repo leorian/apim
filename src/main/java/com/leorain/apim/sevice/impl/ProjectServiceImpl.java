@@ -31,7 +31,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectEntity findProjectEntity(Long projectId) {
-        return projectMapper.getOne(projectId);
+        ProjectEntity projectEntity = projectMapper.getOne(projectId);
+        projectEntity.setProjectIdText(String.valueOf(projectEntity.getProjectId()));
+        return projectEntity;
     }
 
     @Override
