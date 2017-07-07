@@ -146,7 +146,7 @@
             $("#userTableTBody").delegate("button.btn-success", "click", function () {
                 var userId = $(this).attr("data-userid");
                 $.get("apiUser/findApiUser/"+userId, null, function (data) {
-                    $("#userIdInput").val(data.userId);
+                    $("#userIdInput").val(data.userIdText);
                     $("#usNameInput").val(data.usName);
                     $("#cnNameInput").val(data.cnName);
                     $("#userRoleInput").val(data.userRole);

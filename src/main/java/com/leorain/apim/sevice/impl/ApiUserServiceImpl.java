@@ -27,7 +27,9 @@ public class ApiUserServiceImpl implements ApiUserService {
 
     @Override
     public ApiUserEntity findApiUserEntity(Long userId) {
-        return apiUserMapper.getOne(userId);
+        ApiUserEntity apiUserEntity = apiUserMapper.getOne(userId);
+        apiUserEntity.setUserIdText(String.valueOf(apiUserEntity.getUserId()));
+        return apiUserEntity;
     }
 
     @Override
