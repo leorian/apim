@@ -34,6 +34,7 @@
 
             var projectId = getQueryString("projectId");
             $("#projectIdInput").val(projectId);
+            //项目信息展示区
             $.get("project/findProject/" + projectId, null, function (data) {
                 console.log(data);
                 $("#projectNameTd").html(data.projectName);
@@ -50,6 +51,26 @@
                         content = content + projectMemberEntities[i].userName;
                     }
                     $("#projectMembersTd").html(content);
+                }
+            });
+
+            //机器列表信息展示区
+            $.get("projectDeploy/findProjectDeployList/" + projectId, null, function (data) {
+                console.log(data);
+                if (data != null && data.length > 0) {
+                    var trElements = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var trElement = "<tr>";
+                        trElement += ("<td class='text-center'>" + data[i].deployIdText + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].env + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].ip + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].port + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].path + "</td>");
+                        trElement += ("<td class='text-center'>" + "<button class='btn btn-success btn-xs'>编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-xs'>删除</button>" + "</td>");
+                        trElement += "</tr>";
+                        trElements += trElement;
+                    }
+                    $("#machineTableTBody").html(trElements);
                 }
             });
 
