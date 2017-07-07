@@ -66,7 +66,10 @@
                         trElement += ("<td class='text-center'>" + data[i].ip + "</td>");
                         trElement += ("<td class='text-center'>" + data[i].port + "</td>");
                         trElement += ("<td class='text-center'>" + data[i].path + "</td>");
-                        trElement += ("<td class='text-center'>" + "<button class='btn btn-success btn-xs'>编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-xs'>删除</button>" + "</td>");
+                        trElement += ("<td class='text-center'>"
+                        + "<button class='btn btn-success btn-xs' data-deployid='" + data[i].deployIdText + "'>编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;"
+                        + "<button class='btn btn-danger btn-xs' data-deployid='" + data[i].deployIdText + "'>删除</button>" +
+                        "</td>");
                         trElement += "</tr>";
                         trElements += trElement;
                     }
