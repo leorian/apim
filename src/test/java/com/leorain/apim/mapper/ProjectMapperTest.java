@@ -61,11 +61,11 @@ public class ProjectMapperTest {
     public void testQuery3() throws Exception {
         List<Long> projectIdList = new ArrayList<>();
         projectIdList.add(20170707093615909l);
-        Map<Long, Integer> map = projectMapper.getMemberCountByProjectList(projectIdList);
-        if (map == null || map.size() == 0) {
+        List<ProjectEntity> projectEntities = projectMapper.getMemberCountByProjectList(projectIdList);
+        if (projectEntities == null || projectEntities.size() == 0) {
             System.out.println("is null");
         } else {
-            System.out.println(JSON.toJSONString(map));
+            System.out.println(JSON.toJSONString(projectEntities));
         }
     }
 

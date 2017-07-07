@@ -19,5 +19,5 @@ public interface ProjectMapper extends BaseMapper<ProjectEntity> {
      * @param projectIdList
      * @return
      */
-    Map<Long, Integer> getMemberCountByProjectList(List<Long> projectIdList);
+    List<ProjectEntity> getMemberCountByProjectList(List<Long> projectIdList);
 }

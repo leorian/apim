@@ -8,8 +8,12 @@ import com.leorain.apim.tools.JqPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xiezg@317hu.com on 2017/6/30 0030.
@@ -43,6 +47,26 @@ public class ProjectServiceImpl implements ProjectService {
         jqPage.setRecords(jdbcTemplate.queryForObject(countSQL, int.class));
         Object[] args = {jqPage.getFromIndex(), jqPage.getPageSize()};
         jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectEntityRowMapper()));
+        List<ProjectEntity> projectEntityList = jqPage.getRows();
+        if (!CollectionUtils.isEmpty(projectEntityList)) {
+            List<Long> projectIds = new ArrayList<>(projectEntityList.size());
+            for (ProjectEntity pj : projectEntityList) {
+                projectIds.add(pj.getProjectId());
+            }
+
+            List<ProjectEntity> projectEntities = projectMapper.getMemberCountByProjectList(projectIds);
+
+            if (!CollectionUtils.isEmpty(projectEntities)) {
+                Map<Long, Integer> map = new HashMap<>();
+                for (ProjectEntity pj : projectEntities) {
+                    map.put(pj.getProjectId(), pj.getMemberCount());
+                }
+
+                for (ProjectEntity pj : projectEntityList) {
+                    pj.setMemberCount(map.get(pj.getProjectId()));
+                }
+            }
+        }
         return jqPage;
     }
 
