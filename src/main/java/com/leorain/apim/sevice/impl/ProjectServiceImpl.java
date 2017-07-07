@@ -55,7 +55,7 @@ public class ProjectServiceImpl implements ProjectService {
         if (!StringUtils.isEmpty(projectEntity.getProjectName())) {
             countSQL = countSQL + " (tap.projectName LIKE ?) ";
             resultSQL = resultSQL + " (tap.projectName LIKE  ?) ";
-            list.add(projectEntity.getProjectName());
+            list.add("%" + projectEntity.getProjectName() + "%");
         }
 
         if (!StringUtils.isEmpty(projectEntity.getProjectName()) && !(projectEntity.getProjectManager() == null)) {
