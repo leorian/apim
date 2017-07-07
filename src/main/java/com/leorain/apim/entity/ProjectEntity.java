@@ -36,12 +36,12 @@ public class ProjectEntity extends BaseEntity {
     /**
      * 接口总数
      */
-    private Integer interfaceCount;
+    private Integer interfaceCount = 0;
 
     /**
      * 组内人员总数
      */
-    private Integer memberCount;
+    private Integer memberCount = 0;
 
     public ProjectEntity() {
     }
