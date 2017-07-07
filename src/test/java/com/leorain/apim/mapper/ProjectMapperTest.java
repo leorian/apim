@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -58,13 +59,13 @@ public class ProjectMapperTest {
 
     @Test
     public void testQuery3() throws Exception {
-        List<Long> projectIdList= new ArrayList<>();
+        List<Long> projectIdList = new ArrayList<>();
         projectIdList.add(20170707093615909l);
-        List<ProjectEntity> projectEntities = projectMapper.getMemberCountByProjectList(projectIdList);
-        if (projectEntities == null || projectEntities.size() == 0) {
+        Map<Long, Integer> map = projectMapper.getMemberCountByProjectList(projectIdList);
+        if (map == null || map.size() == 0) {
             System.out.println("is null");
         } else {
-            System.out.println(projectEntities.toString());
+            System.out.println(JSON.toJSONString(map));
         }
     }
 

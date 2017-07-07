@@ -33,7 +33,7 @@
         FROM T_API_PROJECT tap LEFT JOIN T_API_USER tau ON tap.projectManager = tau.userId
     </select>
 
-    <select id="getMemberCountByProjectList" resultMap="BaseResultMap">
+    <select id="getMemberCountByProjectList" resultType="HashMap">
         SELECT tap.projectId AS projectId, COUNT(tapm.userId) AS memberCount
         FROM T_API_PROJECT tap LEFT JOIN T_API_PROJECT_MEMBER tapm ON tap.projectId = tapm.projectId
         WHERE tap.projectId IN
