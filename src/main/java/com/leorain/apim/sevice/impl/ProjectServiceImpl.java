@@ -42,4 +42,9 @@ public class ProjectServiceImpl implements ProjectService {
         jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectEntityRowMapper()));
         return jqPage;
     }
+
+    @Override
+    public void insertProject(ProjectEntity projectEntity) {
+        projectMapper.insert(projectEntity);
+    }
 }

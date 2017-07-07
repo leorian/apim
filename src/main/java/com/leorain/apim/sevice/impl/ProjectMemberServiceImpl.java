@@ -42,4 +42,9 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
         jqPage.setRows(jdbcTemplate.query(resultSQL, args, new ProjectMemberEntityRowMapper()));
         return jqPage;
     }
+
+    @Override
+    public void insertProjectMemberEntity(ProjectMemberEntity projectMemberEntity) {
+        projectMemberMapper.insert(projectMemberEntity);
+    }
 }

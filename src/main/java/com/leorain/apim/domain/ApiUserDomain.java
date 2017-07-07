@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.leorain.apim.entity.ApiUserEntity;
 import org.springframework.util.DigestUtils;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
 /**
  * Created by xiezg@317hu.com on 2017/7/6 0006.
  */
-public class ApiUserDomain {
+public class ApiUserDomain implements Serializable{
     private String usNameInput;
     private String cnNameInput;
     private String userRoleInput;

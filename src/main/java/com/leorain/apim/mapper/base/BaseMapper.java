@@ -12,9 +12,9 @@ public interface BaseMapper<T> {
 
     T getOne(Long id);
 
-    void insert(T user);
+    void insert(T t);
 
-    void update(T user);
+    void update(T t);
 
     void delete(Long id);
 }

@@ -33,4 +33,11 @@ public interface ProjectMemberService {
      * @return
      */
     JqPage<ProjectMemberEntity> findProjectMemberEntityPage(JqPage jqPage, ProjectMemberEntity projectMemberEntity);
+
+    /**
+     * 新增项目成员信息
+     *
+     * @param projectMemberEntity
+     */
+    void insertProjectMemberEntity(ProjectMemberEntity projectMemberEntity);
 }

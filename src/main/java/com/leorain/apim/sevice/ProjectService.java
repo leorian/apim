@@ -26,4 +26,11 @@ public interface ProjectService {
      * @return
      */
     JqPage<ProjectEntity> findProjectEntityPage(JqPage jqPage, ProjectEntity projectEntity);
+
+    /**
+     * 新增项目实体信息
+     *
+     * @param projectEntity
+     */
+    void insertProject(ProjectEntity projectEntity);
 }
