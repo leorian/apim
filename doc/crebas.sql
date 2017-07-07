@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/6/30 星期五 10:31:00                       */
+/* Created on:     2017/7/7 星期五 14:22:43                        */
 /*==============================================================*/
 
 
@@ -17,6 +17,8 @@ drop table if exists T_API_INTERFACE_REQUEST;
 drop table if exists T_API_INTERFACE_RESPONSE;
 
 drop table if exists T_API_PROJECT;
+
+drop table if exists T_API_PROJECT_DEPLOY;
 
 drop table if exists T_API_PROJECT_MEMBER;
 
@@ -168,6 +170,26 @@ create table T_API_PROJECT
 alter table T_API_PROJECT comment '项目表';
 
 /*==============================================================*/
+/* Table: T_API_PROJECT_DEPLOY                                  */
+/*==============================================================*/
+create table T_API_PROJECT_DEPLOY
+(
+   deployId             bigint not null comment '发布ID',
+   projectId            bigint comment '项目ID',
+   env                  varchar(10) comment '环境',
+   ip                   varchar(20) comment 'IP地址',
+   port                 int comment '端口号',
+   path                 varchar(512) comment 'tomcat等服务器系统路径',
+   createUserId         bigint comment '创建人',
+   createDateTime       datetime comment '创建时间',
+   updateUserId         bigint comment '更新人',
+   updateDateTime       datetime comment '更新时间',
+   primary key (deployId)
+);
+
+alter table T_API_PROJECT_DEPLOY comment '项目部署情况表';
+
+/*==============================================================*/
 /* Table: T_API_PROJECT_MEMBER                                  */
 /*==============================================================*/
 create table T_API_PROJECT_MEMBER
@@ -245,6 +267,9 @@ alter table T_API_INTERFACE_RESPONSE add constraint FK_Reference_10 foreign key 
 
 alter table T_API_PROJECT add constraint FK_Reference_1 foreign key (projectManager)
       references T_API_USER (userId) on delete restrict on update restrict;
+
+alter table T_API_PROJECT_DEPLOY add constraint FK_Reference_11 foreign key (projectId)
+      references T_API_PROJECT (projectId) on delete restrict on update restrict;
 
 alter table T_API_PROJECT_MEMBER add constraint FK_Reference_2 foreign key (projectId)
       references T_API_PROJECT (projectId) on delete restrict on update restrict;
