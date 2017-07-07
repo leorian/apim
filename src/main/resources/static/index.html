@@ -194,13 +194,24 @@
 
             //新增或者编辑项目提交按钮事件
             $("#newProjectSubmitBtn").click(function () {
-                $.post("project/insertProject", $("#newProjectForm").serialize(), function (data) {
-                    console.log(data);
-                    if (data.success) {
-                        $("#newProjectModal").modal("hide");
-                        window.location.reload();
-                    }
-                }, "json");
+                if ($("#projectIdInput").val() == null || $("#projectIdInput").val() == "") {
+                    $.post("project/insertProject", $("#newProjectForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#newProjectModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                } else {
+                    $.post("project/updateProject", $("#newProjectForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#newProjectModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                }
+
             });
 
             //用户编辑按钮事件
@@ -229,7 +240,7 @@
                         var projectMembersInput = $("#projectMembersInput").find("input[type='checkbox']");
                         for (var i = 0; i < projectMembersInput.length; i++) {
                             var projectMemberInput = projectMembersInput[i];
-                            $(projectMemberInput).prop("checked",false);
+                            $(projectMemberInput).prop("checked", false);
                         }
 
                         for (var i = 0; i < projectMembersInput.length; i++) {
