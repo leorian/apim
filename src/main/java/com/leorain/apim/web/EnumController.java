@@ -1,5 +1,6 @@
 package com.leorain.apim.web;
 
+import com.leorain.apim.enums.EnvEnum;
 import com.leorain.apim.enums.UserRoleEnum;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,17 @@ public class EnumController {
      * @return
      */
     @RequestMapping("/userRoleEnums")
-    private Map<Integer, String> userRoleEnums() {
+    public Map<Integer, String> userRoleEnums() {
         return UserRoleEnum.DATA_MAP;
+    }
+
+    /**
+     * 环境枚举
+     *
+     * @return
+     */
+    @RequestMapping("/envEnums")
+    public Map<String, String> envEnums() {
+        return EnvEnum.DATA_MAP;
     }
 }
