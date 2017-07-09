@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/7/7 星期五 14:22:43                        */
+/* Created on:     2017/7/10 星期一 07:24:39                       */
 /*==============================================================*/
 
 
@@ -184,6 +184,11 @@ create table T_API_PROJECT_DEPLOY
    createDateTime       datetime comment '创建时间',
    updateUserId         bigint comment '更新人',
    updateDateTime       datetime comment '更新时间',
+   loginAccount         varchar(32) comment '登录账号',
+   loginPassword        varchar(256) comment '登录密码',
+   loginPort            int comment '登录监听的端口号',
+   loginProtocol        varchar(10) comment '登录所用的协议',
+   loginOs              varchar(20) comment '登录的系统',
    primary key (deployId)
 );
 
