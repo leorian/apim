@@ -8,6 +8,11 @@
         <result column="ip" property="ip" jdbcType="VARCHAR"/>
         <result column="port" property="port" jdbcType="INTEGER"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="loginOs" property="loginOs" jdbcType="VARCHAR"/>
+        <result column="loginProtocol" property="loginProtocol" jdbcType="VARCHAR"/>
+        <result column="loginPort" property="loginPort" jdbcType="INTEGER"/>
+        <result column="loginAccount" property="loginAccount" jdbcType="VARCHAR"/>
+        <result column="loginPassword" property="loginPassword" jdbcType="VARCHAR"/>
 
         <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
         <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
@@ -17,7 +22,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        deployId, projectId, env, ip, port, path, createUserId, createDateTime, updateUserId, updateDateTime
+        deployId, projectId, env, ip, port, path, loginOs, loginProtocol, loginPort, loginAccount, loginPassword,
+        createUserId, createDateTime, updateUserId, updateDateTime
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap">
@@ -43,9 +49,11 @@
     <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceEntity">
        INSERT INTO 
        		T_API_PROJECT_DEPLOY
-       		(deployId, projectId, env, ip, port, path, createUserId, createDateTime, updateUserId, updateDateTime)
+       		(deployId, projectId, env, ip, port, path, loginOs, loginProtocol, loginPort, loginAccount, loginPassword,
+       		 createUserId, createDateTime, updateUserId, updateDateTime)
        	VALUES
-       		(#{deployId}, #{projectId}, #{env}, #{ip}, #{port}, #{path}, #{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
+       		(#{deployId}, #{projectId}, #{env}, #{ip}, #{port}, #{path}, #{loginOs}, #{loginProtocol}, #{loginPort}, #{loginAccount}, #{loginPassword},
+       		 #{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
     </insert>
 
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceEntity">
@@ -57,6 +65,11 @@
         <if test="ip != null">ip = #{ip},</if>
         <if test="port != null">port = #{port},</if>
         <if test="path != null">path = #{path},</if>
+        <if test="loginOs != null">loginOs = #{loginOs},</if>
+        <if test="loginProtocol != null">loginProtocol = #{loginProtocol},</if>
+        <if test="loginPort != null">loginPort = #{loginPort},</if>
+        <if test="loginAccount != null">loginAccount = #{loginAccount},</if>
+        <if test="loginPassword != null">loginPassword = #{loginPassword},</if>
         <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
         <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
         WHERE

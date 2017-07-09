@@ -18,6 +18,11 @@ public class ProjectDeployEntityRowMapper implements RowMapper<ProjectDeployEnti
         projectDeployEntity.setIp(resultSet.getString("ip"));
         projectDeployEntity.setPort(resultSet.getInt("port"));
         projectDeployEntity.setPath(resultSet.getString("path"));
+        projectDeployEntity.setLoginOs(resultSet.getString("loginOs"));
+        projectDeployEntity.setLoginProtocol(resultSet.getString("loginProtocol"));
+        projectDeployEntity.setLoginPort(resultSet.getInt("loginPort"));
+        projectDeployEntity.setLoginAccount(resultSet.getString("loginAccount"));
+        projectDeployEntity.setLoginPassword(resultSet.getString("loginPassword"));
         projectDeployEntity.setCreateUserId(resultSet.getLong("createUserId"));
         projectDeployEntity.setCreateDateTime(resultSet.getDate("createDateTime"));
         projectDeployEntity.setUpdateUserId(resultSet.getLong("updateUserId"));

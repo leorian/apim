@@ -18,6 +18,12 @@ public class ProjectDeployEntity extends BaseEntity {
     private Integer port;
     private String path;
 
+    private String loginAccount;
+    private String loginPassword;
+    private Integer loginPort;
+    private String loginProtocol;
+    private String loginOs;
+
     public ProjectDeployEntity() {
     }
 
@@ -92,6 +98,46 @@ public class ProjectDeployEntity extends BaseEntity {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getLoginAccount() {
+        return loginAccount;
+    }
+
+    public void setLoginAccount(String loginAccount) {
+        this.loginAccount = loginAccount;
+    }
+
+    public String getLoginPassword() {
+        return loginPassword;
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
+
+    public Integer getLoginPort() {
+        return loginPort;
+    }
+
+    public void setLoginPort(Integer loginPort) {
+        this.loginPort = loginPort;
+    }
+
+    public String getLoginProtocol() {
+        return loginProtocol;
+    }
+
+    public void setLoginProtocol(String loginProtocol) {
+        this.loginProtocol = loginProtocol;
+    }
+
+    public String getLoginOs() {
+        return loginOs;
+    }
+
+    public void setLoginOs(String loginOs) {
+        this.loginOs = loginOs;
     }
 
     @Override

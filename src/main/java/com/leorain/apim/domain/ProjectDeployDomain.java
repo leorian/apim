@@ -16,6 +16,11 @@ public class ProjectDeployDomain implements Serializable {
     private String ipInput;
     private String portInput;
     private String pathInput;
+    private String loginOsInput;
+    private String loginProtocolInput;
+    private String loginPortInput;
+    private String loginAccountInput;
+    private String loginPasswordInput;
 
     public String getProjectIdInput() {
         return projectIdInput;
@@ -57,6 +62,46 @@ public class ProjectDeployDomain implements Serializable {
         this.pathInput = pathInput;
     }
 
+    public String getLoginOsInput() {
+        return loginOsInput;
+    }
+
+    public void setLoginOsInput(String loginOsInput) {
+        this.loginOsInput = loginOsInput;
+    }
+
+    public String getLoginProtocolInput() {
+        return loginProtocolInput;
+    }
+
+    public void setLoginProtocolInput(String loginProtocolInput) {
+        this.loginProtocolInput = loginProtocolInput;
+    }
+
+    public String getLoginPortInput() {
+        return loginPortInput;
+    }
+
+    public void setLoginPortInput(String loginPortInput) {
+        this.loginPortInput = loginPortInput;
+    }
+
+    public String getLoginAccountInput() {
+        return loginAccountInput;
+    }
+
+    public void setLoginAccountInput(String loginAccountInput) {
+        this.loginAccountInput = loginAccountInput;
+    }
+
+    public String getLoginPasswordInput() {
+        return loginPasswordInput;
+    }
+
+    public void setLoginPasswordInput(String loginPasswordInput) {
+        this.loginPasswordInput = loginPasswordInput;
+    }
+
     public ProjectDeployEntity buildProjectDeployEntity() {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
@@ -67,6 +112,11 @@ public class ProjectDeployDomain implements Serializable {
         projectDeployEntity.setIp(this.getIpInput());
         projectDeployEntity.setPort(Integer.valueOf(this.getPortInput()));
         projectDeployEntity.setPath(this.getPathInput());
+        projectDeployEntity.setLoginOs(this.getLoginOsInput());
+        projectDeployEntity.setLoginProtocol(this.getLoginProtocolInput());
+        projectDeployEntity.setLoginPort(Integer.valueOf(this.getLoginPortInput()));
+        projectDeployEntity.setLoginAccount(this.getLoginAccountInput());
+        projectDeployEntity.setLoginPassword(this.getLoginPasswordInput());
         projectDeployEntity.setCreateDateTime(date);
         projectDeployEntity.setUpdateDateTime(date);
         return projectDeployEntity;
