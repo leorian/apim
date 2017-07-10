@@ -289,6 +289,59 @@
             });
 
 
+            //编辑事件
+            $("#defaultEnvJqgridPanel").delegate(".btn-edit", "click", function () {
+                var data_key = $(this).attr("data-key");
+                var data_value = $(this).attr("data-value");
+                $("#jqgrid_key").val(data_key);
+                $("#jqgrid_value").val(data_value);
+                $("#updateModal").modal('show');
+            });
+
+            $("#defineEnvJqgridPanel").delegate(".btn-edit", "click", function () {
+                var data_key = $(this).attr("data-key");
+                var data_value = $(this).attr("data-value");
+                var data_defAppRunEnv = $(this).attr("data-defAppRunEnv");
+                var data_defAppRunEnvValue = $(this).attr("data-defAppRunEnvValue");
+                var data_defAppRunVersion = $(this).attr("data-defAppRunVersion");
+                $("#jqgrid_key").val(data_key);
+                $("#jqgrid_value").val(data_value);
+                $("#jqgrid_defAppRunEnv").val(data_defAppRunEnv);
+                $("#jqgrid_defAppRunEnvValue").val(data_defAppRunEnvValue);
+                $("#jqgrid_defAppRunVersion").val(data_defAppRunVersion);
+                $("#updateModal").modal('show');
+            });
+
+            $("#confirmUpdateBtn").click(function () {
+                var data_key = $("#jqgrid_key").val();
+                var data_value = $("#jqgrid_value").val();
+                var data_defAppRunEnv = $("#jqgrid_defAppRunEnv").val();
+                var data_defAppRunVersion = $("#jqgrid_defAppRunVersion").val();
+                if (data_value == null || data_value == undefined || data_value.trim() == "") {
+                    $("#legalModalBody").html("value值不能为空！");
+                    $("#legalModal").css("z-index", $("#legalModal").css("z-index") + 10);
+                    $("#legalModal").modal('show');
+                    return;
+                }
+
+                $.post("config/updateOneProperty", {
+                    "appId": projectId,
+//                    "appName": "$!{appDO.appName}",
+                    "serverType": $("input[name='serverType']").val(),
+                    "key": data_key,
+                    "value": data_value,
+                    "defAppRunEnv": data_defAppRunEnv,
+                    "defAppRunVersion": data_defAppRunVersion
+                }, function (result) {
+                    tabSwitch($("input[name='serverType']").val());
+                    $("#updateModal").modal('hide');
+
+                    $("#legalModalBody").html(eval("(" + result + ")").msg);
+                    $("#legalModal").modal('show');
+                });
+            });
+
+
         });
     </script>
 </head>
