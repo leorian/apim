@@ -204,6 +204,43 @@
 
             $($("#myTab li").get(1)).trigger("click");
 
+            //提交事件
+            $("#ajaxSubmitBtn").click(function () {
+                var appId = $("input[name='appId']").val();
+                if (appId == null || appId == undefined || appId == "") {
+                    $("#legalModalBody").html("应用不能为空！");
+                    $("#legalModal").modal('show');
+                    return
+                }
+
+                var appProperties = $("textarea[name='appProperties']").val();
+                if (appProperties == null || appProperties == undefined || appProperties == "") {
+                    $("#legalModalBody").html("请填入配置信息（格式：属性名=属性值 或者 属性名:属性值）!");
+                    $("#legalModal").modal('show');
+                    return
+                }
+
+                $.post("config/beforeSaveConfigCheck", $("#configForm").serialize(), function (result) {
+                    if ("FAILURE" == eval("(" + result + ")").code) {
+                        $("#legalModalBody").html(eval("(" + result + ")").msg);
+                        $("#legalModal").modal('show');
+                        return;
+                    }
+
+                    $("#myModalBody").html(eval("(" + result + ")").msg);
+                    $("#myModal").modal('show');
+                });
+            });
+
+            $("#confirmSubmitBtn").click(function () {
+                $.post("config/saveConfig", $("#configForm").serialize(), function (result) {
+                    tabSwitch($("input[name='serverType']").val());
+                    $('#myModal').modal('hide');
+                    $("#legalModalBody").html(eval("(" + result + ")").msg);
+                    $("#legalModal").modal('show');
+                });
+            });
+
 
         });
     </script>
