@@ -97,7 +97,7 @@
                     {label: '操作人', name: 'createId', sortable: false}
                 ],
                 viewrecords: true,
-                height:"auto",
+                height: "auto",
                 rowNum: 20,
                 rownumbers: true,
                 pager: "#jqGridPager"
@@ -125,6 +125,10 @@
             $("#appEnvMenus").delegate("li", "click", function () {
                 $("#dropdownMenu1").attr("data-id", $(this).attr("data-id"));
                 $("#dropdownMenu1").find(".customLabel").html($(this).attr("data-text"));
+            });
+
+            $(".glyphicon-circle-arrow-left").click(function () {
+                window.location.href = "projectConfig.html?projectId=" + projectId;
             });
 
         });
@@ -159,7 +163,9 @@
         <div class="panel panel-primary" id="userManagerPanel">
             <div class="panel-heading">
                 <h3 class="panel-title">配置管理
-                    <div style="display:inline;float:right"><a href="index.html"><span
+                    <div style="display:inline;float:right"><a href="javascript:void(0);"><span
+                            class="glyphicon glyphicon-circle-arrow-left" style="color: white"></span></a>&nbsp;&nbsp;<a
+                            href="index.html"><span
                             class="glyphicon glyphicon-home" style="color: rgb(212, 106, 64);"></span></a></div>
                 </h3>
             </div>
@@ -174,13 +180,13 @@
                                 <td id="projectNameTd">
                                     <!--配置中心-->
                                 </td>
-                                <th  class="text-center">
+                                <th class="text-center">
                                     项目经理：
                                 </th>
                                 <td id="projectManagerTd">
                                     <!--张三-->
                                 </td>
-                                <th  class="text-center">
+                                <th class="text-center">
                                     创建时间：
                                 </th>
                                 <td id="createDateTimeTd">
@@ -188,7 +194,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th  class="text-center">
+                                <th class="text-center">
                                     组内成员：
                                 </th>
                                 <td colspan="5" id="projectMembersTd">
@@ -196,7 +202,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th  class="text-center">
+                                <th class="text-center">
                                     项目描述：
                                 </th>
                                 <td colspan="5" id="projectDescribeTd">
@@ -218,7 +224,8 @@
                                                     data-toggle="dropdown"><span class="customLabel">应用环境</span>
                                                 <span class="caret"></span>
                                             </button>
-                                            <ul id="appEnvMenus" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                            <ul id="appEnvMenus" class="dropdown-menu" role="menu"
+                                                aria-labelledby="dropdownMenu1">
                                                 <li role="presentation" data-id="" data-text="全部">
                                                     <a role="menuitem" tabindex="-1" href="#">全部</a>
                                                 </li>
@@ -238,7 +245,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="keyOrValue" placeholder="key or value">
+                                        <input type="text" class="form-control" id="keyOrValue"
+                                               placeholder="key or value">
                                     </div>
                                     <div class="col-sm-3">
                                         <button class="btn btn-info btn-lg" id="searchBtn" type="button">
