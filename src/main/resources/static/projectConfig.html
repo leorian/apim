@@ -183,6 +183,19 @@
                 tabSwitch(serverType);
             });
 
+            //自定义配置选项查询按钮事件
+            $("#defineQueryBtn").click(function () {
+                $.post("${ctxPath}/config/configSet/getAllConfigSetList", {
+                    "appId": projectId,
+//                    "appName": "$!{appDO.appName}",
+                    "serverType": "DEF",
+                    "defAppRunEnv": $("#defAppRunEnv").val(),
+                    'defAppRunVersion': $("#defAppRunVersion").val()
+                }, function (data) {
+                    renderDefineTable(data);
+                }, "json");
+            });
+
             $("#defParaPanel").hide();
             $("#defineQueryBtnDiv").hide();
             $("#defineEnvJqgridPanel").hide();
