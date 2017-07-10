@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.leorain.apim.mongodb.consts.ConfigConstants;
 import com.leorain.apim.mongodb.domain.ConfigSet;
 import com.leorain.apim.mongodb.domain.DefineConfigSet;
+import com.leorain.apim.mongodb.domain.JqPage;
 import com.leorain.apim.mongodb.domain.RecordConfig;
 import com.leorain.apim.mongodb.enums.OperationType;
 import com.leorain.apim.mongodb.exception.ConfigCenterCodeEnum;
@@ -362,5 +363,32 @@ public class ConfigController {
         configSetService.insertOne(recordConfig);
 
         return ConfigCenterCodeEnum.T1007.toString();
+    }
+
+    /**
+     * 配置操作记录分页查询
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getRecordConfigList", method = RequestMethod.POST)
+    public String getRecordConfigList(HttpServletRequest request) {
+        String callBack = request.getParameter("callback");
+        String keyOrValue = request.getParameter("keyOrValue");
+        Integer page = Integer.valueOf(request.getParameter("page").toString());
+        Integer rows = Integer.valueOf(request.getParameter("rows").toString());
+        String appId = request.getParameter("appId");
+        String appName = request.getParameter("appName");
+        String serverType = request.getParameter("serverType");
+        if (StringUtils.isEmpty(serverType)) {
+            serverType = null;
+        }
+
+        JqPage<RecordConfig> jqPage = new JqPage<RecordConfig>();
+        jqPage.setPage(page);
+        jqPage.setPageSize(rows);
+        Gson gson = new Gson();
+        return callBack + "(" + gson.toJson(configSetService.getJqPage(jqPage, RecordConfig.class
+                , keyOrValue, serverType, appId, appName, null, null)) + ")";
     }
 }
