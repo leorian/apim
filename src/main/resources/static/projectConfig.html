@@ -185,7 +185,7 @@
 
             //自定义配置选项查询按钮事件
             $("#defineQueryBtn").click(function () {
-                $.post("${ctxPath}/config/configSet/getAllConfigSetList", {
+                $.post("config/getAllConfigSetList", {
                     "appId": projectId,
 //                    "appName": "$!{appDO.appName}",
                     "serverType": "DEF",
