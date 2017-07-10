@@ -66,6 +66,11 @@
                         trElement += ("<td class='text-center'>" + data[i].ip + "</td>");
                         trElement += ("<td class='text-center'>" + data[i].port + "</td>");
                         trElement += ("<td class='text-center'>" + data[i].path + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].loginOs + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].loginProtocol + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].loginPort + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].loginAccount + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].loginPassword + "</td>");
                         trElement += ("<td class='text-center'>"
                         + "<button data-toggle=\"modal\" data-target=\"#newMachineModal\""
                         + " class='btn btn-success btn-xs' data-deployid='" + data[i].deployIdText + "'>编辑</button>"
@@ -78,7 +83,7 @@
                     }
                     $("#machineTableTBody").html(trElements);
                 } else {
-                    $("#machineTableTBody").html("<tr><td colspan='6' class='text-center'>没有记录！</td></tr>")
+                    $("#machineTableTBody").html("<tr><td colspan='11' class='text-center'>没有记录！</td></tr>")
                 }
             });
 
@@ -86,6 +91,20 @@
             $.get("enum/envEnums", null, function (data) {
                 for (var code in data) {
                     $("#envInput").append("<option value='" + code + "'>" + data[code] + "</option>");
+                }
+            });
+
+            //操作系统类型枚举
+            $.get("enum/loginOsEnums", null, function (data) {
+                for (var code in data) {
+                    $("#loginOsInput").append("<option value='" + code + "'>" + data[code] + "</option>");
+                }
+            });
+
+            //远程协议枚举
+            $.get("enum/loginProtocolEnums", null, function (data) {
+                for (var code in data) {
+                    $("#loginProtocolInput").append("<option value='" + code + "'>" + data[code] + "</option>");
                 }
             });
 
@@ -127,6 +146,11 @@
                     $("#ipInput").val(data.ip);
                     $("#portInput").val(data.port);
                     $("#pathInput").val(data.path);
+                    $("#loginOsInput").val(data.loginOs);
+                    $("#loginProtocolInput").val(data.loginProtocol);
+                    $("#loginPortInput").val(data.loginPort);
+                    $("#loginAccountInput").val(data.loginAccount);
+                    $("#loginPasswordInput").val(data.loginPassword);
                 });
 
                 $("#newMachineModalLabel").html("编辑机器");
@@ -242,6 +266,11 @@
                     <th class="text-center">IP地址</th>
                     <th class="text-center">端口号</th>
                     <th class="text-center">路径</th>
+                    <th class="text-center">操作系统</th>
+                    <th class="text-center">远程协议</th>
+                    <th class="text-center">协议端口</th>
+                    <th class="text-center">账号</th>
+                    <th class="text-center">密码</th>
                     <th class="text-center">操作</th>
                     <tbody id="machineTableTBody">
                     <!--用户列表-->
@@ -315,9 +344,43 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pathInput" class="col-sm-3 control-label">路径</label>
+                        <label for="pathInput" class="col-sm-3 control-label">路径：</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="pathInput" name="pathInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginOsInput" class="col-sm-3 control-label">操作系统：</label>
+                        <div class="col-sm-9">
+                            <select id="loginOsInput" name="loginOsInput" class="form-control">
+                                <!--操作系统类型枚举-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginProtocolInput" class="col-sm-3 control-label">远程协议：</label>
+                        <div class="col-sm-9">
+                            <select id="loginProtocolInput" name="loginProtocolInput" class="form-control">
+                                <!--远程协议枚举-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPortInput" class="col-sm-3 control-label">协议端口：</label>
+                        <div class="col-sm-9">
+                            <input id="loginPortInput" name="loginPortInput" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginAccountInput" class="col-sm-3 control-label">登录账号：</label>
+                        <div class="col-sm-9">
+                            <input id="loginAccountInput" name="loginAccountInput" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPasswordInput" class="col-sm-3 control-label">登录密码：</label>
+                        <div class="col-sm-9">
+                            <input id="loginPasswordInput" name="loginPasswordInput" class="form-control">
                         </div>
                     </div>
                 </form>
