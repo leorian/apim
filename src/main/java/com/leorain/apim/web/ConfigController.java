@@ -245,4 +245,122 @@ public class ConfigController {
 
         return ConfigCenterCodeEnum.T1004.toString();
     }
+
+    /**
+     * 删除一个配置项
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/deleteOneProperty", method = RequestMethod.POST)
+    public String deleteOneProperty(HttpServletRequest request) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String uId = (String) request.getAttribute("uId");
+        String appId = request.getParameter("appId");
+        if (StringUtils.isEmpty(appId)) {
+            return ConfigCenterCodeEnum.T1001.toString();
+        }
+
+        String appName = request.getParameter("appName");
+        String serverType = request.getParameter("serverType");
+        if (StringUtils.isEmpty(serverType)) {
+            return ConfigCenterCodeEnum.T1002.toString();
+        }
+
+        String key = request.getParameter("key");
+        String value = request.getParameter("value");
+
+        if (ConfigConstants.DEF.equals(serverType)) {//自定义选项配置删除
+            String defAppRunEnv = request.getParameter("defAppRunEnv");
+            String defAppRunVersion = request.getParameter("defAppRunVersion");
+            configSetService.deleteOneByKey(appId, appName, defAppRunEnv, key, uId, defAppRunVersion, DefineConfigSet.class);
+            return ConfigCenterCodeEnum.T1005.toString();
+        }
+
+        configSetService.deleteOneByKey(appId, appName, serverType, key, null, null, ConfigSet.class);
+
+        //操作记录
+        RecordConfig recordConfig = new RecordConfig();
+        recordConfig.setAppId(appId);
+        recordConfig.setAppName(appName);
+        recordConfig.setServerType(serverType);
+        recordConfig.setOperationType(OperationType.DELETE.name());
+        recordConfig.setCreateId(uId);
+        recordConfig.setCreateTime(simpleDateFormat.format(new Date()));
+        recordConfig.setKey(key);
+        recordConfig.setPreValue("");
+        recordConfig.setValue(value);
+        System.out.println(recordConfig.toString());
+        configSetService.insertOne(recordConfig);
+        return ConfigCenterCodeEnum.T1005.toString();
+    }
+
+    /**
+     * 更新一个配置项
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/updateOneProperty", method = RequestMethod.POST)
+    public String updateOneProperty(HttpServletRequest request) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String uId = (String) request.getAttribute("uId");
+        String appId = request.getParameter("appId");
+        if (StringUtils.isEmpty(appId)) {
+            return ConfigCenterCodeEnum.T1001.toString();
+        }
+
+        String appName = request.getParameter("appName");
+        String serverType = request.getParameter("serverType");
+        if (StringUtils.isEmpty(serverType)) {
+            return ConfigCenterCodeEnum.T1002.toString();
+        }
+
+        String key = request.getParameter("key");
+        String value = request.getParameter("value");
+        if (ConfigConstants.DEF.equals(serverType)) {
+            String defAppRunEnv = request.getParameter("defAppRunEnv");
+            String defAppRunVersion = request.getParameter("defAppRunVersion");
+            DefineConfigSet oldDefineConfigSet = configSetService.findOneByKey(appId, appName, defAppRunEnv, key, uId, defAppRunVersion, DefineConfigSet.class);
+            if (oldDefineConfigSet == null) {
+                return ConfigCenterCodeEnum.T1006.toString();
+            }
+
+            oldDefineConfigSet.setValue(value);
+            oldDefineConfigSet.setUpdateId(uId);
+            oldDefineConfigSet.setUpdateTime(simpleDateFormat.format(new Date()));
+            configSetService.updateOneByKey(appId, appName, defAppRunEnv, oldDefineConfigSet.getKey(), uId, defAppRunVersion, oldDefineConfigSet);
+            return ConfigCenterCodeEnum.T1007.toString();
+        }
+
+        ConfigSet oldConfigSet = configSetService.findOneByKey(appId, appName, serverType, key
+                , null, null, ConfigSet.class);
+        if (oldConfigSet == null) {
+            return ConfigCenterCodeEnum.T1006.toString();
+        }
+
+        String oldValue = oldConfigSet.getValue();
+        //更新
+        oldConfigSet.setValue(value);
+        oldConfigSet.setUpdateId(uId);
+        oldConfigSet.setUpdateTime(simpleDateFormat.format(new Date()));
+        configSetService.updateOneByKey(appId, appName, serverType, oldConfigSet.getKey()
+                , null, null, oldConfigSet);
+
+        //操作记录
+        RecordConfig recordConfig = new RecordConfig();
+        recordConfig.setAppId(appId);
+        recordConfig.setAppName(appName);
+        recordConfig.setServerType(serverType);
+        recordConfig.setOperationType(OperationType.UPDATE.name());
+        recordConfig.setCreateId(uId);
+        recordConfig.setCreateTime(simpleDateFormat.format(new Date()));
+        recordConfig.setKey(key);
+        recordConfig.setPreValue(oldValue);
+        recordConfig.setValue(value);
+        System.out.println(recordConfig.toString());
+        configSetService.insertOne(recordConfig);
+
+        return ConfigCenterCodeEnum.T1007.toString();
+    }
 }
