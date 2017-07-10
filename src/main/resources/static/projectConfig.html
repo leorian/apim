@@ -52,7 +52,146 @@
                     }
                     $("#projectMembersTd").html(content);
                 }
+
+                //应用ID
+                $("input[name='appId']").val(projectId);
+                //应用名称
+                $("input[name='appName']").val(data.projectName);
             });
+
+            var serverTypeHashMap = new Object();
+            serverTypeHashMap['DEV'] = "开发";
+            serverTypeHashMap['SIT'] = "测试";
+            serverTypeHashMap['UAT'] = "UAT";
+            serverTypeHashMap['PRD'] = "线上";
+
+            //默认渲染事件
+            function renderDefaultTable(data) {
+                var template = "";
+                if (data != undefined && data != null && data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        var row = data[i];
+                        template += "<tr>";
+                        template += "<td style='text-align: center;'>" + (i + 1) + "</td>";
+                        template += "<td style='text-align: left;'>" + row.key + "</td>";
+                        template += "<td style='text-align: left;'>" + row.value + "</td>";
+                        template += " <td style='text-align:right;'> " +
+                            "<button type='button' " +
+                            "data-key='" + row.key + "' " +
+                            "data-value='" + row.value + "' " +
+                            "class='btn btn-xs btn-info btn-edit'>编辑</button> " +
+                            "<button type='button'" +
+                            "data-key='" + row.key + "' " +
+                            "data-value='" + row.value + "' " +
+                            " class='btn btn-xs btn-danger btn-delete'>删除</button> " +
+                            "</td>"
+                        template += "</tr>";
+                    }
+                }
+                $("#defaultEnvJqgridPanel").find(".keyValueThead").html(" <tr> " +
+                    "<th style='width: 50px;'>序号</th> " +
+                    "<th>Key</th> " +
+                    "<th>Value</th> " +
+                    "<th style='text-align:right; min-width: 120px;'>操作</th>" +
+                    "</tr>");
+                $("#defaultEnvJqgridPanel").find(".keyValueTbody").html(template == "" ? "<tr><td colspan='4' style='text-align: center; color:red;'>没有记录！</td></tr>" : template);
+            }
+
+            //自定义渲染事件
+            function renderDefineTable(data) {
+                var template = "";
+                if (data != undefined && data != null && data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        var row = data[i];
+                        template += "<tr>";
+                        template += "<td style='text-align: center;'>" + (i + 1) + "</td>";
+                        template += "<td style='text-align: left;'>" + row.key + "</td>";
+                        template += "<td style='text-align: left;'>" + row.value + "</td>";
+                        template += "<td style='text-align: left;'>" + serverTypeHashMap[row.serverType] + "</td>";
+                        template += "<td style='text-align: left;'>" + row.version + "</td>";
+                        template += " <td style='text-align:right;'> " +
+                            "<button type='button' class='btn btn-xs btn-info btn-edit'" +
+                            "data-defAppRunEnv='" + row.serverType + "' " +
+                            "data-defAppRunEnvValue='" + serverTypeHashMap[row.serverType] + "' " +
+                            "data-defAppRunVersion='" + row.version + "' " +
+                            "data-key='" + row.key + "' " +
+                            "data-value='" + row.value + "' " +
+                            ">编辑</button> " +
+                            "<button type='button' class='btn btn-xs btn-danger btn-delete'" +
+                            "data-defAppRunEnv='" + row.serverType + "' " +
+                            "data-defAppRunEnvValue='" + serverTypeHashMap[row.serverType] + "' " +
+                            "data-defAppRunVersion='" + row.version + "' " +
+                            "data-key='" + row.key + "' " +
+                            "data-value='" + row.value + "' " +
+                            ">删除</button> " +
+                            "</td>"
+                        template += "</tr>";
+                    }
+                }
+                $("#defineEnvJqgridPanel").find(".keyValueThead").html(" <tr> " +
+                    "<th style='width: 50px;'>序号</th> " +
+                    "<th>Key</th> " +
+                    "<th>Value</th> " +
+                    "<th>运行环境</th> " +
+                    "<th>版本号</th> " +
+                    "<th style='text-align:right; min-width: 120px;'>操作</th>" +
+                    "</tr>");
+                $("#defineEnvJqgridPanel").find(".keyValueTbody").html(template == "" ? "<tr><td colspan='6' style='text-align: center; color:red;'>没有记录！</td></tr>" : template);
+            }
+
+            function tabSwitch(serverType) {
+                if ("DEF" == serverType) {
+                    $("#defParaPanel").show();
+                    $("#defineQueryBtnDiv").show();
+                    $("#jqgrid_defAppRunEnv_Panel").show();
+                    $("#jqgrid_defAppRunVersion_Panel").show();
+
+                    $("#defaultEnvJqgridPanel").hide();
+                    $("#defineEnvJqgridPanel").show();
+
+                    $.post("config/getAllConfigSetList", {
+                        "appId": projectId,
+//                        "appName": "$!{appDO.appName}",
+                        "serverType": "DEF"
+                    }, function (data) {
+                        renderDefineTable(data);
+                    }, "json");
+
+                } else {
+                    $("#defParaPanel").hide();
+                    $("#defineQueryBtnDiv").hide();
+                    $("#jqgrid_defAppRunEnv_Panel").hide();
+                    $("#jqgrid_defAppRunVersion_Panel").hide();
+
+                    $("#defineEnvJqgridPanel").hide();
+                    $("#defaultEnvJqgridPanel").show();
+                    $.post("config/getAllConfigSetList", {
+                        "appId": projectId,
+//                        "appName": "$!{appDO.appName}",
+                        "serverType": $("input[name='serverType']").val()
+                    }, function (data) {
+                        renderDefaultTable(data);
+                    }, "json");
+
+                }
+            }
+
+            $("#myTab").delegate("li", "click", function () {
+                var a = $(this).children("a");
+                var serverType = a.attr("href").substr(1).toUpperCase();
+                $("input[name='serverType']").val(serverType);
+                tabSwitch(serverType);
+            });
+
+            $("#defParaPanel").hide();
+            $("#defineQueryBtnDiv").hide();
+            $("#defineEnvJqgridPanel").hide();
+            $("#jqgrid_defAppRunEnv_Panel").hide();
+            $("#jqgrid_defAppRunVersion_Panel").hide();
+
+            $($("#myTab li").get(1)).trigger("click");
+
+
         });
     </script>
 </head>
@@ -133,7 +272,7 @@
                     </div>
                 </div>
                 <br/>
-                <ul class="nav nav-tabs">
+                <ul id="myTab" class="nav nav-tabs">
                     <li class="active">
                         <a href="#def" data-toggle="tab">
                             自定义配置项
@@ -160,25 +299,85 @@
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="def">
-                        <p>自定义配置项内容</p>
-                    </div>
-                    <div class="tab-pane fade" id="dev">
-                        <p>开发环境配置项内容</p>
-                    </div>
-                    <div class="tab-pane fade" id="sit">
-                        <p>测试环境配置项内容</p>
-                    </div>
-                    <div class="tab-pane fade" id="uat">
-                        <p>预发环境配置项内容</p>
-                    </div>
-                    <div class="tab-pane fade" id="prd">
-                        <p>线上环境配置项内容</p>
-                    </div>
+                <!-- Tab panes -->
+                <div style="margin: 20px;">
+                    <form method="post" id="configForm" class="form-x" action="info.htm">
+                        <input type="hidden" name="do_action" value="infoAction"/>
+                        <input type="hidden" name="do_method" value="save"/>
+                        <input type="hidden" name="appId" , value=""/>
+                        <input type="hidden" name="appName" , value=""/>
+                        <div class="form-group">
+                            <input type="hidden" name="serverType" value=""/>
+                            <textarea name="appProperties" rows="10" cols="120"></textarea>
+                        </div>
+                        <div class="form-group" id="defParaPanel">
+                            <label class="control-label">应用运行环境</label>
+                            <select id="defAppRunEnv" name="defAppRunEnv" class="form-control" style="width: 210px;">
+                                <option value="DEV">开发</option>
+                                <option value="SIT">测试</option>
+                                <option value="UAT">UAT</option>
+                                <option value="PRD">线上</option>
+                            </select>
+                            <br/>
+                            <label class="control-label">版本号</label>
+                            <select id="defAppRunVersion" name="defAppRunVersion" class="form-control"
+                                    style="width: 210px;">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">
+                                <label></label>
+                            </div>
+                            <div class="field">
+                                <button class="btn btn-primary btn-lg" type="button" id="ajaxSubmitBtn">提&nbsp;&nbsp;&nbsp;&nbsp;交
+                                </button>
+                                <button type="button" id="historyBtn" class="btn btn-default btn-lg">历史操作记录</button>
+                                <span id="defineQueryBtnDiv">
+                            <button type="button" id="defineQueryBtn" class="btn btn-info btn-lg">查&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+                        </span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <br/>
-
+                <div style="margin:20px;width:98%" id="defaultEnvJqgridPanel">
+                    <table class="table table-striped table-hover"
+                           style="table-layout:fixed;word-break:break-all; word-wrap:break-all;">
+                        <thead class="keyValueThead">
+                        </thead>
+                        <tbody class="keyValueTbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin:20px;width:98%" id="defineEnvJqgridPanel">
+                    <table class="table table-striped table-hover"
+                           style="table-layout:fixed;word-break:break-all; word-wrap:break-all;">
+                        <thead class="keyValueThead">
+                        </thead>
+                        <tbody class="keyValueTbody">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
