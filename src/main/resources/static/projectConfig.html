@@ -133,28 +133,52 @@
                     </div>
                 </div>
                 <br/>
-                <!--<div class="text-right">-->
-                    <!--<button type="button" id="addMachineBtn" class="btn btn-info" data-toggle="modal"-->
-                            <!--data-target="#newMachineModal">新增机器-->
-                    <!--</button>-->
-                <!--</div>-->
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#def" data-toggle="tab">
+                            自定义配置项
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#dev" data-toggle="tab">
+                            开发
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sit" data-toggle="tab">
+                            测试
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#uat" data-toggle="tab">
+                            UAT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#prd" data-toggle="tab">
+                            线上
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="def">
+                        <p>自定义配置项内容</p>
+                    </div>
+                    <div class="tab-pane fade" id="dev">
+                        <p>开发环境配置项内容</p>
+                    </div>
+                    <div class="tab-pane fade" id="sit">
+                        <p>测试环境配置项内容</p>
+                    </div>
+                    <div class="tab-pane fade" id="uat">
+                        <p>预发环境配置项内容</p>
+                    </div>
+                    <div class="tab-pane fade" id="prd">
+                        <p>线上环境配置项内容</p>
+                    </div>
+                </div>
                 <br/>
-                <!--<table class="table table-bordered">-->
-                    <!--<th class="text-center">机器ID</th>-->
-                    <!--<th class="text-center">环境</th>-->
-                    <!--<th class="text-center">IP地址</th>-->
-                    <!--<th class="text-center">端口号</th>-->
-                    <!--<th class="text-center">路径</th>-->
-                    <!--<th class="text-center">操作系统</th>-->
-                    <!--<th class="text-center">远程协议</th>-->
-                    <!--<th class="text-center">协议端口</th>-->
-                    <!--<th class="text-center">账号</th>-->
-                    <!--<th class="text-center">密码</th>-->
-                    <!--<th class="text-center">操作</th>-->
-                    <!--<tbody id="machineTableTBody">-->
-                    <!--&lt;!&ndash;用户列表&ndash;&gt;-->
-                    <!--</tbody>-->
-                <!--</table>-->
+
             </div>
         </div>
     </div>
