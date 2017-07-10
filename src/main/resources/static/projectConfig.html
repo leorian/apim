@@ -241,6 +241,53 @@
                 });
             });
 
+            //删除事件
+            $("#defaultEnvJqgridPanel").delegate(".btn-delete", "click", function () {
+                var data_key = $(this).attr("data-key");
+                var data_value = $(this).attr("data-value");
+                $("#delModalBody").html(data_key + " 值 " + data_value);
+                $("#confirmDelBtn").attr("data-key", data_key)
+                    .attr("data-value", data_value);
+                $("#delModal").modal('show');
+            });
+
+            $("#defineEnvJqgridPanel").delegate(".btn-delete", "click", function () {
+                var data_key = $(this).attr("data-key");
+                var data_value = $(this).attr("data-value");
+                var data_defAppRunEnv = $(this).attr("data-defAppRunEnv");
+                var data_defAppRunEnvValue = $(this).attr("data-defAppRunEnvValue");
+                var data_defAppRunVersion = $(this).attr("data-defAppRunVersion");
+                $("#delModalBody").html(data_key + " 值 " + data_value + "<br/>" + "应用运行环境：" + data_defAppRunEnvValue
+                    + "<br/>" + "版本号：" + data_defAppRunVersion);
+                $("#confirmDelBtn").attr("data-key", data_key)
+                    .attr("data-value", data_value).attr("data-defAppRunEnv", data_defAppRunEnv)
+                    .attr("data-defAppRunVersion", data_defAppRunVersion)
+                    .attr("data-defAppRunEnvValue", data_defAppRunEnvValue);
+                $("#delModal").modal('show');
+            });
+
+            $("#confirmDelBtn").click(function () {
+                var data_key = $(this).attr("data-key");
+                var data_value = $(this).attr("data-value");
+                var data_defAppRunEnv = $(this).attr("data-defAppRunEnv");
+                var data_defAppRunVersion = $(this).attr("data-defAppRunVersion");
+                $.post("config/deleteOneProperty", {
+                    "appId": projectId,
+//                    "appName": "$!{appDO.appName}",
+                    "serverType": $("input[name='serverType']").val(),
+                    "key": data_key,
+                    "value": data_value,
+                    "defAppRunEnv": data_defAppRunEnv,
+                    "defAppRunVersion": data_defAppRunVersion
+                }, function (result) {
+                    tabSwitch($("input[name='serverType']").val());
+                    $("#delModal").modal('hide');
+
+                    $("#legalModalBody").html(eval("(" + result + ")").msg);
+                    $("#legalModal").modal('show');
+                });
+            });
+
 
         });
     </script>
@@ -323,12 +370,12 @@
                 </div>
                 <br/>
                 <ul id="myTab" class="nav nav-tabs">
-                    <li class="active">
+                    <li>
                         <a href="#def" data-toggle="tab">
                             自定义配置项
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="#dev" data-toggle="tab">
                             开发
                         </a>
