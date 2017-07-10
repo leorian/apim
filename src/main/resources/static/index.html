@@ -282,6 +282,12 @@
                 window.location.href = "projectDeploy.html?projectId=" + projectId;
             });
 
+            //项目配置管理按钮事件
+            $("#projectTableTBody").delegate("button.btn-info", "click", function () {
+                var projectId = $(this).attr("data-projectid");
+                window.location.href = "projectConfig.html?projectId=" + projectId;
+            });
+
             //删除用户提交按钮事件
             $("#deleteUserModal").delegate("button.btn-primary", "click", function () {
                 var userId = $(this).attr("data-userid");
