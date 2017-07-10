@@ -1,10 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/7/10 星期一 07:24:39                       */
+/* Created on:     2017/7/10 星期一 10:35:43                       */
 /*==============================================================*/
 
 
 drop table if exists T_API_INTERFACE;
+
+drop table if exists T_API_INTERFACE_HTTP;
 
 drop table if exists T_API_INTERFACE_METHOD;
 
@@ -12,9 +14,15 @@ drop table if exists T_API_INTERFACE_METHOD_PARAMETER;
 
 drop table if exists T_API_INTERFACE_METHOD_RETURNTYPE;
 
+drop table if exists T_API_INTERFACE_PARAM;
+
 drop table if exists T_API_INTERFACE_REQUEST;
 
 drop table if exists T_API_INTERFACE_RESPONSE;
+
+drop table if exists T_API_INTERFACE_RESULT;
+
+drop table if exists T_API_INTERFACE_RPC;
 
 drop table if exists T_API_PROJECT;
 
@@ -45,6 +53,28 @@ create table T_API_INTERFACE
 );
 
 alter table T_API_INTERFACE comment '项目接口表';
+
+/*==============================================================*/
+/* Table: T_API_INTERFACE_HTTP                                  */
+/*==============================================================*/
+create table T_API_INTERFACE_HTTP
+(
+   id                   varchar(64) not null comment '接口ID主键',
+   appId                int comment '应用ID',
+   protocol             varchar(5) comment '协议(HTTPS/HTTP)',
+   method               varchar(10) comment '请求方式（GET/POST）',
+   transformat          varchar(10) comment '传输格式（JSON/XML/HTML）',
+   address              varchar(256) comment '接口地址',
+   name                 varchar(128) comment '接口名称',
+   "describe"           varchar(512) comment '接口描述',
+   createId             varchar(32) comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateId             varchar(32) comment '更新人ID',
+   updateDateTime       datetime comment '更新时间',
+   primary key (id)
+);
+
+alter table T_API_INTERFACE_HTTP comment 'HTTP接口表';
 
 /*==============================================================*/
 /* Table: T_API_INTERFACE_METHOD                                */
@@ -111,6 +141,29 @@ create table T_API_INTERFACE_METHOD_RETURNTYPE
 alter table T_API_INTERFACE_METHOD_RETURNTYPE comment '接口方法返回值类型';
 
 /*==============================================================*/
+/* Table: T_API_INTERFACE_PARAM                                 */
+/*==============================================================*/
+create table T_API_INTERFACE_PARAM
+(
+   id                   varchar(64) comment '接口参数主键',
+   interfaceId          varchar(64) comment '接口ID',
+   interfaceType        varchar(10) comment '接口类型',
+   paramName            varchar(128) comment '参数名称',
+   paramType            varchar(32) comment '参数类型',
+   paramDescribe        varchar(512) comment '参数描述',
+   required             bool comment '是否必填',
+   jsontransformat      bool comment '是否JSON格式化传输',
+   example              varchar(512) comment '示例',
+   defaultValue         varchar(512) comment '默认值',
+   createId             varchar(32) comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateId             varchar(32) comment '更新人ID',
+   updateDateTime       datetime comment '更新时间'
+);
+
+alter table T_API_INTERFACE_PARAM comment '接口参数表';
+
+/*==============================================================*/
 /* Table: T_API_INTERFACE_REQUEST                               */
 /*==============================================================*/
 create table T_API_INTERFACE_REQUEST
@@ -150,6 +203,48 @@ create table T_API_INTERFACE_RESPONSE
 );
 
 alter table T_API_INTERFACE_RESPONSE comment '接口出参表';
+
+/*==============================================================*/
+/* Table: T_API_INTERFACE_RESULT                                */
+/*==============================================================*/
+create table T_API_INTERFACE_RESULT
+(
+   id                   varchar(64) not null comment '接口返回示例ID',
+   interfaceId          varchar(64) comment '接口ID',
+   interfaceType        varchar(64) comment '接口类型',
+   exampleType          varchar(32) comment '示例类型（返回示例/异常示例）',
+   exampleContent       varchar(512) comment '示例内容',
+   attentionMatters     varchar(512) comment '注意事项',
+   createId             varchar(32) comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateId             varchar(32) comment '更新人ID',
+   updateDateTime       datetime comment '更新时间',
+   primary key (id)
+);
+
+alter table T_API_INTERFACE_RESULT comment '接口返回示例表';
+
+/*==============================================================*/
+/* Table: T_API_INTERFACE_RPC                                   */
+/*==============================================================*/
+create table T_API_INTERFACE_RPC
+(
+   id                   varchar(64) not null comment '接口ID',
+   appId                int comment '应用ID',
+   name                 varchar(128) comment '接口名称',
+   className            varchar(256) comment '类全路径名称',
+   methodName           varchar(128) comment '方法名称',
+   functionDescribe     varchar(512) comment '功能描述',
+   returnType           varchar(256) comment '返回值类型',
+   methodParam          varchar(512) comment '方法参数',
+   createId             varchar(32) comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateId             varchar(32) comment '更新人ID',
+   updateDateTime       datetime comment '更新时间',
+   primary key (id)
+);
+
+alter table T_API_INTERFACE_RPC comment 'RPC接口表';
 
 /*==============================================================*/
 /* Table: T_API_PROJECT                                         */
