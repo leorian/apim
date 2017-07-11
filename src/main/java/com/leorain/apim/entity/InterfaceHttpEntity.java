@@ -6,6 +6,21 @@ import com.alibaba.fastjson.JSON;
  * Created by xiezg@317hu.com on 2017/7/11 0011.
  */
 public class InterfaceHttpEntity extends BaseEntity {
+    public InterfaceHttpEntity() {
+    }
+
+    public InterfaceHttpEntity(Long id, Long appId, String protocol, String method, String transformat,
+                               String address, String name, String description) {
+        this.id = id;
+        this.appId = appId;
+        this.protocol = protocol;
+        this.method = method;
+        this.transformat = transformat;
+        this.address = address;
+        this.name = name;
+        this.description = description;
+    }
+
     /**
      * 接口ID主键
      */
