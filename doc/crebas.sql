@@ -66,7 +66,7 @@ create table T_API_INTERFACE_HTTP
    transformat          varchar(10) comment '传输格式（JSON/XML/HTML）',
    address              varchar(256) comment '接口地址',
    name                 varchar(128) comment '接口名称',
-   "describe"           varchar(512) comment '接口描述',
+   description           varchar(512) comment '接口描述',
    createId             varchar(32) comment '创建人ID',
    createDateTime       datetime comment '创建时间',
    updateId             varchar(32) comment '更新人ID',
