@@ -55,4 +55,11 @@ public interface ProjectDeployService {
      * @return
      */
     ProjectDeployEntity findProjectDeployEntity(Long deployId);
+
+    /**
+     * @param projectId
+     * @param env
+     * @return
+     */
+    List<String> getIpListByProjectIdAndEnv(Long projectId, String env);
 }

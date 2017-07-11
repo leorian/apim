@@ -69,4 +69,9 @@ public class ProjectDeployServiceImpl implements ProjectDeployService {
         projectDeployEntity.setProjectIdText(String.valueOf(projectDeployEntity.getProjectId()));
         return projectDeployEntity;
     }
+
+    @Override
+    public List<String> getIpListByProjectIdAndEnv(Long projectId, String env) {
+        return projectDeployMapper.getIpByProjectIdAndEnv(projectId, env);
+    }
 }

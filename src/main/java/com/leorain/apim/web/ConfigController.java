@@ -10,6 +10,7 @@ import com.leorain.apim.mongodb.enums.OperationType;
 import com.leorain.apim.mongodb.exception.ConfigCenterCodeEnum;
 import com.leorain.apim.mongodb.service.ConfigSetService;
 import com.leorain.apim.mongodb.util.LDAPUtil;
+import com.leorain.apim.sevice.ProjectDeployService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -32,6 +33,9 @@ import java.util.Map;
 public class ConfigController {
     @Autowired
     private ConfigSetService configSetService;
+
+    @Autowired
+    private ProjectDeployService projectDeployService;
 
     /**
      * 应用、环境配置项列表查询
@@ -391,4 +395,69 @@ public class ConfigController {
         return callBack + "(" + gson.toJson(configSetService.getJqPage(jqPage, RecordConfig.class
                 , keyOrValue, serverType, appId, appName, null, null)) + ")";
     }
+
+    /**
+     * 查询项目环境对应的IP列表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/loadPrivateIpList", method = RequestMethod.POST)
+    public String loadPrivateIpList(HttpServletRequest request) {
+        String appId = request.getParameter("appId");
+        String serverType = request.getParameter("serverType");
+        if (StringUtils.isEmpty(appId)) {
+            return ConfigCenterCodeEnum.T1001.toString();
+        }
+
+        if (StringUtils.isEmpty(serverType)) {
+            return ConfigCenterCodeEnum.T1002.toString();
+        }
+
+        List<String> privateIpList = projectDeployService.getIpListByProjectIdAndEnv(Long.valueOf(appId), serverType);
+        if (CollectionUtils.isEmpty(privateIpList)) {
+            return ConfigCenterCodeEnum.T1012.toString();
+        }
+
+        StringBuffer stringBuffer = new StringBuffer("<pre>");
+        for (String privateIp : privateIpList) {
+            stringBuffer.append(privateIp).append("\n");
+        }
+
+        return stringBuffer.toString();
+    }
+
+
+    /**
+     * 查询项目环境对应的配置项信息列表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/loadAppEnvTypeProperties", method = RequestMethod.POST)
+    public String loadAppEnvTypeProperties(HttpServletRequest request) {
+        String appId = request.getParameter("appId");
+        String serverType = request.getParameter("serverType");
+        if (StringUtils.isEmpty(appId)) {
+            return ConfigCenterCodeEnum.T1001.toString();
+        }
+
+        if (StringUtils.isEmpty(serverType)) {
+            return ConfigCenterCodeEnum.T1002.toString();
+        }
+
+        List<ConfigSet> configSetList = configSetService.findListByAppIdServerType(appId, null, serverType
+                , null, null, ConfigSet.class);
+
+        if (CollectionUtils.isEmpty(configSetList)) {
+            return ConfigCenterCodeEnum.T1013.toString();
+        }
+
+        StringBuffer configSetBuffer = new StringBuffer("<pre>");
+        for (ConfigSet configSet : configSetList) {
+            configSetBuffer.append(configSet.getKey() + "=" + configSet.getValue()).append("\n");
+        }
+        return configSetBuffer.toString();
+    }
+
 }
