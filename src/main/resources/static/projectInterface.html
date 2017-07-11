@@ -133,28 +133,33 @@
                     </div>
                 </div>
                 <br/>
-                <!--<div class="text-right">-->
-                    <!--<button type="button" id="addMachineBtn" class="btn btn-info" data-toggle="modal"-->
-                            <!--data-target="#newMachineModal">新增机器-->
-                    <!--</button>-->
-                <!--</div>-->
+                <div class="text-right">
+                    <button type="button" id="addMachineBtn" class="btn btn-info">新增HTTP接口</button>
+                </div>
                 <br/>
-                <!--<table class="table table-bordered">-->
-                    <!--<th class="text-center">机器ID</th>-->
-                    <!--<th class="text-center">环境</th>-->
-                    <!--<th class="text-center">IP地址</th>-->
-                    <!--<th class="text-center">端口号</th>-->
-                    <!--<th class="text-center">路径</th>-->
-                    <!--<th class="text-center">操作系统</th>-->
-                    <!--<th class="text-center">远程协议</th>-->
-                    <!--<th class="text-center">协议端口</th>-->
-                    <!--<th class="text-center">账号</th>-->
-                    <!--<th class="text-center">密码</th>-->
-                    <!--<th class="text-center">操作</th>-->
-                    <!--<tbody id="machineTableTBody">-->
-                    <!--&lt;!&ndash;用户列表&ndash;&gt;-->
-                    <!--</tbody>-->
-                <!--</table>-->
+                <table class="table table-bordered">
+                    <th class="text-center">接口ID</th>
+                    <th class="text-center">接口名称</th>
+                    <th class="text-center">请求协议</th>
+                    <th class="text-center">请求方法</th>
+                    <th class="text-center">接口地址</th>
+                    <th class="text-center">操作</th>
+                    <tbody id="machineTableTBody">
+                    <!--用户列表-->
+                    <tr>
+                        <td class="text-center">20170711100808001</td>
+                        <td class="text-center">用户查询接口</td>
+                        <td class="text-center">HTTP</td>
+                        <td class="text-center">GET</td>
+                        <td class="text-center">/user/findUser</td>
+                        <td class="text-center">
+                            <button class="btn btn-xs btn-success">编辑</button>&nbsp;&nbsp;
+                            <button class="btn btn-xs btn-danger">删除</button>&nbsp;&nbsp;
+                            <button class="btn btn-xs btn-info">预览</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
