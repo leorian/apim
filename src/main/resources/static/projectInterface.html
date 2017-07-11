@@ -53,6 +53,40 @@
                     $("#projectMembersTd").html(content);
                 }
             });
+
+            //HTTP接口添加参数
+            $("#httpAddRequestParam").click(function () {
+                var html = "<tr> " +
+                    "<td> <input type=\"text\" class=\"form-control input-sm\"> </td> " +
+                    " <td> " +
+                    "<select class=\"form-control input-sm\"> " +
+                    "<option value=\"string\">string</option> " +
+                    "</select> " +
+                    "</td>" +
+                    "<td>" +
+                    "<input type=\"text\" class=\"form-control input-sm\">" +
+                    "</td>" +
+                    "<td>" +
+                    "<input type=\"checkbox\" class=\"form-control input-sm\">" +
+                    "</td>" +
+                    "<td>" +
+                    "<input type=\"checkbox\" class=\"form-control input-sm\">" +
+                    "</td>" +
+                    "<td> " +
+                    "<input type=\"text\" class=\"form-control input-sm\">" +
+                    "</td>" +
+                    "<td> " +
+                    "<input type=\"text\" class=\"form-control input-sm\">" +
+                    "</td>" +
+                    "</tr> ";
+                $("#myHttpModal").find("tbody").append(html);
+            });
+
+            //行选中事件
+            $("#myHttpModal").delegate("tbody > tr", "click", function () {
+                $("#myHttpModal").find("tbody > tr").removeClass("bg-success");
+                $(this).addClass("bg-success");
+            });
         });
     </script>
 </head>
