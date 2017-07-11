@@ -92,6 +92,11 @@
                 $("#myHttpModal").find("tbody > tr").removeClass("bg-success");
                 $(this).addClass("bg-success");
             });
+
+            //
+            $("#myHttpModal").delegate(".glyphicon-trash", "click", function () {
+                $(this).parent().parent().parent().remove();
+            });
         });
     </script>
 </head>
