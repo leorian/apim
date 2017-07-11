@@ -318,7 +318,9 @@
                             &nbsp;&nbsp;
                             <button class="btn btn-xs btn-danger">删除</button>
                             &nbsp;&nbsp;
-                            <button class="btn btn-xs btn-warning">预览</button>
+                            <button class="btn btn-xs btn-warning" data-toggle="modal"
+                                    data-target="#myRpcPreviewModal">预览
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -842,6 +844,173 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="exceptionExampleHttpPreview">
+                                    <br/>
+                                    <div class="form-group">
+                                        <h6>异常示例</h6>
+                                        <pre>异常示例占位符</pre>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <h6>注意事项</h6>
+                                        <pre>注意事项占位符</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myRpcPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myRpcPreviewModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myRpcPreviewModalLabel">
+                    RPC接口预览
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <h3>接口名称占位符</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group text-right">
+                            类全路径名称：
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            类全路径名称占位符
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group text-right">
+                            方法名称：
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            方法名称占位符
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group text-right">
+                            功能描述：
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            功能描述占位符
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group text-right">
+                            返回值类型：
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            返回值类型占位符
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group text-right">
+                            方法参数：
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            方法参数占位符
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <table class="table table-bordered">
+                                <caption>参数说明</caption>
+                                <thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>类型</th>
+                                    <th>说明</th>
+                                    <th>是否必填</th>
+                                    <th>示例</th>
+                                    <th>默认值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>userId</td>
+                                    <td>string</td>
+                                    <td>用户ID</td>
+                                    <td>是</td>
+                                    <td>userId=hello</td>
+                                    <td>放大发送</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <ul id="myRpcPreviewTab" class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#returnExampleHttpPreview" data-toggle="tab">
+                                        返回示例
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#exceptionExampleHttpPreview" data-toggle="tab">
+                                        异常示例
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="myRpcPreviewTabContent" class="tab-content">
+                                <div class="tab-pane fade in active" id="returnExampleRpcPreview">
+                                    <br/>
+                                    <div class="form-group">
+                                        <h6>返回示例</h6>
+                                        <pre>返回示例占位符</pre>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <h6>注意事项</h6>
+                                        <pre>注意事项占位符</pre>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="exceptionExampleRpcPreview">
                                     <br/>
                                     <div class="form-group">
                                         <h6>异常示例</h6>
