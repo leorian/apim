@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceHttpMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceHttpEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="appId" property="appId" jdbcType="BIGINT"/>
+        <result column="protocol" property="protocol" jdbcType="VARCHAR"/>
+        <result column="method" property="method" jdbcType="VARCAHR"/>
+        <result column="transformat" property="transformat" jdbcType="VARCHAR"/>
+        <result column="address" property="adress" jdbcType="VARCAHR"/>
+        <result column="name" property="name" jdbcType="VARCAHR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, appId, protocol, method, transformat, address, name, description, createUserId, createDateTime,
+        updateUserId, updateDateTime
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_HTTP
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_HTTP
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceHttpEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_HTTP
+       		(id, appId, protocol, method, transformat, address, name, description,
+       		createUserId, createDateTime, updateUserId, updateDateTime)
+       	VALUES
+       		(#{id}, #{appId}, #{protocol}, #{method}, #{transformat}, #{address}, #{name}, #{description},
+       		#{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceHttpEntity">
+        UPDATE
+        T_API_INTERFACE_HTTP
+        SET
+        <if test="appId != null">appId = #{appId},</if>
+        <if test="protocol != null">protocol = #{protocol},</if>
+        <if test="method != null">method = #{method},</if>
+        <if test="transformat != null">transformat = #{transformat},</if>
+        <if test="address != null">address = #{address},</if>
+        <if test="name != null">name = #{name},</if>
+        <if test="description != null">description = #{description},</if>
+        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_HTTP
+       WHERE 
+       		 id =#{id}
+    </delete>
+
+</mapper>
