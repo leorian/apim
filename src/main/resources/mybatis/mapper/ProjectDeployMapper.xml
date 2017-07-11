@@ -39,6 +39,12 @@
         WHERE projectId = #{projectId}
     </select>
 
+    <select id="getIpByProjectIdAndEnv" resultType="java.lang.String">
+        SELECT ip
+        FROM T_API_PROJECT_DEPLOY
+        WHERE  projectId = #{projectId} AND env = #{env}
+    </select>
+
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

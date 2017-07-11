@@ -27,11 +27,11 @@ public class ProjectDeployMapperTest {
     @Test
     public void testInsert() throws Exception {
         projectDeployMapper.insert(new ProjectDeployEntity(1l, 1l, "用户接口",
-                "1",  1,"1"));
+                "1", 1, "1"));
         projectDeployMapper.insert(new ProjectDeployEntity(2l, 1l, "用户接口",
-                "1",  1,"1"));
+                "1", 1, "1"));
         projectDeployMapper.insert(new ProjectDeployEntity(3l, 1l, "用户接口",
-                "1",  1,"1"));
+                "1", 1, "1"));
 
         Assert.assertEquals(3, projectDeployMapper.getAll().size());
     }
@@ -64,5 +64,11 @@ public class ProjectDeployMapperTest {
         jqPage.setPageSize(10);
         jqPage = projectDeployService.findProjectDeployEntityPage(jqPage, null);
         System.out.println(JSON.toJSONString(jqPage));
+    }
+
+    @Test
+    public void testIp() {
+        List<String> ipList = projectDeployMapper.getIpByProjectIdAndEnv(20170707105701696l, "PRD");
+        System.out.println(JSON.toJSONString(ipList));
     }
 }
