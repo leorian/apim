@@ -97,6 +97,22 @@
             $("#myHttpModal").delegate(".glyphicon-trash", "click", function () {
                 $(this).parent().parent().parent().remove();
             });
+
+            //上移事件
+            $("#parup").click(function () {
+                var currentElement = $("#myHttpModal").find("tbody > tr.bg-success");
+                if (currentElement.prev().length > 0) {
+                    currentElement.prev().insertAfter(currentElement);
+                }
+            });
+
+            //下移事件
+            $("#pardown").click(function () {
+                var currentElement = $("#myHttpModal").find("tbody > tr.bg-success");
+                if (currentElement.next().length > 0) {
+                    currentElement.insertAfter(currentElement.next());
+                }
+            });
         });
     </script>
 </head>
