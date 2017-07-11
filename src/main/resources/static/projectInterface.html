@@ -298,6 +298,71 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <h5>请求参数</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th style="width: 120px">参数名称</th>
+                                    <th style="width: 120px">参数类型</th>
+                                    <th style="width: 120px">参数说明</th>
+                                    <th style="width: 120px">必填</th>
+                                    <th style="width: 120px">JSON格式化传输</th>
+                                    <th style="width: 120px">示例</th>
+                                    <th style="width: 120px">默认值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control input-sm">
+                                    </td>
+                                    <td>
+                                        <select class="form-control input-sm">
+                                            <option value="string">string</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="form-control input-sm">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="form-control input-sm">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm">
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="7">
+                                        <a href="javascript:;" class="addAddParam" onclick="addAddParam();"><span
+                                                class="glyphicon glyphicon-plus-sign"></span> 添加属性</a>
+                                        <a href="javascript:;" id="parup"
+                                           class="btn btn-sm btn-default glyphicon glyphicon-arrow-up">上移</a>
+                                        <a href="javascript:;" id="pardown"
+                                           class="btn btn-sm btn-default glyphicon glyphicon-arrow-down">下移</a>
+                                    </th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
