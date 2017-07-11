@@ -57,26 +57,31 @@
             //HTTP接口添加参数
             $("#httpAddRequestParam").click(function () {
                 var html = "<tr> " +
-                    "<td> <input type=\"text\" class=\"form-control input-sm\"> </td> " +
+                    "<td> <input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'> </td> " +
                     " <td> " +
-                    "<select class=\"form-control input-sm\"> " +
+                    "<select class=\"form-control input-sm\" style='height: 25px;'> " +
                     "<option value=\"string\">string</option> " +
                     "</select> " +
                     "</td>" +
                     "<td>" +
-                    "<input type=\"text\" class=\"form-control input-sm\">" +
+                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
                     "</td>" +
                     "<td>" +
-                    "<input type=\"checkbox\" class=\"form-control input-sm\">" +
+                    "<input type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
                     "</td>" +
                     "<td>" +
-                    "<input type=\"checkbox\" class=\"form-control input-sm\">" +
+                    "<input type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
                     "</td>" +
                     "<td> " +
-                    "<input type=\"text\" class=\"form-control input-sm\">" +
+                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
                     "</td>" +
                     "<td> " +
-                    "<input type=\"text\" class=\"form-control input-sm\">" +
+                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                    "</td>" +
+                    "<td>" +
+                    "<a href=\"#\">" +
+                    "<span class=\"glyphicon glyphicon-trash\"></span>" +
+                    "</a>" +
                     "</td>" +
                     "</tr> ";
                 $("#myHttpModal").find("tbody").append(html);
@@ -345,45 +350,51 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 120px">参数名称</th>
+                                    <th style="width: 120px;">参数名称</th>
                                     <th style="width: 120px">参数类型</th>
                                     <th style="width: 120px">参数说明</th>
                                     <th style="width: 120px">必填</th>
                                     <th style="width: 120px">JSON格式化传输</th>
                                     <th style="width: 120px">示例</th>
                                     <th style="width: 120px">默认值</th>
+                                    <th style="width: 40px">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <input type="text" class="form-control input-sm">
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
                                     </td>
                                     <td>
-                                        <select class="form-control input-sm">
+                                        <select class="form-control input-sm" style="height: 25px;">
                                             <option value="string">string</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control input-sm">
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
                                     </td>
                                     <td>
-                                        <input type="checkbox" class="form-control input-sm">
+                                        <input type="checkbox" class="form-control input-sm" style="height: 18px;">
                                     </td>
                                     <td>
-                                        <input type="checkbox" class="form-control input-sm">
+                                        <input type="checkbox" class="form-control input-sm" style="height: 18px;">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control input-sm">
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control input-sm">
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
                                     </td>
                                 </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th colspan="7">
+                                    <th colspan="8">
                                         <a href="javascript:;" id="httpAddRequestParam"><span
                                                 class="glyphicon glyphicon-plus-sign"></span> 添加属性</a>
                                         <a href="javascript:;" id="parup"
