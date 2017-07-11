@@ -87,18 +87,18 @@
                 $("#myHttpModal").find("tbody").append(html);
             });
 
-            //行选中事件
+            //HTTP接口行选中事件
             $("#myHttpModal").delegate("tbody > tr", "click", function () {
                 $("#myHttpModal").find("tbody > tr").removeClass("bg-success");
                 $(this).addClass("bg-success");
             });
 
-            //删除行事件
+            //Http接口删除行事件
             $("#myHttpModal").delegate(".glyphicon-trash", "click", function () {
                 $(this).parent().parent().parent().remove();
             });
 
-            //上移事件
+            //Http接口上移事件
             $("#parup").click(function () {
                 var currentElement = $("#myHttpModal").find("tbody > tr.bg-success");
                 if (currentElement.prev().length > 0) {
@@ -106,7 +106,7 @@
                 }
             });
 
-            //下移事件
+            //Http接口下移事件
             $("#pardown").click(function () {
                 var currentElement = $("#myHttpModal").find("tbody > tr.bg-success");
                 if (currentElement.next().length > 0) {
