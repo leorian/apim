@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>运维支撑系统</title>
+    <link rel="stylesheet" href="webFrame/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+    <script src="webFrame/jquery-2.1.1/jquery.min.js"></script>
+    <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            function add0(m) {
+                return m < 10 ? '0' + m : m
+            }
+
+            function format(timestamp) {
+                //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+
+                var time = new Date(timestamp);
+                var year = time.getFullYear();
+                var month = time.getMonth() + 1;
+                var date = time.getDate();
+                var hours = time.getHours();
+                var minutes = time.getMinutes();
+                var seconds = time.getSeconds();
+                return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+            }
+
+            function getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+
+            var projectId = getQueryString("projectId");
+            $("input[name='appId']").val(projectId);
+            //项目信息展示区
+            $.get("project/findProject/" + projectId, null, function (data) {
+                console.log(data);
+                $("#projectNameTd").html(data.projectName);
+                $("#projectManagerTd").html(data.projectManagerText);
+                $("#createDateTimeTd").html(format(data.createDateTime));
+                $("#projectDescribeTd").html(data.projectDescribe);
+                var projectMemberEntities = data.projectMemberEntities;
+                if (projectMemberEntities != null && projectMemberEntities.length > 0) {
+                    var content = "";
+                    for (var i = 0; i < projectMemberEntities.length; i++) {
+                        if (i != 0) {
+                            content = content + ", ";
+                        }
+                        content = content + projectMemberEntities[i].userName;
+                    }
+                    $("#projectMembersTd").html(content);
+                }
+
+                //应用ID
+                $("input[name='appId']").val(projectId);
+                //应用名称
+                $("input[name='appName']").val(data.projectName);
+            });
+
+            var serverTypeHashMap = new Object();
+            serverTypeHashMap['DEV'] = "开发";
+            serverTypeHashMap['SIT'] = "测试";
+            serverTypeHashMap['UAT'] = "UAT";
+            serverTypeHashMap['PRD'] = "线上";
+
+
+            $("#myTab").delegate("li", "click", function () {
+                var a = $(this).children("a");
+                var serverType = a.attr("href").substr(1).toUpperCase();
+                $("input[name='serverType']").val(serverType);
+                //应用部署环境服务器信息
+                $.post("config/loadPrivateIpList", $("#configForm").serialize(), function (result) {
+                    $("#serverInfoPanel").html(result);
+                });
+                //应用部署环境配置项信息
+                $.post("config/loadAppEnvTypeProperties", $("#configForm").serialize(), function (result) {
+                    $("#configInfoPanel").html(result);
+                });
+            });
+
+            $($("#myTab li").get(0)).trigger("click");
+
+        });
+    </script>
+</head>
+<body>
+<!--顶部导航-->
+<header id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse header-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:void(0);"> 登录者：xiezg</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="button button-little bg-red" href="login.htm">
+                        <span class="icon-power-off"></span>
+                        退出登录
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <!--配置管理-->
+        <div class="panel panel-primary" id="userManagerPanel">
+            <div class="panel-heading">
+                <h3 class="panel-title">项目概览
+                    <div style="display:inline;float:right"><a href="index.html"><span
+                            class="glyphicon glyphicon-home" style="color: rgb(212, 106, 64);"></span></a></div>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="text-center">
+                                    项目名称：
+                                </th>
+                                <td id="projectNameTd">
+                                    <!--配置中心-->
+                                </td>
+                                <th class="text-center">
+                                    项目经理：
+                                </th>
+                                <td id="projectManagerTd">
+                                    <!--张三-->
+                                </td>
+                                <th class="text-center">
+                                    创建时间：
+                                </th>
+                                <td id="createDateTimeTd">
+                                    <!--2017-06-28-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">
+                                    组内成员：
+                                </th>
+                                <td colspan="5" id="projectMembersTd">
+                                    <!--张三，李四，王五，赵六-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">
+                                    项目描述：
+                                </th>
+                                <td colspan="5" id="projectDescribeTd">
+                                    <!--配置项管理平台-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#dev" data-toggle="tab">
+                            开发
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sit" data-toggle="tab">
+                            测试
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#uat" data-toggle="tab">
+                            UAT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#prd" data-toggle="tab">
+                            线上
+                        </a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="body-content">
+                    <div style="margin: 20px;">
+                        <form method="post" id="configForm" class="form-x" action="detail.htm">
+                            <input type="hidden" name="do_action" value="infoAction"/>
+                            <input type="hidden" name="do_method" value="save"/>
+                            <input type="hidden" name="appId" value=""/>
+                            <input type="hidden" name="appName" value=""/>
+                            <input type="hidden" name="serverType" value=""/>
+                        </form>
+                    </div>
+                    <div style="margin: 20px;">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">应用部署环境服务器信息</h3>
+                            </div>
+                            <div class="panel-body" id="serverInfoPanel">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 20px;">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">应用部署环境配置项信息</h3>
+                            </div>
+                            <div class="panel-body" id="configInfoPanel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<!--底部导航-->
+<footer class="footer navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-collapse collapse header-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:void(0);"><img src="webFrame/timg.jpg" width="50px" height="30px"/>&nbsp;&nbsp;317护</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="button button-little bg-red" href="javascript:void(0);">
+                        <span class="icon-power-off"></span>
+                        杭州伯仲信息科技有限公司<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        云平台部
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

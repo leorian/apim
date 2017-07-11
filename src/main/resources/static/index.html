@@ -73,7 +73,7 @@
                         for (var i = 0; i < data.rows.length; i++) {
                             var trElement = "<tr>";
                             trElement += ("<td class='text-center'>" + data.rows[i].projectIdText + "</td>");
-                            trElement += ("<td class='text-center'>" + data.rows[i].projectName + "</td>");
+                            trElement += ("<td class='text-center'><a class='btn btn-xs btn-link' data-projectid='" + data.rows[i].projectIdText + "'>" + data.rows[i].projectName + "</a></td>");
                             trElement += ("<td class='text-center' >" + data.rows[i].interfaceCount + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].projectManagerText + "</td>");
                             trElement += ("<td class='text-center'>" + data.rows[i].memberCount + "</td>");
@@ -292,6 +292,12 @@
             $("#projectTableTBody").delegate("button.btn-default", "click", function () {
                 var projectId = $(this).attr("data-projectid");
                 window.location.href = "projectInterface.html?projectId=" + projectId;
+            });
+
+            //项目名称本身链接事件
+            $("#projectTableTBody").delegate("a.btn-link", "click", function () {
+                var projectId = $(this).attr("data-projectid");
+                window.location.href = "projectConfigView.html?projectId=" + projectId;
             });
 
             //删除用户提交按钮事件
