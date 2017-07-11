@@ -87,9 +87,48 @@
                 $("#myHttpModal").find("tbody").append(html);
             });
 
+            //Rpc接口添加参数
+            $("#rpcAddRequestParam").click(function () {
+                var html = "<tr> " +
+                    "<td> <input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'> </td> " +
+                    " <td> " +
+                    "<select class=\"form-control input-sm\" style='height: 25px;'> " +
+                    "<option value=\"string\">string</option> " +
+                    "</select> " +
+                    "</td>" +
+                    "<td>" +
+                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
+                    "</td>" +
+                    "<td>" +
+                    "<input type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
+                    "</td>" +
+                    "<td>" +
+                    "<input type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                    "</td>" +
+                    "<td> " +
+                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                    "</td>" +
+                    "<td> " +
+                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                    "</td>" +
+                    "<td>" +
+                    "<a href=\"#\">" +
+                    "<span class=\"glyphicon glyphicon-trash\"></span>" +
+                    "</a>" +
+                    "</td>" +
+                    "</tr> ";
+                $("#myRpcModal").find("tbody").append(html);
+            });
+
             //HTTP接口行选中事件
             $("#myHttpModal").delegate("tbody > tr", "click", function () {
                 $("#myHttpModal").find("tbody > tr").removeClass("bg-success");
+                $(this).addClass("bg-success");
+            });
+
+            //RPC接口行选中事件
+            $("#myRpcModal").delegate("tbody > tr", "click", function () {
+                $("#myRpcModal").find("tbody > tr").removeClass("bg-success");
                 $(this).addClass("bg-success");
             });
 
@@ -98,17 +137,38 @@
                 $(this).parent().parent().parent().remove();
             });
 
+            //RPC接口删除行事件
+            $("#myRpcModal").delegate(".glyphicon-trash", "click", function () {
+                $(this).parent().parent().parent().remove();
+            });
+
             //Http接口上移事件
-            $("#parup").click(function () {
+            $("#httpParup").click(function () {
                 var currentElement = $("#myHttpModal").find("tbody > tr.bg-success");
                 if (currentElement.prev().length > 0) {
                     currentElement.prev().insertAfter(currentElement);
                 }
             });
 
+            //RPC接口上移事件
+            $("#rpcParup").click(function () {
+                var currentElement = $("#myRpcModal").find("tbody > tr.bg-success");
+                if (currentElement.prev().length > 0) {
+                    currentElement.prev().insertAfter(currentElement);
+                }
+            });
+
             //Http接口下移事件
-            $("#pardown").click(function () {
+            $("#httpPardown").click(function () {
                 var currentElement = $("#myHttpModal").find("tbody > tr.bg-success");
+                if (currentElement.next().length > 0) {
+                    currentElement.insertAfter(currentElement.next());
+                }
+            });
+
+            //RPC接口下移事件
+            $("#rpcPardown").click(function () {
+                var currentElement = $("#myRpcModal").find("tbody > tr.bg-success");
                 if (currentElement.next().length > 0) {
                     currentElement.insertAfter(currentElement.next());
                 }
@@ -418,9 +478,9 @@
                                     <th colspan="8">
                                         <a href="javascript:;" id="httpAddRequestParam"><span
                                                 class="glyphicon glyphicon-plus-sign"></span> 添加属性</a>
-                                        <a href="javascript:;" id="parup"
+                                        <a href="javascript:;" id="httpParup"
                                            class="btn btn-sm btn-default glyphicon glyphicon-arrow-up">上移</a>
-                                        <a href="javascript:;" id="pardown"
+                                        <a href="javascript:;" id="httpPardown"
                                            class="btn btn-sm btn-default glyphicon glyphicon-arrow-down">下移</a>
                                     </th>
                                 </tr>
@@ -433,20 +493,20 @@
                 <br/>
                 <div class="row">
                     <div class="col-sm-12">
-                        <ul id="myTab" class="nav nav-tabs">
+                        <ul id="myHttpTab" class="nav nav-tabs">
                             <li class="active">
-                                <a href="#returnExample" data-toggle="tab">
+                                <a href="#returnExampleHttp" data-toggle="tab">
                                     返回示例
                                 </a>
                             </li>
                             <li>
-                                <a href="#exceptionExample" data-toggle="tab">
+                                <a href="#exceptionExampleHttp" data-toggle="tab">
                                     异常示例
                                 </a>
                             </li>
                         </ul>
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in active" id="returnExample">
+                        <div id="myHttpTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="returnExampleHttp">
                                 <br/>
                                 <div class="form-group">
                                     <textarea class="form-control" placeholder="暂无返回示例"></textarea>
@@ -455,7 +515,7 @@
                                     <textarea class="form-control" placeholder="注意事项"></textarea>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="exceptionExample">
+                            <div class="tab-pane fade" id="exceptionExampleHttp">
                                 <br/>
                                 <div class="form-group">
                                     <textarea class="form-control" placeholder="暂无异常示例"></textarea>
@@ -483,7 +543,7 @@
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myRpcModal" tabindex="-1" role="dialog" aria-labelledby="myRpcModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 1024px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -494,7 +554,153 @@
                 </h4>
             </div>
             <div class="modal-body">
-                在这里添加一些文本
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <h5>接口详情</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="类全路径名称">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="方法名称">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="功能描述"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="返回值类型">
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="方法参数">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <h5>请求参数</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th style="width: 120px;">参数名称</th>
+                                    <th style="width: 120px">参数类型</th>
+                                    <th style="width: 120px">参数说明</th>
+                                    <th style="width: 120px">必填</th>
+                                    <th style="width: 120px">JSON格式化传输</th>
+                                    <th style="width: 120px">示例</th>
+                                    <th style="width: 120px">默认值</th>
+                                    <th style="width: 40px">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
+                                    </td>
+                                    <td>
+                                        <select class="form-control input-sm" style="height: 25px;">
+                                            <option value="string">string</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="form-control input-sm" style="height: 18px;">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="form-control input-sm" style="height: 18px;">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm" style="height: 25px;">
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="8">
+                                        <a href="javascript:;" id="rpcAddRequestParam"><span
+                                                class="glyphicon glyphicon-plus-sign"></span> 添加属性</a>
+                                        <a href="javascript:;" id="rpcParup"
+                                           class="btn btn-sm btn-default glyphicon glyphicon-arrow-up">上移</a>
+                                        <a href="javascript:;" id="rpcPardown"
+                                           class="btn btn-sm btn-default glyphicon glyphicon-arrow-down">下移</a>
+                                    </th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul id="myRpcTab" class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#returnExampleRpc" data-toggle="tab">
+                                    返回示例
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#exceptionExampleRpc" data-toggle="tab">
+                                    异常示例
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="myRpcTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="returnExampleRpc">
+                                <br/>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="暂无返回示例"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="注意事项"></textarea>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="exceptionExampleRpc">
+                                <br/>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="暂无异常示例"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="注意事项"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
