@@ -5,10 +5,10 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="appId" property="appId" jdbcType="BIGINT"/>
         <result column="protocol" property="protocol" jdbcType="VARCHAR"/>
-        <result column="method" property="method" jdbcType="VARCAHR"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
         <result column="transformat" property="transformat" jdbcType="VARCHAR"/>
-        <result column="address" property="adress" jdbcType="VARCAHR"/>
-        <result column="name" property="name" jdbcType="VARCAHR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
 
         <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
