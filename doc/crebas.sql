@@ -75,6 +75,25 @@ create table T_API_INTERFACE_HTTP
 );
 
 alter table T_API_INTERFACE_HTTP comment 'HTTP接口表';
+--新版本
+create table T_API_INTERFACE_HTTP
+(
+   id                   BIGINT not null comment '接口ID主键',
+   appId                BIGINT comment '应用ID',
+   protocol             varchar(5) comment '协议(HTTPS/HTTP)',
+   method               varchar(10) comment '请求方式（GET/POST）',
+   transformat          varchar(10) comment '传输格式（JSON/XML/HTML）',
+   address              varchar(256) comment '接口地址',
+   name                 varchar(128) comment '接口名称',
+   description           varchar(512) comment '接口描述',
+   createUserId             BIGINT comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateUserId             BIGINT comment '更新人ID',
+   updateDateTime       datetime comment '更新时间',
+   primary key (id)
+);
+
+alter table T_API_INTERFACE_HTTP comment 'HTTP接口表';
 
 /*==============================================================*/
 /* Table: T_API_INTERFACE_METHOD                                */
