@@ -264,6 +264,24 @@ create table T_API_INTERFACE_RESULT
 
 alter table T_API_INTERFACE_RESULT comment '接口返回示例表';
 
+--新版本
+create table T_API_INTERFACE_RESULT
+(
+   id                   BIGINT not null comment '接口返回示例ID',
+   interfaceId          BIGINT comment '接口ID',
+   interfaceType        varchar(64) comment '接口类型',
+   exampleType          varchar(32) comment '示例类型（返回示例/异常示例）',
+   exampleContent       varchar(512) comment '示例内容',
+   attentionMatters     varchar(512) comment '注意事项',
+   createUserId             BIGINT comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateUserId             BIGINT comment '更新人ID',
+   updateDateTime       datetime comment '更新时间',
+   primary key (id)
+);
+
+alter table T_API_INTERFACE_RESULT comment '接口返回示例表';
+
 /*==============================================================*/
 /* Table: T_API_INTERFACE_RPC                                   */
 /*==============================================================*/
