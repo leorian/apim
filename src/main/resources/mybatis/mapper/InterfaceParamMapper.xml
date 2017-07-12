@@ -44,7 +44,7 @@
        		(id, interfaceId, interfaceType, paramName, paramType, paramDescribe, required, jsontransformat,example, defaultValue,
        		createUserId, createDateTime, updateUserId, updateDateTime)
        	VALUES
-       		(#{id}, #{interfaceId}, #{interfaceType}, #{paramName}, #{paramType}, #{paramDescribe}, #{required}, #{jsontransformat},#{example}, #{defaultValue}
+       		(#{id}, #{interfaceId}, #{interfaceType}, #{paramName}, #{paramType}, #{paramDescribe}, #{required}, #{jsontransformat},#{example}, #{defaultValue},
        		#{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
     </insert>
 
