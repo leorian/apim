@@ -49,16 +49,17 @@
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceHttpEntity">
         UPDATE
         T_API_INTERFACE_HTTP
-        SET
-        <if test="appId != null">appId = #{appId},</if>
-        <if test="protocol != null">protocol = #{protocol},</if>
-        <if test="method != null">method = #{method},</if>
-        <if test="transformat != null">transformat = #{transformat},</if>
-        <if test="address != null">address = #{address},</if>
-        <if test="name != null">name = #{name},</if>
-        <if test="description != null">description = #{description},</if>
-        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
-        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        <set>
+            <if test="appId != null">appId = #{appId},</if>
+            <if test="protocol != null">protocol = #{protocol},</if>
+            <if test="method != null">method = #{method},</if>
+            <if test="transformat != null">transformat = #{transformat},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
         WHERE
         id = #{id}
     </update>
