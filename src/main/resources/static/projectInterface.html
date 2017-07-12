@@ -67,10 +67,12 @@
                     "<input name='paramDescribesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
                     "</td>" +
                     "<td>" +
-                    "<input name='requiredsInput' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
+                    "<input name='requiredsInput' type='hidden' value='false'>" +
+                    "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
                     "</td>" +
                     "<td>" +
-                    "<input name='jsontransformatsInput' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                    "<input name='jsontransformatsInput' type='hidden' value='false'>" +
+                    "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
                     "</td>" +
                     "<td> " +
                     "<input name='examplesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
@@ -183,6 +185,24 @@
                         window.location.reload();
                     }
                 }, "json");
+            });
+
+            //是否传值改变事件
+            $("#myHttpModal").delegate("input[name='requiredsInputCheckBox']", "click", function () {
+                if ($(this).prop('checked')) {
+                    $(this).prev("input[name='requiredsInput']").val("true");
+                } else {
+                    $(this).prev("input[name='requiredsInput']").val("false");
+                }
+            });
+
+            //是否JSON格式化传输改变事件
+            $("#myHttpModal").delegate("input[name='jsontransformatsInputCheckBox']", "click", function () {
+                if ($(this).prop("checked")) {
+                    $(this).prev("input[name='jsontransformatsInput']").val("true");
+                } else {
+                    $(this).prev("input[name='jsontransformatsInput']").val("false");
+                }
             });
         });
     </script>
@@ -476,11 +496,14 @@
                                                    style="height: 25px;">
                                         </td>
                                         <td>
-                                            <input name="requiredsInput" type="checkbox" class="form-control input-sm"
+                                            <input name="requiredsInput" type="hidden" value="false"/>
+                                            <input name="requiredsInputCheckBox" type="checkbox"
+                                                   class="form-control input-sm"
                                                    style="height: 18px;">
                                         </td>
                                         <td>
-                                            <input name="jsontransformatsInput" type="checkbox"
+                                            <input name="jsontransformatsInput" type="hidden" value="false"/>
+                                            <input name="jsontransformatsInputCheckBox" type="checkbox"
                                                    class="form-control input-sm" style="height: 18px;">
                                         </td>
                                         <td>
