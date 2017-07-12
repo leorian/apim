@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceResultMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceResultEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="interfaceType" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="exampleType" property="exampleType" jdbcType="VARCHAR"/>
+        <result column="exampleContent" property="exampleContent" jdbcType="VARCHAR"/>
+        <result column="attentionMatters" property="attentionMatters" jdbcType="VARCHAR"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, interfaceId, interfaceType, exampleType, exampleContent,attentionMatters, createUserId, createDateTime, updateUserId, updateDateTime
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RESULT
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RESULT
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceResultEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_RESULT
+       		(id, interfaceId, interfaceType, exampleType, exampleContent, attentionMatters, createUserId, createDateTime, updateUserId, updateDateTime)
+       	VALUES
+       		(#{id}, #{interfaceId}, #{interfaceType}, #{exampleType}, #{exampleContent}, #{attentionMatters},
+       		#{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceResultEntity">
+        UPDATE
+        T_API_INTERFACE_RESULT
+        <set>
+            <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+            <if test="interfaceType != null">interfaceType = #{interfaceType},</if>
+            <if test="exampleType != null">exampleType = #{exampleType},</if>
+            <if test="exampleContent != null">exampleContent = #{exampleContent},</if>
+            <if test="attentionMatters != null">attentionMatters = #{attentionMatters},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_RESULT
+       WHERE 
+       		 id =#{id}
+    </delete>
+
+</mapper>
