@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceParamMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceParamEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="interfaceId" property="interfaceId" jdbcType="BIGINT"/>
+        <result column="interfaceType" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="paramName" property="paramName" jdbcType="VARCHAR"/>
+        <result column="paramType" property="paramType" jdbcType="VARCHAR"/>
+        <result column="paramDescribe" property="paramDescribe" jdbcType="VARCHAR"/>
+        <result column="required" property="required" jdbcType="BOOLEAN"/>
+        <result column="jsontransformat" property="jsontransformat" jdbcType="BOOLEAN"/>
+        <result column="example" property="example" jdbcType="VARCHAR"/>
+        <result column="defaultValue" property="defaultValue" jdbcType="VARCHAR"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, interfaceId, interfaceType, paramName, paramType, paramDescribe, required, jsontransformat, example, defaultValue,
+         createUserId, createDateTime, updateUserId, updateDateTime
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_PARAM
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_PARAM
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceParamEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_PARAM
+       		(id, interfaceId, interfaceType, paramName, paramType, paramDescribe, required, jsontransformat,example, defaultValue,
+       		createUserId, createDateTime, updateUserId, updateDateTime)
+       	VALUES
+       		(#{id}, #{interfaceId}, #{interfaceType}, #{paramName}, #{paramType}, #{paramDescribe}, #{required}, #{jsontransformat},#{example}, #{defaultValue}
+       		#{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceParamEntity">
+        UPDATE
+        T_API_INTERFACE_PARAM
+        <set>
+            <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+            <if test="interfaceType != null">interfaceType = #{interfaceType},</if>
+            <if test="paramName != null">paramName = #{paramName},</if>
+            <if test="paramType != null">paramType = #{paramType},</if>
+            <if test="paramDescribe != null">paramDescribe = #{paramDescribe},</if>
+            <if test="required != null">required = #{required},</if>
+            <if test="jsontransformat != null">jsontransformat = #{jsontransformat},</if>
+            <if test="example != null">example = #{example},</if>
+            <if test="defaultValue != null">defaultValue = #{defaultValue},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_PARAM
+       WHERE 
+       		 id =#{id}
+    </delete>
+
+</mapper>
