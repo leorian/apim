@@ -65,19 +65,20 @@
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceEntity">
         UPDATE
         T_API_PROJECT_DEPLOY
-        SET
-        <if test="projectId != null">projectId = #{projectId},</if>
-        <if test="env != null">env = #{env},</if>
-        <if test="ip != null">ip = #{ip},</if>
-        <if test="port != null">port = #{port},</if>
-        <if test="path != null">path = #{path},</if>
-        <if test="loginOs != null">loginOs = #{loginOs},</if>
-        <if test="loginProtocol != null">loginProtocol = #{loginProtocol},</if>
-        <if test="loginPort != null">loginPort = #{loginPort},</if>
-        <if test="loginAccount != null">loginAccount = #{loginAccount},</if>
-        <if test="loginPassword != null">loginPassword = #{loginPassword},</if>
-        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
-        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        <set>
+            <if test="projectId != null">projectId = #{projectId},</if>
+            <if test="env != null">env = #{env},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="path != null">path = #{path},</if>
+            <if test="loginOs != null">loginOs = #{loginOs},</if>
+            <if test="loginProtocol != null">loginProtocol = #{loginProtocol},</if>
+            <if test="loginPort != null">loginPort = #{loginPort},</if>
+            <if test="loginAccount != null">loginAccount = #{loginAccount},</if>
+            <if test="loginPassword != null">loginPassword = #{loginPassword},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
         WHERE
         deployId = #{deployId}
     </update>

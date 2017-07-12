@@ -44,12 +44,13 @@
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceResponseEntity">
         UPDATE
         T_API_INTERFACE_RESPONSE
-        SET
-        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
-        <if test="scene != null">scene = #{scene},</if>
-        <if test="responseReturnMode != null">responseReturnMode = #{responseReturnMode},</if>
-        <if test="responseExample != null">responseExample = #{responseExample},</if>
-        <if test="responseRemark != null">responseRemark = #{responseRemark}</if>
+        <set>
+            <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+            <if test="scene != null">scene = #{scene},</if>
+            <if test="responseReturnMode != null">responseReturnMode = #{responseReturnMode},</if>
+            <if test="responseExample != null">responseExample = #{responseExample},</if>
+            <if test="responseRemark != null">responseRemark = #{responseRemark}</if>
+        </set>
         WHERE
         interfaceResponseId = #{interfaceResponseId}
     </update>

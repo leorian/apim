@@ -44,12 +44,13 @@
     <update id="update" parameterType="com.leorain.apim.entity.PublisherEntity">
         UPDATE
         T_API_PUBLISHER
-        SET
-        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
-        <if test="environment != null">environment = #{environment}, </if>
-        <if test="interfaceRealAddress != null">interfaceRealAddress = #{interfaceRealAddress}, </if>
-        <if test="groupName != null">groupName = #{groupName}, </if>
-        <if test="version != null">version = #{version} </if>
+        <set>
+            <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+            <if test="environment != null">environment = #{environment},</if>
+            <if test="interfaceRealAddress != null">interfaceRealAddress = #{interfaceRealAddress},</if>
+            <if test="groupName != null">groupName = #{groupName},</if>
+            <if test="version != null">version = #{version}</if>
+        </set>
         WHERE
         publisherId = #{publisherId}
     </update>

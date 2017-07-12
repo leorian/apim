@@ -51,16 +51,17 @@
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceMethodParameterEntity">
         UPDATE
         T_API_INTERFACE_METHOD_PARAMETER
-        SET
-        <if test="interfaceMethodId != null">interfaceMethodId = #{interfaceMethodId},</if>
-        <if test="methodId != null">methodId = #{methodId},</if>
-        <if test="parameterIndex != null">parameterIndex = #{parameterIndex},</if>
-        <if test="parameterTypeShortName != null">parameterTypeShortName = #{parameterTypeShortName},</if>
-        <if test="parameterTypeFullName != null">parameterTypeFullName = #{parameterTypeFullName},</if>
-        <if test="parameterName != null">parameterName = #{parameterName},</if>
-        <if test="parameterMeaning != null">parameterMeaning = #{parameterMeaning},</if>
-        <if test="parameterRequired != null">parameterRequired = #{parameterRequired},</if>
-        <if test="code != null">code = #{code}</if>
+        <set>
+            <if test="interfaceMethodId != null">interfaceMethodId = #{interfaceMethodId},</if>
+            <if test="methodId != null">methodId = #{methodId},</if>
+            <if test="parameterIndex != null">parameterIndex = #{parameterIndex},</if>
+            <if test="parameterTypeShortName != null">parameterTypeShortName = #{parameterTypeShortName},</if>
+            <if test="parameterTypeFullName != null">parameterTypeFullName = #{parameterTypeFullName},</if>
+            <if test="parameterName != null">parameterName = #{parameterName},</if>
+            <if test="parameterMeaning != null">parameterMeaning = #{parameterMeaning},</if>
+            <if test="parameterRequired != null">parameterRequired = #{parameterRequired},</if>
+            <if test="code != null">code = #{code}</if>
+        </set>
         WHERE
         parameterId = #{parameterId}
     </update>

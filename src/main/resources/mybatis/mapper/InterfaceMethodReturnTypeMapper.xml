@@ -44,12 +44,13 @@
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceMethodReturnTypeEntity">
         UPDATE
         T_API_INTERFACE_METHOD_RETURNTYPE
-        SET
-        <if test="interfaceMethodId != null">interfaceMethodId = #{interfaceMethodId},</if>
-        <if test="methodId != null">methodId = #{methodId},</if>
-        <if test="returnTypeShortName != null">returnTypeShortName = #{returnTypeShortName},</if>
-        <if test="returnTypeFullName != null">returnTypeFullName = #{returnTypeFullName},</if>
-        <if test="code != null">code = #{code}</if>
+        <set>
+            <if test="interfaceMethodId != null">interfaceMethodId = #{interfaceMethodId},</if>
+            <if test="methodId != null">methodId = #{methodId},</if>
+            <if test="returnTypeShortName != null">returnTypeShortName = #{returnTypeShortName},</if>
+            <if test="returnTypeFullName != null">returnTypeFullName = #{returnTypeFullName},</if>
+            <if test="code != null">code = #{code}</if>
+        </set>
         WHERE
         returnTypeId = #{returnTypeId}
     </update>

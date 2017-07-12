@@ -47,15 +47,16 @@
     <update id="update" parameterType="com.leorain.apim.entity.ApiUserEntity">
         UPDATE
         T_API_USER
-        SET
-        <if test="usName != null">usName = #{usName},</if>
-        <if test="cnName != null">cnName = #{cnName},</if>
-        <if test="userRole != null">userRole = #{userRole},</if>
-        <if test="cellPhone != null">cellPhone = #{cellPhone},</if>
-        <if test="email != null">email = #{email},</if>
-        <if test="password != null">password = #{password},</if>
-        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
-        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        <set>
+            <if test="usName != null">usName = #{usName},</if>
+            <if test="cnName != null">cnName = #{cnName},</if>
+            <if test="userRole != null">userRole = #{userRole},</if>
+            <if test="cellPhone != null">cellPhone = #{cellPhone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
         WHERE
         userId = #{userId}
     </update>

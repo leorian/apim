@@ -64,12 +64,13 @@
     <update id="update" parameterType="com.leorain.apim.entity.ProjectEntity">
         UPDATE
         T_API_PROJECT
-        SET
-        <if test="projectName != null">projectName = #{projectName},</if>
-        <if test="projectDescribe != null">projectDescribe = #{projectDescribe},</if>
-        <if test="projectManager != null">projectManager = #{projectManager},</if>
-        <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
-        <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        <set>
+            <if test="projectName != null">projectName = #{projectName},</if>
+            <if test="projectDescribe != null">projectDescribe = #{projectDescribe},</if>
+            <if test="projectManager != null">projectManager = #{projectManager},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
         WHERE
         projectId = #{projectId}
     </update>

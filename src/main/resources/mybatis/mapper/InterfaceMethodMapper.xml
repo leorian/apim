@@ -44,12 +44,13 @@
     <update id="update" parameterType="com.leorain.apim.entity.InterfaceMethodEntity">
         UPDATE
         T_API_INTERFACE_METHOD
-        SET
-        <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
-        <if test="interfaceMethodName != null">interfaceMethodName = #{interfaceMethodName},</if>
-        <if test="functionDescribe != null">functionDescribe = #{functionDescribe},</if>
-        <if test="methodParameter != null">methodParameter = #{methodParameter},</if>
-        <if test="returnType != null">returnType = #{returnType}</if>
+        <set>
+            <if test="interfaceId != null">interfaceId = #{interfaceId},</if>
+            <if test="interfaceMethodName != null">interfaceMethodName = #{interfaceMethodName},</if>
+            <if test="functionDescribe != null">functionDescribe = #{functionDescribe},</if>
+            <if test="methodParameter != null">methodParameter = #{methodParameter},</if>
+            <if test="returnType != null">returnType = #{returnType}</if>
+        </set>
         WHERE
         interfaceMethodId = #{interfaceMethodId}
     </update>
