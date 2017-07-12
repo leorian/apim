@@ -182,6 +182,27 @@ create table T_API_INTERFACE_PARAM
 
 alter table T_API_INTERFACE_PARAM comment '接口参数表';
 
+--新版本
+create table T_API_INTERFACE_PARAM
+(
+   id                   BIGINT comment '接口参数主键',
+   interfaceId          BIGINT comment '接口ID',
+   interfaceType        varchar(10) comment '接口类型',
+   paramName            varchar(128) comment '参数名称',
+   paramType            varchar(32) comment '参数类型',
+   paramDescribe        varchar(512) comment '参数描述',
+   required             bool comment '是否必填',
+   jsontransformat      bool comment '是否JSON格式化传输',
+   example              varchar(512) comment '示例',
+   defaultValue         varchar(512) comment '默认值',
+   createUserId             BIGINT comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateUserId             BIGINT comment '更新人ID',
+   updateDateTime       datetime comment '更新时间'
+);
+
+alter table T_API_INTERFACE_PARAM comment '接口参数表';
+
 /*==============================================================*/
 /* Table: T_API_INTERFACE_REQUEST                               */
 /*==============================================================*/
