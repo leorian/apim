@@ -46,4 +46,9 @@ public class InterfaceHttpController {
         interfaceResultService.insertInterfaceResultEntities(interfaceResultEntities);
         return new ResultDomain();
     }
+
+    @RequestMapping("/findInterfaceHttpList")
+    public List<InterfaceHttpEntity> findInterfaceHttpList() {
+        return interfaceHttpService.findInterfaceHttpEntities();
+    }
 }

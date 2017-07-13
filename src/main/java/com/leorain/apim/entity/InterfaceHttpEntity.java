@@ -27,6 +27,11 @@ public class InterfaceHttpEntity extends BaseEntity {
     private Long id;
 
     /**
+     * 接口ID主键字符串形式
+     */
+    private String idText;
+
+    /**
      * 项目ID/应用ID
      */
     private Long appId;
@@ -67,6 +72,14 @@ public class InterfaceHttpEntity extends BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdText() {
+        return idText;
+    }
+
+    public void setIdText(String idText) {
+        this.idText = idText;
     }
 
     public Long getAppId() {

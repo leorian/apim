@@ -54,6 +54,32 @@
                 }
             });
 
+            //HTTP接口列表展示
+            $.get("interfaceHttp/findInterfaceHttpList", null, function (data) {
+                if (data != null && data.length > 0) {
+                    var trElements = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var trElement = "<tr>";
+                        trElement += ("<td class='text-center'>" + data[i].idText + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].name + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].protocol + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].method + "</td>");
+                        trElement += ("<td class='text-center'>" + data[i].address + "</td>");
+                        trElement += ("<td class='text-center'>" +
+                        "<button class=\"btn btn-xs btn-success\">编辑</button>" +
+                        "&nbsp;&nbsp;" +
+                        "<button class=\"btn btn-xs btn-danger\">删除</button>" +
+                        "&nbsp;&nbsp;" +
+                        "<button class=\"btn btn-xs btn-warning\" data-toggle=\"modal\" data-target=\"#myHttpPreviewModal\">预览 </button>" +
+                        "</td>");
+                        trElements += trElement;
+                    }
+                    $("#httpTableTBody").html(trElements);
+                } else {
+                    $("#httpTableTBody").html("<tr><td colspan='6'>暂无信息</td></tr>");
+                }
+            });
+
             //HTTP接口添加参数
             $("#httpAddRequestParam").click(function () {
                 var html = "<tr> " +
@@ -297,24 +323,24 @@
                     <th class="text-center">请求方法</th>
                     <th class="text-center">接口地址</th>
                     <th class="text-center">操作</th>
-                    <tbody id="machineTableTBody">
-                    <!--用户列表-->
-                    <tr>
-                        <td class="text-center">20170711100808001</td>
-                        <td class="text-center">用户查询接口</td>
-                        <td class="text-center">HTTP</td>
-                        <td class="text-center">GET</td>
-                        <td class="text-center">/user/findUser</td>
-                        <td class="text-center">
-                            <button class="btn btn-xs btn-success">编辑</button>
-                            &nbsp;&nbsp;
-                            <button class="btn btn-xs btn-danger">删除</button>
-                            &nbsp;&nbsp;
-                            <button class="btn btn-xs btn-warning" data-toggle="modal"
-                                    data-target="#myHttpPreviewModal">预览
-                            </button>
-                        </td>
-                    </tr>
+                    <tbody id="httpTableTBody">
+                    <!-- HTTP接口列表
+                     <tr>
+                     <td class="text-center">20170711100808001</td>
+                     <td class="text-center">用户查询接口</td>
+                     <td class="text-center">HTTP</td>
+                     <td class="text-center">GET</td>
+                     <td class="text-center">/user/findUser</td>
+                     <td class="text-center">
+                     <button class="btn btn-xs btn-success">编辑</button>
+                     &nbsp;&nbsp;
+                     <button class="btn btn-xs btn-danger">删除</button>
+                     &nbsp;&nbsp;
+                     <button class="btn btn-xs btn-warning" data-toggle="modal"
+                     data-target="#myHttpPreviewModal">预览
+                     </button>
+                     </td>
+                     </tr>-->
                     </tbody>
                 </table>
                 <br/>
