@@ -1,8 +1,17 @@
 package com.leorain.apim.domain;
 
 import com.alibaba.fastjson.JSON;
+import com.leorain.apim.entity.InterfaceHttpEntity;
+import com.leorain.apim.entity.InterfaceParamEntity;
+import com.leorain.apim.entity.InterfaceResultEntity;
+import com.leorain.apim.enums.ExampleTypeEnum;
+import com.leorain.apim.enums.InterfaceTypeEnum;
+import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -179,6 +188,86 @@ public class InterfaceHttpDomain implements Serializable {
 
     public void setExceptionAttentionMatters(String exceptionAttentionMatters) {
         this.exceptionAttentionMatters = exceptionAttentionMatters;
+    }
+
+    public InterfaceHttpEntity buildInterfaceHttpEntity() {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        InterfaceHttpEntity interfaceHttpEntity = new InterfaceHttpEntity();
+        interfaceHttpEntity.setId(Long.valueOf(simpleDateFormat.format(date)));
+        interfaceHttpEntity.setAppId(this.getAppIdInput());
+        interfaceHttpEntity.setProtocol(this.getProtocolInput());
+        interfaceHttpEntity.setMethod(this.getMethodInput());
+        interfaceHttpEntity.setTransformat(this.getTransformatInput());
+        interfaceHttpEntity.setAddress(this.getAddressInput());
+        interfaceHttpEntity.setName(this.getNameInput());
+        interfaceHttpEntity.setDescription(this.getDescriptionInput());
+        interfaceHttpEntity.setCreateDateTime(date);
+        interfaceHttpEntity.setUpdateDateTime(date);
+        return interfaceHttpEntity;
+    }
+
+    public List<InterfaceParamEntity> buildInterfaceParamEntities(Long interfaceId) {
+        if (CollectionUtils.isEmpty(this.getParamNamesInput())) {
+            return null;
+        }
+
+        List<InterfaceParamEntity> interfaceParamEntities = new ArrayList<>(this.getParamNamesInput().size());
+        for (int i = 0; i < this.getParamNamesInput().size(); i++) {
+            InterfaceParamEntity interfaceParamEntity = new InterfaceParamEntity();
+            try {
+                Thread.sleep(10l);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+            interfaceParamEntity.setId(Long.valueOf(simpleDateFormat.format(date)));
+            interfaceParamEntity.setInterfaceType(InterfaceTypeEnum.HTTP.name());
+            interfaceParamEntity.setParamName(this.getParamNamesInput().get(i));
+            interfaceParamEntity.setParamType(this.getParamTypesInput().get(i));
+            interfaceParamEntity.setParamDescribe(this.getParamDescribesInput().get(i));
+            interfaceParamEntity.setRequired(this.getRequiredsInput().get(i));
+            interfaceParamEntity.setJsontransformat(this.getJsontransformatsInput().get(i));
+            interfaceParamEntity.setExample(this.getExamplesInput().get(i));
+            interfaceParamEntity.setDefaultValue(this.getDefaultValuesInput().get(i));
+            interfaceParamEntity.setCreateDateTime(date);
+            interfaceParamEntity.setUpdateDateTime(date);
+            interfaceParamEntities.add(interfaceParamEntity);
+        }
+
+        return interfaceParamEntities;
+    }
+
+    public List<InterfaceResultEntity> buildInterfaceResultEntities(Long interfaceId) {
+        List<InterfaceResultEntity> interfaceResultEntities = new ArrayList<>(2);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        InterfaceResultEntity interfaceResultEntity1 = new InterfaceResultEntity();
+        interfaceResultEntity1.setId(Long.valueOf(simpleDateFormat.format(new Date())));
+        interfaceResultEntity1.setInterfaceId(interfaceId);
+        interfaceResultEntity1.setInterfaceType(InterfaceTypeEnum.HTTP.name());
+        interfaceResultEntity1.setExampleType(ExampleTypeEnum.NORMAL.name());
+        interfaceResultEntity1.setExampleContent(this.getReturnExampleContent());
+        interfaceResultEntity1.setAttentionMatters(this.getReturnExampleAttentionMatters());
+        interfaceResultEntity1.setCreateDateTime(new Date());
+        interfaceResultEntity1.setUpdateDateTime(new Date());
+        interfaceResultEntities.add(interfaceResultEntity1);
+        try {
+            Thread.sleep(10L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        InterfaceResultEntity interfaceResultEntity2 = new InterfaceResultEntity();
+        interfaceResultEntity2.setId(Long.valueOf(simpleDateFormat.format(new Date())));
+        interfaceResultEntity2.setInterfaceId(interfaceId);
+        interfaceResultEntity2.setInterfaceType(InterfaceTypeEnum.HTTP.name());
+        interfaceResultEntity2.setExampleType(ExampleTypeEnum.EXCEPTION.name());
+        interfaceResultEntity2.setExampleContent(this.getExceptionExampleContent());
+        interfaceResultEntity2.setAttentionMatters(this.getExceptionAttentionMatters());
+        interfaceResultEntity2.setCreateDateTime(new Date());
+        interfaceResultEntity2.setUpdateDateTime(new Date());
+        interfaceResultEntities.add(interfaceResultEntity2);
+        return interfaceResultEntities;
     }
 
     @Override
