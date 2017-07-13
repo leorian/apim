@@ -2,6 +2,8 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.List;
+
 /**
  * Created by xiezg@317hu.com on 2017/7/11 0011.
  */
@@ -65,6 +67,16 @@ public class InterfaceHttpEntity extends BaseEntity {
      * 接口描述
      */
     private String description;
+
+    /**
+     *
+     */
+    private List<InterfaceParamEntity> interfaceParamEntities;
+
+    /**
+     *
+     */
+    private List<InterfaceResultEntity> interfaceResultEntities;
 
     public Long getId() {
         return id;
@@ -136,6 +148,22 @@ public class InterfaceHttpEntity extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<InterfaceParamEntity> getInterfaceParamEntities() {
+        return interfaceParamEntities;
+    }
+
+    public void setInterfaceParamEntities(List<InterfaceParamEntity> interfaceParamEntities) {
+        this.interfaceParamEntities = interfaceParamEntities;
+    }
+
+    public List<InterfaceResultEntity> getInterfaceResultEntities() {
+        return interfaceResultEntities;
+    }
+
+    public void setInterfaceResultEntities(List<InterfaceResultEntity> interfaceResultEntities) {
+        this.interfaceResultEntities = interfaceResultEntities;
     }
 
     @Override

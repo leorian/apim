@@ -1,8 +1,8 @@
 package com.leorain.apim.mapper;
 
 import com.leorain.apim.entity.InterfaceResultEntity;
-import com.leorain.apim.enums.InterfaceTypeEnum;
 import com.leorain.apim.mapper.base.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,5 +15,6 @@ public interface InterfaceResultMapper extends BaseMapper<InterfaceResultEntity>
      * @param interfaceType
      * @return
      */
-    List<InterfaceResultEntity> getInterfaceResultEntitiesByInterfaceId(String interfaceId, String interfaceType);
+    List<InterfaceResultEntity> getInterfaceResultEntitiesByInterfaceId(@Param("interfaceId") Long interfaceId,
+                                                                        @Param("interfaceType") String interfaceType);
 }

@@ -21,4 +21,10 @@ public interface InterfaceHttpService {
      * @return
      */
     List<InterfaceHttpEntity> findInterfaceHttpEntities();
+
+    /**
+     * @param interfaceId
+     * @return
+     */
+    InterfaceHttpEntity findInterfaceHttpEntity(Long interfaceId);
 }

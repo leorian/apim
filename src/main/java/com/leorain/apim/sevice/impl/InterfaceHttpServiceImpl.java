@@ -32,4 +32,9 @@ public class InterfaceHttpServiceImpl implements InterfaceHttpService {
         }
         return interfaceHttpEntities;
     }
+
+    @Override
+    public InterfaceHttpEntity findInterfaceHttpEntity(Long interfaceId) {
+        return interfaceHttpMapper.getOne(interfaceId);
+    }
 }
