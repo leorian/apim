@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice.impl;
 
 import com.leorain.apim.entity.InterfaceResultEntity;
+import com.leorain.apim.enums.InterfaceTypeEnum;
 import com.leorain.apim.mapper.InterfaceResultMapper;
 import com.leorain.apim.sevice.InterfaceResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class InterfaceResultServiceImpl implements InterfaceResultService {
         for (InterfaceResultEntity interfaceResultEntity : interfaceResultEntities) {
             interfaceResultMapper.insert(interfaceResultEntity);
         }
+    }
+
+    @Override
+    public List<InterfaceResultEntity> findInterfaceEntitiesByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
+        return interfaceResultMapper.getInterfaceResultEntitiesByInterfaceId(interfaceId, interfaceTypeEnum.name());
     }
 }

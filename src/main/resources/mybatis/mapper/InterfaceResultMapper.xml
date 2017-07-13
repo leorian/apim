@@ -33,6 +33,13 @@
         WHERE id = #{id}
     </select>
 
+    <select id="getInterfaceResultEntitiesByInterfaceId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RESULT
+        WHERE interfaceId = #{interfaceId} AND interfaceType = #{interfaceType}
+    </select>
+
     <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceResultEntity">
        INSERT INTO 
        		T_API_INTERFACE_RESULT

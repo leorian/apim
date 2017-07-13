@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.InterfaceResultEntity;
+import com.leorain.apim.enums.InterfaceTypeEnum;
 
 import java.util.List;
 
@@ -14,4 +15,13 @@ public interface InterfaceResultService {
      * @param interfaceResultEntities
      */
     void insertInterfaceResultEntities(List<InterfaceResultEntity> interfaceResultEntities);
+
+    /**
+     * 查询接口返回示例
+     *
+     * @param interfaceId
+     * @param interfaceTypeEnum
+     * @return
+     */
+    List<InterfaceResultEntity> findInterfaceEntitiesByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum);
 }
