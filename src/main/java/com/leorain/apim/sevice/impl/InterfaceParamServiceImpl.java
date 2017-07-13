@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice.impl;
 
 import com.leorain.apim.entity.InterfaceParamEntity;
+import com.leorain.apim.enums.InterfaceTypeEnum;
 import com.leorain.apim.mapper.InterfaceParamMapper;
 import com.leorain.apim.sevice.InterfaceParamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,11 @@ public class InterfaceParamServiceImpl implements InterfaceParamService {
         for (InterfaceParamEntity interfaceParamEntity : interfaceParamEntities) {
             interfaceParamMapper.insert(interfaceParamEntity);
         }
+    }
+
+    @Override
+    public List<InterfaceParamEntity> findInterfaceParamEntityByInterfaceId(Long interfaceId,
+                                                                            InterfaceTypeEnum interfaceTypeEnum) {
+        return interfaceParamMapper.getInterfaceParamEntitiesByInterfaceId(interfaceId, interfaceTypeEnum.name());
     }
 }

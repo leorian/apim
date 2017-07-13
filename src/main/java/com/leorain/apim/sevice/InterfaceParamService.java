@@ -1,6 +1,7 @@
 package com.leorain.apim.sevice;
 
 import com.leorain.apim.entity.InterfaceParamEntity;
+import com.leorain.apim.enums.InterfaceTypeEnum;
 
 import java.util.List;
 
@@ -15,4 +16,13 @@ public interface InterfaceParamService {
      * @param interfaceParamEntities
      */
     void insertInterfaceParamEntities(List<InterfaceParamEntity> interfaceParamEntities);
+
+    /**
+     * 查询接口参数信息列表
+     *
+     * @param interfaceId
+     * @param interfaceTypeEnum
+     * @return
+     */
+    List<InterfaceParamEntity> findInterfaceParamEntityByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum);
 }
