@@ -223,6 +223,7 @@ public class InterfaceHttpDomain implements Serializable {
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
             interfaceParamEntity.setId(Long.valueOf(simpleDateFormat.format(date)));
+            interfaceParamEntity.setInterfaceId(interfaceId);
             interfaceParamEntity.setInterfaceType(InterfaceTypeEnum.HTTP.name());
             interfaceParamEntity.setParamName(this.getParamNamesInput().get(i));
             interfaceParamEntity.setParamType(this.getParamTypesInput().get(i));

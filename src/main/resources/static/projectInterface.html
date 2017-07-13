@@ -70,7 +70,7 @@
                         "&nbsp;&nbsp;" +
                         "<button class=\"btn btn-xs btn-danger\">删除</button>" +
                         "&nbsp;&nbsp;" +
-                        "<button class=\"btn btn-xs btn-warning\" data-toggle=\"modal\" data-target=\"#myHttpPreviewModal\">预览 </button>" +
+                        "<button class=\"btn btn-xs btn-warning\" data-interfaceid='" + data[i].idText + "' data-toggle=\"modal\" data-target=\"#myHttpPreviewModal\">预览 </button>" +
                         "</td>");
                         trElements += trElement;
                     }
@@ -78,6 +78,14 @@
                 } else {
                     $("#httpTableTBody").html("<tr><td colspan='6'>暂无信息</td></tr>");
                 }
+            });
+
+            //HTTP接口预览
+            $("#httpTableTBody").delegate("button.btn-warning", "click", function () {
+                var interfaceId = $(this).attr("data-interfaceid");
+                $.get("interfaceHttp/findInterfaceHttp/" + interfaceId, null, function (data) {
+                    console.log(data);
+                });
             });
 
             //HTTP接口添加参数

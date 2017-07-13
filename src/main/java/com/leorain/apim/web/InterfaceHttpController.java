@@ -11,10 +11,7 @@ import com.leorain.apim.sevice.InterfaceHttpService;
 import com.leorain.apim.sevice.InterfaceParamService;
 import com.leorain.apim.sevice.InterfaceResultService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -65,8 +62,8 @@ public class InterfaceHttpController {
      * @param interfaceId
      * @return
      */
-    @RequestMapping("/findInterface/{interfaceId}")
-    public InterfaceHttpEntity findInterfaceHttp(@RequestParam("interfaceId") Long interfaceId) {
+    @RequestMapping("/findInterfaceHttp/{interfaceId}")
+    public InterfaceHttpEntity findInterfaceHttp(@PathVariable("interfaceId") Long interfaceId) {
         InterfaceHttpEntity interfaceHttpEntity = interfaceHttpService.findInterfaceHttpEntity(interfaceId);
         interfaceHttpEntity.setInterfaceParamEntities(interfaceParamService.
                 findInterfaceParamEntityByInterfaceId(interfaceHttpEntity.getId(), InterfaceTypeEnum.HTTP));
