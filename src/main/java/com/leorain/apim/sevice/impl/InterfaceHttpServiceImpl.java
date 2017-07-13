@@ -1,5 +1,6 @@
 package com.leorain.apim.sevice.impl;
 
+import com.leorain.apim.entity.InterfaceHttpEntity;
 import com.leorain.apim.mapper.InterfaceHttpMapper;
 import com.leorain.apim.sevice.InterfaceHttpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,4 +14,8 @@ public class InterfaceHttpServiceImpl implements InterfaceHttpService {
     @Autowired
     private InterfaceHttpMapper interfaceHttpMapper;
 
+    @Override
+    public void insertInterfaceHttpEntity(InterfaceHttpEntity interfaceHttpEntity) {
+        interfaceHttpMapper.insert(interfaceHttpEntity);
+    }
 }
