@@ -70,8 +70,9 @@ public class InterfaceHttpController {
         InterfaceHttpEntity interfaceHttpEntity = interfaceHttpService.findInterfaceHttpEntity(interfaceId);
         interfaceHttpEntity.setInterfaceParamEntities(interfaceParamService.
                 findInterfaceParamEntityByInterfaceId(interfaceHttpEntity.getId(), InterfaceTypeEnum.HTTP));
-        interfaceHttpEntity.setInterfaceResultEntities(interfaceResultService.findInterfaceResultEntitiesByInterfaceId(interfaceHttpEntity.getId(),
-                InterfaceTypeEnum.HTTP));
+        interfaceHttpEntity.setInterfaceResultEntities(interfaceResultService.
+                findInterfaceResultEntitiesByInterfaceId(interfaceHttpEntity.getId(),
+                        InterfaceTypeEnum.HTTP));
 
         return interfaceHttpEntity;
     }
