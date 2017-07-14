@@ -42,4 +42,9 @@ public class InterfaceHttpServiceImpl implements InterfaceHttpService {
     public void deleteInterfaceHttpEntity(Long interfaceId) {
         interfaceHttpMapper.delete(interfaceId);
     }
+
+    @Override
+    public void updateInterfaceHttpEntity(InterfaceHttpEntity interfaceHttpEntity) {
+        interfaceHttpMapper.update(interfaceHttpEntity);
+    }
 }

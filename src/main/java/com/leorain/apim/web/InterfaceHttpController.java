@@ -51,6 +51,25 @@ public class InterfaceHttpController {
     }
 
     /**
+     * @param interfaceHttpDomain
+     * @param interfaceId
+     * @return
+     */
+    @RequestMapping(value = "/updateInterfaceHttp", method = RequestMethod.POST)
+    public ResultDomain updateInterfaceHttp(InterfaceHttpDomain interfaceHttpDomain,
+                                            @RequestParam("interfaceHttpIdInput") Long interfaceId) {
+        System.out.println(JSON.toJSONString(interfaceHttpDomain));
+        InterfaceHttpEntity interfaceHttpEntity = interfaceHttpDomain.buildInterfaceHttpEntity();
+        interfaceHttpEntity.setId(interfaceId);
+        interfaceHttpService.updateInterfaceHttpEntity(interfaceHttpEntity);
+        interfaceParamService.deleteInterfaceParamEntityByInterfaceId(interfaceId, InterfaceTypeEnum.HTTP);
+        interfaceParamService.insertInterfaceParamEntities(interfaceHttpDomain.buildInterfaceParamEntities(interfaceId));
+        interfaceResultService.deleteInterfaceResultEntityByInterfaceId(interfaceId, InterfaceTypeEnum.HTTP);
+        interfaceResultService.insertInterfaceResultEntities(interfaceHttpDomain.buildInterfaceResultEntities(interfaceId));
+        return new ResultDomain();
+    }
+
+    /**
      * @return
      */
     @RequestMapping("/findInterfaceHttpList")

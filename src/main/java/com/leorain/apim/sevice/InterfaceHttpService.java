@@ -32,4 +32,9 @@ public interface InterfaceHttpService {
      * @param interfaceId
      */
     void deleteInterfaceHttpEntity(Long interfaceId);
+
+    /**
+     * @param interfaceHttpEntity
+     */
+    void updateInterfaceHttpEntity(InterfaceHttpEntity interfaceHttpEntity);
 }
