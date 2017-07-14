@@ -110,6 +110,8 @@
                             trElements += trElement;
                         }
                         $("#myHttpPreviewTBody").html(trElements);
+                    } else {
+                        $("#myHttpPreviewTBody").html("<tr>" + "<td class='text-center' colspan='7'>" + "暂无信息！" + "</td>" + "</tr>")
                     }
 
                     //结果示例
@@ -998,7 +1000,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
                 <!--<button type="button" class="btn btn-primary">-->
-                    <!--提交更改-->
+                <!--提交更改-->
                 <!--</button>-->
             </div>
         </div><!-- /.modal-content -->
