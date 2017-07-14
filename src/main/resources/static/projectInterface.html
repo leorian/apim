@@ -111,6 +111,20 @@
                         }
                         $("#myHttpPreviewTBody").html(trElements);
                     }
+
+                    //结果示例
+                    if (data.interfaceResultEntities != null && data.interfaceResultEntities.length > 0) {
+                        debugger;
+                        for (var i = 0; i < data.interfaceResultEntities.length; i++) {
+                            if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
+                                $("#httpReturnExampleView").html(data.interfaceResultEntities[i].exampleContent);
+                                $("#httpReturnAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                            } else {
+                                $("#httpExceptionExampleView").html(data.interfaceResultEntities[i].exampleContent);
+                                $("#httpExceptionAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                            }
+                        }
+                    }
                 });
             });
 
@@ -947,24 +961,32 @@
                                     <br/>
                                     <div class="form-group">
                                         <h6>返回示例</h6>
-                                        <pre>返回示例占位符</pre>
+                                        <pre id="httpReturnExampleView">
+                                            <!--返回示例占位符-->
+                                        </pre>
                                     </div>
                                     <br/>
                                     <div class="form-group">
                                         <h6>注意事项</h6>
-                                        <pre>注意事项占位符</pre>
+                                        <pre id="httpReturnAttentionMattersView">
+                                            <!--注意事项占位符-->
+                                        </pre>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="exceptionExampleHttpPreview">
                                     <br/>
                                     <div class="form-group">
                                         <h6>异常示例</h6>
-                                        <pre>异常示例占位符</pre>
+                                        <pre id="httpExceptionExampleView">
+                                            <!--异常示例占位符-->
+                                        </pre>
                                     </div>
                                     <br/>
                                     <div class="form-group">
                                         <h6>注意事项</h6>
-                                        <pre>注意事项占位符</pre>
+                                        <pre id="httpExceptionAttentionMattersView">
+                                            <!--注意事项占位符-->
+                                        </pre>
                                     </div>
                                 </div>
                             </div>
