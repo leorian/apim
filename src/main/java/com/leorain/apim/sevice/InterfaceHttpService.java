@@ -27,4 +27,9 @@ public interface InterfaceHttpService {
      * @return
      */
     InterfaceHttpEntity findInterfaceHttpEntity(Long interfaceId);
+
+    /**
+     * @param interfaceId
+     */
+    void deleteInterfaceHttpEntity(Long interfaceId);
 }

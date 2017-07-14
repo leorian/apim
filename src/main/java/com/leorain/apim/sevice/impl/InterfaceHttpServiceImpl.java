@@ -37,4 +37,9 @@ public class InterfaceHttpServiceImpl implements InterfaceHttpService {
     public InterfaceHttpEntity findInterfaceHttpEntity(Long interfaceId) {
         return interfaceHttpMapper.getOne(interfaceId);
     }
+
+    @Override
+    public void deleteInterfaceHttpEntity(Long interfaceId) {
+        interfaceHttpMapper.delete(interfaceId);
+    }
 }
