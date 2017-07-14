@@ -119,11 +119,29 @@
                         debugger;
                         for (var i = 0; i < data.interfaceResultEntities.length; i++) {
                             if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
-                                $("#httpReturnExampleView").html(data.interfaceResultEntities[i].exampleContent);
-                                $("#httpReturnAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                                if (data.interfaceResultEntities[i].exampleContent == null || data.interfaceResultEntities[i].exampleContent.trim() == "") {
+                                    $("#httpReturnExampleView").html("暂无返回示例！");
+                                } else {
+                                    $("#httpReturnExampleView").html(data.interfaceResultEntities[i].exampleContent);
+                                }
+
+                                if (data.interfaceResultEntities[i].attentionMatters == null || data.interfaceResultEntities[i].attentionMatters.trim() == "") {
+                                    $("#httpReturnAttentionMattersView").html("暂无注意事项！")
+                                } else {
+                                    $("#httpReturnAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                                }
                             } else {
-                                $("#httpExceptionExampleView").html(data.interfaceResultEntities[i].exampleContent);
-                                $("#httpExceptionAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                                if (data.interfaceResultEntities[i].exampleContent == null || data.interfaceResultEntities[i].exampleContent.trim() == "") {
+                                    $("#httpExceptionExampleView").html("暂无异常示例！");
+                                } else {
+                                    $("#httpExceptionExampleView").html(data.interfaceResultEntities[i].exampleContent);
+                                }
+
+                                if (data.interfaceResultEntities[i].attentionMatters == null || data.interfaceResultEntities[i].attentionMatters.trim() == "") {
+                                    $("#httpExceptionAttentionMattersView").html("暂无注意事项！");
+                                } else {
+                                    $("#httpExceptionAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                                }
                             }
                         }
                     }
