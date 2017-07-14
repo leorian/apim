@@ -72,4 +72,11 @@
        		 id =#{id}
     </delete>
 
+    <delete id="deleteByInterfaceId">
+        DELETE FROM
+          T_API_INTERFACE_RESULT
+        WHERE
+          interfaceId = #{interfaceId} AND interfaceType = #{interfaceType}
+    </delete>
+
 </mapper>

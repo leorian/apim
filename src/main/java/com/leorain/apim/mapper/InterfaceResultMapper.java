@@ -17,4 +17,11 @@ public interface InterfaceResultMapper extends BaseMapper<InterfaceResultEntity>
      */
     List<InterfaceResultEntity> getInterfaceResultEntitiesByInterfaceId(@Param("interfaceId") Long interfaceId,
                                                                         @Param("interfaceType") String interfaceType);
+
+    /**
+     * @param interfaceId
+     * @param interfaceType
+     */
+    void deleteByInterfaceId(@Param("interfaceId") String interfaceId,
+                             @Param("interfaceType") String interfaceType);
 }

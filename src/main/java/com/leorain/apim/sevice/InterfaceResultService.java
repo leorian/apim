@@ -24,4 +24,10 @@ public interface InterfaceResultService {
      * @return
      */
     List<InterfaceResultEntity> findInterfaceResultEntitiesByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum);
+
+    /**
+     * @param interfaceId
+     * @param interfaceTypeEnum
+     */
+    void deleteInterfaceResultEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum);
 }

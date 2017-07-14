@@ -29,4 +29,9 @@ public class InterfaceResultServiceImpl implements InterfaceResultService {
     public List<InterfaceResultEntity> findInterfaceResultEntitiesByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
         return interfaceResultMapper.getInterfaceResultEntitiesByInterfaceId(interfaceId, interfaceTypeEnum.name());
     }
+
+    @Override
+    public void deleteInterfaceResultEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
+        interfaceResultMapper.deleteByInterfaceId(interfaceId, interfaceTypeEnum.name());
+    }
 }

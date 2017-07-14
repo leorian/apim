@@ -30,4 +30,9 @@ public class InterfaceParamServiceImpl implements InterfaceParamService {
                                                                             InterfaceTypeEnum interfaceTypeEnum) {
         return interfaceParamMapper.getInterfaceParamEntitiesByInterfaceId(interfaceId, interfaceTypeEnum.name());
     }
+
+    @Override
+    public void deleteInterfaceParamEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
+        interfaceParamMapper.deleteByInterfaceId(interfaceId, interfaceTypeEnum.name());
+    }
 }

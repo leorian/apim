@@ -25,4 +25,10 @@ public interface InterfaceParamService {
      * @return
      */
     List<InterfaceParamEntity> findInterfaceParamEntityByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum);
+
+    /**
+     * @param interfaceId
+     * @param interfaceTypeEnum
+     */
+    void deleteInterfaceParamEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum);
 }
