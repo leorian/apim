@@ -128,14 +128,31 @@
                                 "<input name='paramDescribesInput' value='" + data.interfaceParamEntities[i].paramDescribe + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
                                 "</td>"
                             );
-                            html += ( "<td>" +
-                            "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
-                            "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
-                            "</td>" );
-                            html += ( "<td>" +
-                            "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformatsInput + "'>" +
-                            "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
-                            "</td>");
+
+                            if (data.interfaceParamEntities[i].required) {
+                                html += ( "<td>" +
+                                "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
+                                "<input name='requiredsInputCheckBox' type=\"checkbox\" checked='checked' class=\"form-control input-sm\" style='height: 18px;' >" +
+                                "</td>" );
+                            } else {
+                                html += ( "<td>" +
+                                "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
+                                "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
+                                "</td>" );
+                            }
+
+                            if (data.interfaceParamEntities[i].jsontransformat) {
+                                html += ( "<td>" +
+                                "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformat + "'>" +
+                                "<input name='jsontransformatsInputCheckBox' checked='checked' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                                "</td>");
+                            } else {
+                                html += ( "<td>" +
+                                "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformat + "'>" +
+                                "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                                "</td>");
+                            }
+
                             html += (  "<td> " +
                             "<input name='examplesInput' value='" + data.interfaceParamEntities[i].example + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
                             "</td>" );
