@@ -73,4 +73,18 @@ public class InterfaceHttpController {
 
         return interfaceHttpEntity;
     }
+
+    /**
+     * 删除接口信息
+     *
+     * @param interfaceId
+     * @return
+     */
+    @RequestMapping("/deleteInterfaceHttp/{interfaceId}")
+    public ResultDomain deleteInterfaceHttp(@PathVariable("interfaceId") Long interfaceId) {
+        interfaceResultService.deleteInterfaceResultEntityByInterfaceId(interfaceId, InterfaceTypeEnum.HTTP);
+        interfaceParamService.deleteInterfaceParamEntityByInterfaceId(interfaceId, InterfaceTypeEnum.HTTP);
+        interfaceHttpService.deleteInterfaceHttpEntity(interfaceId);
+        return new ResultDomain();
+    }
 }

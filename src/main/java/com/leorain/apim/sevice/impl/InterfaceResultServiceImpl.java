@@ -31,7 +31,7 @@ public class InterfaceResultServiceImpl implements InterfaceResultService {
     }
 
     @Override
-    public void deleteInterfaceResultEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
+    public void deleteInterfaceResultEntityByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
         interfaceResultMapper.deleteByInterfaceId(interfaceId, interfaceTypeEnum.name());
     }
 }

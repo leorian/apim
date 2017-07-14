@@ -32,7 +32,7 @@ public class InterfaceParamServiceImpl implements InterfaceParamService {
     }
 
     @Override
-    public void deleteInterfaceParamEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
+    public void deleteInterfaceParamEntityByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum) {
         interfaceParamMapper.deleteByInterfaceId(interfaceId, interfaceTypeEnum.name());
     }
 }

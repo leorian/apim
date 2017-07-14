@@ -30,5 +30,5 @@ public interface InterfaceParamService {
      * @param interfaceId
      * @param interfaceTypeEnum
      */
-    void deleteInterfaceParamEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum);
+    void deleteInterfaceParamEntityByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum);
 }

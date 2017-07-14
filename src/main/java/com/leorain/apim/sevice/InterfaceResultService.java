@@ -29,5 +29,5 @@ public interface InterfaceResultService {
      * @param interfaceId
      * @param interfaceTypeEnum
      */
-    void deleteInterfaceResultEntityByInterfaceId(String interfaceId, InterfaceTypeEnum interfaceTypeEnum);
+    void deleteInterfaceResultEntityByInterfaceId(Long interfaceId, InterfaceTypeEnum interfaceTypeEnum);
 }
