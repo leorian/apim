@@ -112,6 +112,46 @@
                     $("input[name='addressInput']").val(data.address);
                     $("input[name='nameInput']").val(data.name);
                     $("textarea[name='descriptionInput']").val(data.description);
+
+                    //请求参数
+                    if (data.interfaceParamEntities != null && data.interfaceParamEntities.length > 0) {
+                        for (var i = 0; i < data.interfaceParamEntities.length; i++) {
+                            var html = "<tr> ";
+                            html += ("<td> <input name='paramNamesInput' type=\"text\" value='" + data.interfaceParamEntities[i].paramName + "' class=\"form-control input-sm\" style='height: 25px;'> </td> " );
+                            html += (" <td> " +
+                            "<select name='paramTypesInput' class=\"form-control input-sm\" style='height: 25px;'> " +
+                            "<option value=\"string\">string</option> " +
+                            "</select> " +
+                            "</td>");
+                            html += (
+                                "<td>" +
+                                "<input name='paramDescribesInput' value='" + data.interfaceParamEntities[i].paramDescribe + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
+                                "</td>"
+                            );
+                            html += ( "<td>" +
+                            "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
+                            "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
+                            "</td>" );
+                            html += ( "<td>" +
+                            "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformatsInput + "'>" +
+                            "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                            "</td>");
+                            html += (  "<td> " +
+                            "<input name='examplesInput' value='" + data.interfaceParamEntities[i].example + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                            "</td>" );
+                            html += ( "<td> " +
+                            "<input name='defaultValuesInput' value='" + data.interfaceParamEntities[i].defaultValue + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                            "</td>" );
+                            html += (
+                            "<td>" +
+                            "<a href=\"#\">" +
+                            "<span class=\"glyphicon glyphicon-trash\"></span>" +
+                            "</a>" +
+                            "</td>" );
+                            html += "</tr> ";
+                            $("#myHttpModal").find("tbody").append(html);
+                        }
+                    }
                 }, "json");
             });
 
@@ -611,46 +651,46 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="paramNamesInput" class="form-control input-sm"
-                                                   style="height: 25px;">
-                                        </td>
-                                        <td>
-                                            <select name="paramTypesInput" class="form-control input-sm"
-                                                    style="height: 25px;">
-                                                <option value="string">string</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input name="paramDescribesInput" type="text" class="form-control input-sm"
-                                                   style="height: 25px;">
-                                        </td>
-                                        <td>
-                                            <input name="requiredsInput" type="hidden" value="false"/>
-                                            <input name="requiredsInputCheckBox" type="checkbox"
-                                                   class="form-control input-sm"
-                                                   style="height: 18px;">
-                                        </td>
-                                        <td>
-                                            <input name="jsontransformatsInput" type="hidden" value="false"/>
-                                            <input name="jsontransformatsInputCheckBox" type="checkbox"
-                                                   class="form-control input-sm" style="height: 18px;">
-                                        </td>
-                                        <td>
-                                            <input name="examplesInput" type="text" class="form-control input-sm"
-                                                   style="height: 25px;">
-                                        </td>
-                                        <td>
-                                            <input name="defaultValuesInput" type="text" class="form-control input-sm"
-                                                   style="height: 25px;">
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <!--<tr>-->
+                                    <!--<td>-->
+                                    <!--<input type="text" name="paramNamesInput" class="form-control input-sm"-->
+                                    <!--style="height: 25px;">-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<select name="paramTypesInput" class="form-control input-sm"-->
+                                    <!--style="height: 25px;">-->
+                                    <!--<option value="string">string</option>-->
+                                    <!--</select>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<input name="paramDescribesInput" type="text" class="form-control input-sm"-->
+                                    <!--style="height: 25px;">-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<input name="requiredsInput" type="hidden" value="false"/>-->
+                                    <!--<input name="requiredsInputCheckBox" type="checkbox"-->
+                                    <!--class="form-control input-sm"-->
+                                    <!--style="height: 18px;">-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<input name="jsontransformatsInput" type="hidden" value="false"/>-->
+                                    <!--<input name="jsontransformatsInputCheckBox" type="checkbox"-->
+                                    <!--class="form-control input-sm" style="height: 18px;">-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<input name="examplesInput" type="text" class="form-control input-sm"-->
+                                    <!--style="height: 25px;">-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<input name="defaultValuesInput" type="text" class="form-control input-sm"-->
+                                    <!--style="height: 25px;">-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                    <!--<a href="#">-->
+                                    <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                    <!--</a>-->
+                                    <!--</td>-->
+                                    <!--</tr>-->
                                     </tbody>
                                     <tfoot>
                                     <tr>
