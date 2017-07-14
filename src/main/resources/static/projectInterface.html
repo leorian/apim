@@ -170,6 +170,20 @@
                             $("#myHttpModal").find("tbody").append(html);
                         }
                     }
+
+                    //结果示例
+                    if (data.interfaceResultEntities != null && data.interfaceResultEntities.length > 0) {
+                        debugger;
+                        for (var i = 0; i < data.interfaceResultEntities.length; i++) {
+                            if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
+                                $("textarea[name='returnExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
+                                $("textarea[name='returnExampleAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
+                            } else {
+                                $("textarea[name='exceptionExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
+                                $("textarea[name='exceptionAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
+                            }
+                        }
+                    }
                 }, "json");
             });
 
