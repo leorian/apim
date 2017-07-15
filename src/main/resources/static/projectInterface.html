@@ -236,6 +236,94 @@
                 }, "json");
             });
 
+            //RPC接口编辑事件
+            $("#rpcTableTBody").delegate("button.btn-success", "click", function () {
+                var interfaceId = $(this).attr("data-interfaceid");
+                $("#myRpcModalLabel").html("编辑RPC接口");
+                $("#interfaceRpcIdInput").val(interfaceId);
+                $("#myRpcModal").find("tbody").empty();
+                $.get("interfaceRpc/findInterfaceRpc/" + interfaceId, null, function (data) {
+                    console.log(data);
+                    $("#myRpcModal").find("input[name='classNameInput']").val(data.className);
+                    $("#myRpcModal").find("input[name='methodNameInput']").val(data.methodName);
+                    $("#myRpcModal").find("input[name='nameInput']").val(data.name);
+                    $("#myRpcModal").find("textarea[name='functionDescribeInput']").val(data.functionDescribe);
+                    $("#myRpcModal").find("input[name='returnTypeInput']").val(data.returnType);
+                    $("#myRpcModal").find("input[name='methodParamInput']").val(data.methodParam);
+
+                    //请求参数
+                    if (data.interfaceParamEntities != null && data.interfaceParamEntities.length > 0) {
+                        for (var i = 0; i < data.interfaceParamEntities.length; i++) {
+                            var html = "<tr> ";
+                            html += ("<td> <input name='paramNamesInput' type=\"text\" value='" + data.interfaceParamEntities[i].paramName + "' class=\"form-control input-sm\" style='height: 25px;'> </td> " );
+                            html += (" <td> " +
+                            "<select name='paramTypesInput' class=\"form-control input-sm\" style='height: 25px;'> " +
+                            "<option value=\"string\">string</option> " +
+                            "</select> " +
+                            "</td>");
+                            html += (
+                                "<td>" +
+                                "<input name='paramDescribesInput' value='" + data.interfaceParamEntities[i].paramDescribe + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
+                                "</td>"
+                            );
+
+                            if (data.interfaceParamEntities[i].required) {
+                                html += ( "<td>" +
+                                "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
+                                "<input name='requiredsInputCheckBox' type=\"checkbox\" checked='checked' class=\"form-control input-sm\" style='height: 18px;' >" +
+                                "</td>" );
+                            } else {
+                                html += ( "<td>" +
+                                "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
+                                "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
+                                "</td>" );
+                            }
+
+                            if (data.interfaceParamEntities[i].jsontransformat) {
+                                html += ( "<td>" +
+                                "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformat + "'>" +
+                                "<input name='jsontransformatsInputCheckBox' checked='checked' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                                "</td>");
+                            } else {
+                                html += ( "<td>" +
+                                "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformat + "'>" +
+                                "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                                "</td>");
+                            }
+
+                            html += (  "<td> " +
+                            "<input name='examplesInput' value='" + data.interfaceParamEntities[i].example + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                            "</td>" );
+                            html += ( "<td> " +
+                            "<input name='defaultValuesInput' value='" + data.interfaceParamEntities[i].defaultValue + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                            "</td>" );
+                            html += (
+                            "<td>" +
+                            "<a href=\"#\">" +
+                            "<span class=\"glyphicon glyphicon-trash\"></span>" +
+                            "</a>" +
+                            "</td>" );
+                            html += "</tr> ";
+                            $("#myRpcModal").find("tbody").append(html);
+                        }
+                    }
+
+                    //结果示例
+                    if (data.interfaceResultEntities != null && data.interfaceResultEntities.length > 0) {
+                        debugger;
+                        for (var i = 0; i < data.interfaceResultEntities.length; i++) {
+                            if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
+                                $("#myRpcModal").find("textarea[name='returnExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
+                                $("#myRpcModal").find("textarea[name='returnExampleAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
+                            } else {
+                                $("#myRpcModal").find("textarea[name='exceptionExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
+                                $("#myRpcModal").find("textarea[name='exceptionAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
+                            }
+                        }
+                    }
+                }, "json");
+            });
+
             //新增HTTP接口
             $("#addHttpInterfaceBtn").click(function () {
                 $("#myHttpModalLabel").html("新增HTTP接口");
