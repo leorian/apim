@@ -36,7 +36,8 @@
             }
 
             var projectId = getQueryString("projectId");
-            $("#projectIdInput").val(projectId);
+            $("#myHttpModal").find("input[name='appIdInput']").val(projectId);
+            $("#myRpcModal").find("input[name='appIdInput']").val(projectId);
             //项目信息展示区
             $.get("project/findProject/" + projectId, null, function (data) {
                 console.log(data);
@@ -117,7 +118,7 @@
             });
 
             //RPC接口删除事件
-            $("#rpcTableTBody").delegate("button.btn-danger", "click", function(){
+            $("#rpcTableTBody").delegate("button.btn-danger", "click", function () {
                 var interfaceId = $(this).attr("data-interfaceid");
                 $("#deleteInterfaceModal").find("button.btn-primary").attr("data-interfaceid", interfaceId);
                 $("#deleteInterfaceModal").find("button.btn-primary").attr("data-interfacetype", "RPC");
@@ -128,7 +129,7 @@
             $("#deleteInterfaceModal").delegate("button.btn-primary", "click", function () {
                 var interfaceId = $(this).attr("data-interfaceid");
                 var interfaceType = $(this).attr("data-interfacetype");
-                if (interfaceType=="HTTP") {
+                if (interfaceType == "HTTP") {
                     $.get("interfaceHttp/deleteInterfaceHttp/" + interfaceId, null, function (data) {
                         console.log(data);
                         if (data.success) {
@@ -137,13 +138,13 @@
                         }
                     }, "json");
                 } else {
-                    $.get("interfaceRpc/deleteInterfaceRpc/" + interfaceId, null, function(data) {
+                    $.get("interfaceRpc/deleteInterfaceRpc/" + interfaceId, null, function (data) {
                         console.log(data);
                         if (data.success) {
                             $("#deleteInterfaceModal").modal("hide");
                             window.location.reload();
                         }
-                    },"json");
+                    }, "json");
                 }
 
             });
@@ -803,6 +804,8 @@
             </div>
             <div class="modal-body">
                 <form id="newInterfaceHttpForm" role="form">
+                    <!--项目ID-->
+                    <input type="hidden" name="appIdInput" value="">
                     <!--接口ID-->
                     <input type="hidden" id="interfaceHttpIdInput" name="interfaceHttpIdInput" value="">
                     <div class="row">
@@ -1011,6 +1014,8 @@
             </div>
             <div class="modal-body">
                 <form id="newInterfaceRpcForm" role="form">
+                    <!--项目ID-->
+                    <input type="hidden" name="appIdInput" value="">
                     <!--接口ID-->
                     <input type="hidden" id="interfaceRpcIdInput" name="interfaceRpcIdInput" value="">
                     <div class="row">
