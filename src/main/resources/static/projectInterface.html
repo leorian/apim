@@ -59,7 +59,7 @@
             });
 
             //HTTP接口列表展示
-            $.get("interfaceHttp/findInterfaceHttpList", null, function (data) {
+            $.get("interfaceHttp/findInterfaceHttpList/" + projectId, null, function (data) {
                 if (data != null && data.length > 0) {
                     var trElements = "";
                     for (var i = 0; i < data.length; i++) {
@@ -85,7 +85,7 @@
             });
 
             //RPC接口列表展示
-            $.get("interfaceRpc/findInterfaceRpcList", null, function (data) {
+            $.get("interfaceRpc/findInterfaceRpcList/" + projectId, null, function (data) {
                 if (data != null && data.length > 0) {
                     var trElements = "";
                     for (var i = 0; i < data.length; i++) {

@@ -57,7 +57,7 @@ public class InterfaceRpcController {
      */
     @RequestMapping(value = "/updateInterfaceRpc", method = RequestMethod.POST)
     public ResultDomain updateInterfaceRpc(InterfaceRpcDomain interfaceRpcDomain,
-                                            @RequestParam("interfaceRpcIdInput") Long interfaceId) {
+                                           @RequestParam("interfaceRpcIdInput") Long interfaceId) {
         System.out.println(JSON.toJSONString(interfaceRpcDomain));
         InterfaceRpcEntity interfaceRpcEntity = interfaceRpcDomain.buildInterfaceRpcEntity();
         interfaceRpcEntity.setId(interfaceId);
@@ -72,9 +72,9 @@ public class InterfaceRpcController {
     /**
      * @return
      */
-    @RequestMapping("/findInterfaceRpcList")
-    public List<InterfaceRpcEntity> findInterfaceRpcList() {
-        return interfaceRpcService.findInterfaceRpcEntities();
+    @RequestMapping("/findInterfaceRpcList/{projectId}")
+    public List<InterfaceRpcEntity> findInterfaceRpcList(@PathVariable("projectId") Long projectId) {
+        return interfaceRpcService.findInterfaceRpcEntities(projectId);
     }
 
     /**

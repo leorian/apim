@@ -34,6 +34,17 @@ public class InterfaceHttpServiceImpl implements InterfaceHttpService {
     }
 
     @Override
+    public List<InterfaceHttpEntity> findInterfaceHttpEntities(Long projectId) {
+        List<InterfaceHttpEntity> interfaceHttpEntities = interfaceHttpMapper.getAllByAppId(projectId);
+        if (!CollectionUtils.isEmpty(interfaceHttpEntities)) {
+            for (InterfaceHttpEntity interfaceHttpEntity : interfaceHttpEntities) {
+                interfaceHttpEntity.setIdText(String.valueOf(interfaceHttpEntity.getId()));
+            }
+        }
+        return interfaceHttpEntities;
+    }
+
+    @Override
     public InterfaceHttpEntity findInterfaceHttpEntity(Long interfaceId) {
         return interfaceHttpMapper.getOne(interfaceId);
     }

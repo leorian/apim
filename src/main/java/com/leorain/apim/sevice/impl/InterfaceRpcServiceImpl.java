@@ -39,6 +39,17 @@ public class InterfaceRpcServiceImpl implements InterfaceRpcService {
     }
 
     @Override
+    public List<InterfaceRpcEntity> findInterfaceRpcEntities(Long projectId) {
+        List<InterfaceRpcEntity> interfaceRpcEntities = interfaceRpcMapper.getAllByAppId(projectId);
+        if (!CollectionUtils.isEmpty(interfaceRpcEntities)) {
+            for (InterfaceRpcEntity interfaceRpcEntity : interfaceRpcEntities) {
+                interfaceRpcEntity.setIdText(String.valueOf(interfaceRpcEntity.getId()));
+            }
+        }
+        return interfaceRpcEntities;
+    }
+
+    @Override
     public InterfaceRpcEntity findInterfaceRpcEntity(Long interfaceId) {
         return interfaceRpcMapper.getOne(interfaceId);
     }

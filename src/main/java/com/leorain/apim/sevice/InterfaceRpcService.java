@@ -9,32 +9,33 @@ import java.util.List;
  */
 public interface InterfaceRpcService {
     /**
-     *
      * @param interfaceRpcEntity
      */
     void insertInterfaceRpcEntity(InterfaceRpcEntity interfaceRpcEntity);
 
     /**
-     *
      * @param interfaceRpcEntity
      */
     void updateInterfaceRpcEntity(InterfaceRpcEntity interfaceRpcEntity);
 
     /**
-     *
      * @return
      */
     List<InterfaceRpcEntity> findInterfaceRpcEntities();
 
     /**
-     *
+     * @param projectId
+     * @return
+     */
+    List<InterfaceRpcEntity> findInterfaceRpcEntities(Long projectId);
+
+    /**
      * @param interfaceId
      * @return
      */
     InterfaceRpcEntity findInterfaceRpcEntity(Long interfaceId);
 
     /**
-     *
      * @param interfaceId
      */
     void deleteInterfaceRpcEntity(Long interfaceId);

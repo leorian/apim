@@ -23,6 +23,12 @@ public interface InterfaceHttpService {
     List<InterfaceHttpEntity> findInterfaceHttpEntities();
 
     /**
+     * @param projectId
+     * @return
+     */
+    List<InterfaceHttpEntity> findInterfaceHttpEntities(Long projectId);
+
+    /**
      * @param interfaceId
      * @return
      */

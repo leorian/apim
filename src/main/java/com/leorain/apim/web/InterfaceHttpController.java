@@ -72,9 +72,9 @@ public class InterfaceHttpController {
     /**
      * @return
      */
-    @RequestMapping("/findInterfaceHttpList")
-    public List<InterfaceHttpEntity> findInterfaceHttpList() {
-        return interfaceHttpService.findInterfaceHttpEntities();
+    @RequestMapping("/findInterfaceHttpList/{projectId}")
+    public List<InterfaceHttpEntity> findInterfaceHttpList(@PathVariable("projectId") Long projectId) {
+        return interfaceHttpService.findInterfaceHttpEntities(projectId);
     }
 
     /**
