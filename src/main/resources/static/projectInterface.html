@@ -405,6 +405,71 @@
                 });
             });
 
+            //RPC接口预览
+            $("#rpcTableTBody").delegate("button.btn-warning", "click", function () {
+                var interfaceId = $(this).attr("data-interfaceid");
+                $.get("interfaceRpc/findInterfaceRpc/" + interfaceId, null, function (data) {
+                    console.log(data);
+                    $("#rpcInterfaceNameView").html(data.name);
+                    $("#rpcClassNameView").html(data.className);
+                    $("#rpcMethodNameView").html(data.methodName);
+                    $("#rpcFunctionDescribeView").html(data.functionDescribe);
+                    $("#rpcReturnTypeView").html(data.returnType);
+                    $("#rpcMethodParamView").html(data.methodParam);
+                    //请求参数
+                    if (data.interfaceParamEntities != null && data.interfaceParamEntities.length > 0) {
+                        var trElements = "";
+                        for (var i = 0; i < data.interfaceParamEntities.length; i++) {
+                            var trElement = "<tr>";
+                            trElement += ("<td>" + data.interfaceParamEntities[i].paramName + "</td>");
+                            trElement += ("<td>" + data.interfaceParamEntities[i].paramType + "</td>");
+                            trElement += ("<td>" + data.interfaceParamEntities[i].paramDescribe + "</td>");
+                            trElement += ("<td>" + boolObj[data.interfaceParamEntities[i].required] + "</td>");
+                            trElement += ("<td>" + boolObj[data.interfaceParamEntities[i].jsontransformat] + "</td>");
+                            trElement += ("<td>" + data.interfaceParamEntities[i].example + "</td>");
+                            trElement += ("<td>" + data.interfaceParamEntities[i].defaultValue + "</td>");
+                            trElement += ("</tr>");
+                            trElements += trElement;
+                        }
+                        $("#myRpcPreviewTBody").html(trElements);
+                    } else {
+                        $("#myRpcPreviewTBody").html("<tr>" + "<td class='text-center' colspan='7'>" + "暂无信息！" + "</td>" + "</tr>")
+                    }
+
+                    //结果示例
+                    if (data.interfaceResultEntities != null && data.interfaceResultEntities.length > 0) {
+                        debugger;
+                        for (var i = 0; i < data.interfaceResultEntities.length; i++) {
+                            if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
+                                if (data.interfaceResultEntities[i].exampleContent == null || data.interfaceResultEntities[i].exampleContent.trim() == "") {
+                                    $("#rpcReturnExampleView").html("暂无返回示例！");
+                                } else {
+                                    $("#rpcReturnExampleView").html(data.interfaceResultEntities[i].exampleContent);
+                                }
+
+                                if (data.interfaceResultEntities[i].attentionMatters == null || data.interfaceResultEntities[i].attentionMatters.trim() == "") {
+                                    $("#rpcReturnAttentionMattersView").html("暂无注意事项！")
+                                } else {
+                                    $("#rpcReturnAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                                }
+                            } else {
+                                if (data.interfaceResultEntities[i].exampleContent == null || data.interfaceResultEntities[i].exampleContent.trim() == "") {
+                                    $("#rpcExceptionExampleView").html("暂无异常示例！");
+                                } else {
+                                    $("#rpcExceptionExampleView").html(data.interfaceResultEntities[i].exampleContent);
+                                }
+
+                                if (data.interfaceResultEntities[i].attentionMatters == null || data.interfaceResultEntities[i].attentionMatters.trim() == "") {
+                                    $("#rpcExceptionAttentionMattersView").html("暂无注意事项！");
+                                } else {
+                                    $("#rpcExceptionAttentionMattersView").html(data.interfaceResultEntities[i].attentionMatters);
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
             //HTTP接口添加参数
             $("#httpAddRequestParam").click(function () {
                 var html = "<tr> " +
@@ -1383,7 +1448,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <h3>接口名称占位符</h3>
+                            <h3 id="rpcInterfaceNameView">
+                                <!--接口名称占位符-->
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -1394,8 +1461,8 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                        <div class="form-group">
-                            类全路径名称占位符
+                        <div class="form-group" id="rpcClassNameView">
+                            <!--类全路径名称占位符-->
                         </div>
                     </div>
                 </div>
@@ -1406,8 +1473,8 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                        <div class="form-group">
-                            方法名称占位符
+                        <div class="form-group" id="rpcMethodNameView">
+                            <!--方法名称占位符-->
                         </div>
                     </div>
                 </div>
@@ -1418,8 +1485,8 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                        <div class="form-group">
-                            功能描述占位符
+                        <div class="form-group" id="rpcFunctionDescribeView">
+                            <!--功能描述占位符-->
                         </div>
                     </div>
                 </div>
@@ -1430,8 +1497,8 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                        <div class="form-group">
-                            返回值类型占位符
+                        <div class="form-group" id="rpcReturnTypeView">
+                            <!--返回值类型占位符-->
                         </div>
                     </div>
                 </div>
@@ -1442,8 +1509,8 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                        <div class="form-group">
-                            方法参数占位符
+                        <div class="form-group" id="rpcMethodParamView">
+                            <!--方法参数占位符-->
                         </div>
                     </div>
                 </div>
@@ -1458,19 +1525,20 @@
                                     <th>类型</th>
                                     <th>说明</th>
                                     <th>是否必填</th>
+                                    <th>JSON格式化传输</th>
                                     <th>示例</th>
                                     <th>默认值</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>userId</td>
-                                    <td>string</td>
-                                    <td>用户ID</td>
-                                    <td>是</td>
-                                    <td>userId=hello</td>
-                                    <td>放大发送</td>
-                                </tr>
+                                <tbody id="myRpcPreviewTBody">
+                                <!--<tr>-->
+                                <!--<td>userId</td>-->
+                                <!--<td>string</td>-->
+                                <!--<td>用户ID</td>-->
+                                <!--<td>是</td>-->
+                                <!--<td>userId=hello</td>-->
+                                <!--<td>放大发送</td>-->
+                                <!--</tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -1481,12 +1549,12 @@
                         <div class="form-group">
                             <ul id="myRpcPreviewTab" class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#returnExampleHttpPreview" data-toggle="tab">
+                                    <a href="#returnExampleRpcPreview" data-toggle="tab">
                                         返回示例
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#exceptionExampleHttpPreview" data-toggle="tab">
+                                    <a href="#exceptionExampleRpcPreview" data-toggle="tab">
                                         异常示例
                                     </a>
                                 </li>
@@ -1496,24 +1564,32 @@
                                     <br/>
                                     <div class="form-group">
                                         <h6>返回示例</h6>
-                                        <pre>返回示例占位符</pre>
+                                        <pre id="rpcReturnExampleView">
+                                            <!--返回示例占位符-->
+                                        </pre>
                                     </div>
                                     <br/>
                                     <div class="form-group">
                                         <h6>注意事项</h6>
-                                        <pre>注意事项占位符</pre>
+                                        <pre id="rpcReturnAttentionMattersView">
+                                            <!--注意事项占位符-->
+                                        </pre>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="exceptionExampleRpcPreview">
                                     <br/>
                                     <div class="form-group">
                                         <h6>异常示例</h6>
-                                        <pre>异常示例占位符</pre>
+                                        <pre id="rpcExceptionExampleView">
+                                            <!--异常示例占位符-->
+                                        </pre>
                                     </div>
                                     <br/>
                                     <div class="form-group">
                                         <h6>注意事项</h6>
-                                        <pre>注意事项占位符</pre>
+                                        <pre id="rpcExceptionAttentionMattersView">
+                                            <!--注意事项占位符-->
+                                        </pre>
                                     </div>
                                 </div>
                             </div>
@@ -1524,9 +1600,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
-                    提交更改
-                </button>
+                <!--<button type="button" class="btn btn-primary">-->
+                <!--提交更改-->
+                <!--</button>-->
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
