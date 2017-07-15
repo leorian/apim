@@ -315,9 +315,9 @@ create table T_API_INTERFACE_RPC
    functionDescribe     varchar(512) comment '功能描述',
    returnType           varchar(256) comment '返回值类型',
    methodParam          varchar(512) comment '方法参数',
-   createId             BIGINT comment '创建人ID',
+   createUserId             BIGINT comment '创建人ID',
    createDateTime       datetime comment '创建时间',
-   updateId             BIGINT comment '更新人ID',
+   updateUserId             BIGINT comment '更新人ID',
    updateDateTime       datetime comment '更新时间',
    primary key (id)
 );
