@@ -79,7 +79,7 @@
                     }
                     $("#httpTableTBody").html(trElements);
                 } else {
-                    $("#httpTableTBody").html("<tr><td colspan='6'>暂无信息</td></tr>");
+                    $("#httpTableTBody").html("<tr><td colspan='6' class='text-center'>暂无信息！</td></tr>");
                 }
             });
 
@@ -104,7 +104,7 @@
                     }
                     $("#rpcTableTBody").html(trElements);
                 } else {
-                    $("#rpcTableTBody").html("<tr><td colspan='6'>暂无信息</td></tr>");
+                    $("#rpcTableTBody").html("<tr><td colspan='5' class='text-center'>暂无信息！</td></tr>");
                 }
             });
 
@@ -112,17 +112,40 @@
             $("#httpTableTBody").delegate("button.btn-danger", "click", function () {
                 var interfaceId = $(this).attr("data-interfaceid");
                 $("#deleteInterfaceModal").find("button.btn-primary").attr("data-interfaceid", interfaceId);
+                $("#deleteInterfaceModal").find("button.btn-primary").attr("data-interfacetype", "HTTP");
+
             });
 
-            //HTTP接口删除确定事件事件
+            //RPC接口删除事件
+            $("#rpcTableTBody").delegate("button.btn-danger", "click", function(){
+                var interfaceId = $(this).attr("data-interfaceid");
+                $("#deleteInterfaceModal").find("button.btn-primary").attr("data-interfaceid", interfaceId);
+                $("#deleteInterfaceModal").find("button.btn-primary").attr("data-interfacetype", "RPC");
+
+            });
+
+            //HTTP接口删除确定事件事件 | RPC接口删除确定事件事件
             $("#deleteInterfaceModal").delegate("button.btn-primary", "click", function () {
                 var interfaceId = $(this).attr("data-interfaceid");
-                $.get("interfaceHttp/deleteInterfaceHttp/" + interfaceId, null, function (data) {
-                    console.log(data);
-                    if (data.success) {
-                        window.location.reload();
-                    }
-                }, "json");
+                var interfaceType = $(this).attr("data-interfacetype");
+                if (interfaceType=="HTTP") {
+                    $.get("interfaceHttp/deleteInterfaceHttp/" + interfaceId, null, function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#deleteInterfaceModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                } else {
+                    $.get("interfaceRpc/deleteInterfaceRpc/" + interfaceId, null, function(data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#deleteInterfaceModal").modal("hide");
+                            window.location.reload();
+                        }
+                    },"json");
+                }
+
             });
 
             //HTTP接口编辑事件
