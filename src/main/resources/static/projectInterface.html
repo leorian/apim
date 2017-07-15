@@ -156,12 +156,12 @@
                 $("#myHttpModal").find("tbody").empty();
                 $.get("interfaceHttp/findInterfaceHttp/" + interfaceId, null, function (data) {
                     console.log(data);
-                    $("input[name='protocolInput']").val(data.protocol);
-                    $("input[name='methodInput']").val(data.method);
-                    $("input[name='transformatInput']").val(data.transformat);
-                    $("input[name='addressInput']").val(data.address);
-                    $("input[name='nameInput']").val(data.name);
-                    $("textarea[name='descriptionInput']").val(data.description);
+                    $("#myHttpModal").find("input[name='protocolInput']").val(data.protocol);
+                    $("#myHttpModal").find("input[name='methodInput']").val(data.method);
+                    $("#myHttpModal").find("input[name='transformatInput']").val(data.transformat);
+                    $("#myHttpModal").find("input[name='addressInput']").val(data.address);
+                    $("#myHttpModal").find("input[name='nameInput']").val(data.name);
+                    $("#myHttpModal").find("textarea[name='descriptionInput']").val(data.description);
 
                     //请求参数
                     if (data.interfaceParamEntities != null && data.interfaceParamEntities.length > 0) {
@@ -225,11 +225,11 @@
                         debugger;
                         for (var i = 0; i < data.interfaceResultEntities.length; i++) {
                             if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
-                                $("textarea[name='returnExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
-                                $("textarea[name='returnExampleAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
+                                $("#myHttpModal").find("textarea[name='returnExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
+                                $("#myHttpModal").find("textarea[name='returnExampleAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
                             } else {
-                                $("textarea[name='exceptionExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
-                                $("textarea[name='exceptionAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
+                                $("#myHttpModal").find("textarea[name='exceptionExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
+                                $("#myHttpModal").find("textarea[name='exceptionAttentionMatters']").val(data.interfaceResultEntities[i].attentionMatters);
                             }
                         }
                     }
