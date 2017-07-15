@@ -304,6 +304,25 @@ create table T_API_INTERFACE_RPC
 
 alter table T_API_INTERFACE_RPC comment 'RPC接口表';
 
+--新版本
+create table T_API_INTERFACE_RPC
+(
+   id                   BIGINT not null comment '接口ID',
+   appId                BIGINT comment '应用ID',
+   name                 varchar(128) comment '接口名称',
+   className            varchar(256) comment '类全路径名称',
+   methodName           varchar(128) comment '方法名称',
+   functionDescribe     varchar(512) comment '功能描述',
+   returnType           varchar(256) comment '返回值类型',
+   methodParam          varchar(512) comment '方法参数',
+   createId             BIGINT comment '创建人ID',
+   createDateTime       datetime comment '创建时间',
+   updateId             BIGINT comment '更新人ID',
+   updateDateTime       datetime comment '更新时间',
+   primary key (id)
+);
+
+alter table T_API_INTERFACE_RPC comment 'RPC接口表';
 /*==============================================================*/
 /* Table: T_API_PROJECT                                         */
 /*==============================================================*/
