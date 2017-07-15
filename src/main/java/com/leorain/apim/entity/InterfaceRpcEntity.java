@@ -2,6 +2,8 @@ package com.leorain.apim.entity;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.List;
+
 /**
  * Created by xiezhonggui on 2017/7/15.
  */
@@ -27,6 +29,11 @@ public class InterfaceRpcEntity extends BaseEntity {
      * 接口ID
      */
     private Long id;
+
+    /**
+     * 接口ID文本形式
+     */
+    private String idText;
 
     /**
      * 应用ID
@@ -62,12 +69,30 @@ public class InterfaceRpcEntity extends BaseEntity {
      */
     private String methodParam;
 
+    /**
+     *
+     */
+    private List<InterfaceParamEntity> interfaceParamEntities;
+
+    /**
+     *
+     */
+    private List<InterfaceResultEntity> interfaceResultEntities;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdText() {
+        return idText;
+    }
+
+    public void setIdText(String idText) {
+        this.idText = idText;
     }
 
     public Long getAppId() {
@@ -124,6 +149,22 @@ public class InterfaceRpcEntity extends BaseEntity {
 
     public void setMethodParam(String methodParam) {
         this.methodParam = methodParam;
+    }
+
+    public List<InterfaceParamEntity> getInterfaceParamEntities() {
+        return interfaceParamEntities;
+    }
+
+    public void setInterfaceParamEntities(List<InterfaceParamEntity> interfaceParamEntities) {
+        this.interfaceParamEntities = interfaceParamEntities;
+    }
+
+    public List<InterfaceResultEntity> getInterfaceResultEntities() {
+        return interfaceResultEntities;
+    }
+
+    public void setInterfaceResultEntities(List<InterfaceResultEntity> interfaceResultEntities) {
+        this.interfaceResultEntities = interfaceResultEntities;
     }
 
     @Override
