@@ -11,7 +11,7 @@ public class InterfaceRpcEntity extends BaseEntity {
     public InterfaceRpcEntity() {
     }
 
-    public InterfaceRpcEntity(Long id, long appId, String name, String className, String methodName,
+    public InterfaceRpcEntity(Long id, Long appId, String name, String className, String methodName,
                               String functionDescribe, String returnType, String methodParam) {
         this.id = id;
         this.appId = appId;
@@ -31,7 +31,7 @@ public class InterfaceRpcEntity extends BaseEntity {
     /**
      * 应用ID
      */
-    private long appId;
+    private Long appId;
 
     /**
      * 接口名称
@@ -70,11 +70,11 @@ public class InterfaceRpcEntity extends BaseEntity {
         this.id = id;
     }
 
-    public long getAppId() {
+    public Long getAppId() {
         return appId;
     }
 
-    public void setAppId(long appId) {
+    public void setAppId(Long appId) {
         this.appId = appId;
     }
 
