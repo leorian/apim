@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leorain.apim.mapper.InterfaceRpcMapper">
+    <resultMap id="BaseResultMap" type="com.leorain.apim.entity.InterfaceRpcEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="appId" property="appId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="className" property="className" jdbcType="VARCHAR"/>
+        <result column="methodName" property="methodName" jdbcType="VARCHAR"/>
+        <result column="functionDescribe" property="functionDescribe" jdbcType="VARCHAR"/>
+        <result column="returnType" property="returnType" jdbcType="VARCHAR"/>
+        <result column="methodParam" property="methodParam" jdbcType="VARCHAR"/>
+
+        <result column="createUserId" property="createUserId" jdbcType="BIGINT"/>
+        <result column="createDateTime" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="updateUserId" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="updateDateTime" property="updateDateTime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, appId, name, className, methodName, functionDescribe,returnType,methodParam,
+        createUserId, createDateTime, updateUserId, updateDateTime
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RPC
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_API_INTERFACE_RPC
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.leorain.apim.entity.InterfaceRpcEntity">
+       INSERT INTO 
+       		T_API_INTERFACE_RPC
+       		(id, appId, name, className, methodName, functionDescribe, returnType, methodParam,
+       		createUserId, createDateTime, updateUserId, updateDateTime)
+       	VALUES
+       		(#{id}, #{appId}, #{name}, #{className}, #{methodName}, #{functionDescribe}, #{returnType}, #{methodParam},
+       		#{createUserId}, #{createDateTime}, #{updateUserId}, #{updateDateTime})
+    </insert>
+
+    <update id="update" parameterType="com.leorain.apim.entity.InterfaceRpcEntity">
+        UPDATE
+        T_API_INTERFACE_RPC
+        <set>
+            <if test="appId != null">appId = #{appId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="className != null">className = #{className},</if>
+            <if test="methodName != null">methodName = #{methodName},</if>
+            <if test="functionDescribe != null">functionDescribe = #{functionDescribe},</if>
+            <if test="returnType != null">returnType=#{returnType},</if>
+            <if test="methodParam != null">methodParam = #{methodParam},</if>
+            <if test="updateUserId != null">updateUserId = #{updateUserId},</if>
+            <if test="updateDateTime != null">updateDateTime = #{updateDateTime}</if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+       DELETE FROM
+       		 T_API_INTERFACE_RPC
+       WHERE 
+       		 id=#{id}
+    </delete>
+
+</mapper>
