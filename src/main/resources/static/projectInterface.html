@@ -195,6 +195,14 @@
                 $("#interfaceHttpIdInput").val("");
             });
 
+            //新增RPC接口
+            $("#addRpcInterfaceBtn").click(function () {
+                $("#myrpcmodallabel").html("新增RPC接口");
+                $("#myRpcModal").find("tbody").empty();
+                $("#interfaceRpcIdInput").val("");
+
+            });
+
             //HTTP接口预览
             $("#httpTableTBody").delegate("button.btn-warning", "click", function () {
                 var interfaceId = $(this).attr("data-interfaceid");
@@ -298,26 +306,28 @@
             //Rpc接口添加参数
             $("#rpcAddRequestParam").click(function () {
                 var html = "<tr> " +
-                    "<td> <input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'> </td> " +
+                    "<td> <input name='paramNamesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'> </td> " +
                     " <td> " +
-                    "<select class=\"form-control input-sm\" style='height: 25px;'> " +
+                    "<select name='paramTypesInput' class=\"form-control input-sm\" style='height: 25px;'> " +
                     "<option value=\"string\">string</option> " +
                     "</select> " +
                     "</td>" +
                     "<td>" +
-                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
+                    "<input name='paramDescribesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
                     "</td>" +
                     "<td>" +
-                    "<input type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
+                    "<input name='requiredsInput' type='hidden' value='false'>" +
+                    "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
                     "</td>" +
                     "<td>" +
-                    "<input type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
+                    "<input name='jsontransformatsInput' type='hidden' value='false'>" +
+                    "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
                     "</td>" +
                     "<td> " +
-                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                    "<input name='examplesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
                     "</td>" +
                     "<td> " +
-                    "<input type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
+                    "<input name='defaultValuesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
                     "</td>" +
                     "<td>" +
                     "<a href=\"#\">" +
@@ -403,7 +413,28 @@
                 }
             });
 
-            //是否传值改变事件
+            //新增RPC接口
+            $("#newInterfaceRpcBtn").click(function () {
+                if ($("#interfaceRpcIdInput").val() == null || $("#interfaceRpcIdInput").val() == "") {
+                    $.post("interfaceRpc/insertInterfaceRpc", $("#newInterfaceRpcForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#myRpcModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                } else {
+                    $.post("interfaceRpc/updateInterfaceRpc", $("#newInterfaceRpcForm").serialize(), function (data) {
+                        console.log(data);
+                        if (data.success) {
+                            $("#myRpcModal").modal("hide");
+                            window.location.reload();
+                        }
+                    }, "json");
+                }
+            });
+
+            //HTTP接口是否传值改变事件
             $("#myHttpModal").delegate("input[name='requiredsInputCheckBox']", "click", function () {
                 if ($(this).prop('checked')) {
                     $(this).prev("input[name='requiredsInput']").val("true");
@@ -412,8 +443,26 @@
                 }
             });
 
-            //是否JSON格式化传输改变事件
+            //RPC接口是否传值改变事件
+            $("#myRpcModal").delegate("input[name='requiredsInputCheckBox']", "click", function () {
+                if ($(this).prop('checked')) {
+                    $(this).prev("input[name='requiredsInput']").val("true");
+                } else {
+                    $(this).prev("input[name='requiredsInput']").val("false");
+                }
+            });
+
+            //HTTP接口是否JSON格式化传输改变事件
             $("#myHttpModal").delegate("input[name='jsontransformatsInputCheckBox']", "click", function () {
+                if ($(this).prop("checked")) {
+                    $(this).prev("input[name='jsontransformatsInput']").val("true");
+                } else {
+                    $(this).prev("input[name='jsontransformatsInput']").val("false");
+                }
+            });
+
+            //RPC接口是否JSON格式化传输改变事件
+            $("#myRpcModal").delegate("input[name='jsontransformatsInputCheckBox']", "click", function () {
                 if ($(this).prop("checked")) {
                     $(this).prev("input[name='jsontransformatsInput']").val("true");
                 } else {
@@ -975,19 +1024,23 @@
                                 <div class="tab-pane fade in active" id="returnExampleRpc">
                                     <br/>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="returnExampleContent" placeholder="暂无返回示例"></textarea>
+                                        <textarea class="form-control" name="returnExampleContent"
+                                                  placeholder="暂无返回示例"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="returnExampleAttentionMatters" placeholder="注意事项"></textarea>
+                                        <textarea class="form-control" name="returnExampleAttentionMatters"
+                                                  placeholder="注意事项"></textarea>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="exceptionExampleRpc">
                                     <br/>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="exceptionExampleContent" placeholder="暂无异常示例"></textarea>
+                                        <textarea class="form-control" name="exceptionExampleContent"
+                                                  placeholder="暂无异常示例"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="exceptionAttentionMatters" placeholder="注意事项"></textarea>
+                                        <textarea class="form-control" name="exceptionAttentionMatters"
+                                                  placeholder="注意事项"></textarea>
                                     </div>
                                 </div>
                             </div>
