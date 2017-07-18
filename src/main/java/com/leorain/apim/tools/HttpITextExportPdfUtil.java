@@ -112,18 +112,22 @@ public class HttpITextExportPdfUtil {
                 for (InterfaceResultEntity interfaceResultEntity : interfaceResultEntities) {
                     if (interfaceResultEntity.getExampleType().equals(ExampleTypeEnum.NORMAL.name())) {
                         writerComplexParagraphParagraph(document, "返回示例",
-                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getExampleContent()), bfChinese);
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getExampleContent())
+                                , bfChinese, ExampleTypeEnum.NORMAL);
                         writerComplexParagraphParagraph(document, "注意事项",
-                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getAttentionMatters()), bfChinese);
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getAttentionMatters())
+                                , bfChinese, ExampleTypeEnum.EXCEPTION);
                     }
                 }
 
                 for (InterfaceResultEntity interfaceResultEntity : interfaceResultEntities) {
                     if (interfaceResultEntity.getExampleType().equals(ExampleTypeEnum.EXCEPTION.name())) {
                         writerComplexParagraphParagraph(document, "异常示例",
-                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getExampleContent()), bfChinese);
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getExampleContent())
+                                , bfChinese, ExampleTypeEnum.NORMAL);
                         writerComplexParagraphParagraph(document, "注意事项",
-                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getAttentionMatters()), bfChinese);
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getAttentionMatters())
+                                , bfChinese, ExampleTypeEnum.EXCEPTION);
                     }
                 }
             }
@@ -195,13 +199,21 @@ public class HttpITextExportPdfUtil {
      * @param bfChinese
      * @return
      */
-    public static void writerComplexParagraphParagraph(Document document, String title, Paragraph nestParagraph, BaseFont bfChinese)
+    public static void writerComplexParagraphParagraph(Document document, String title, Paragraph nestParagraph, BaseFont bfChinese
+            , ExampleTypeEnum exampleTypeEnum)
             throws DocumentException {
         //标题
-        Paragraph paragraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD, BaseColor.RED));
-        paragraph.setSpacingBefore(12);
-        paragraph.setSpacingAfter(8);
-        document.add(paragraph);
+        if (exampleTypeEnum.name().equals(ExampleTypeEnum.NORMAL.name())) {
+            Paragraph paragraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD));
+            paragraph.setSpacingBefore(12);
+            paragraph.setSpacingAfter(8);
+            document.add(paragraph);
+        } else {
+            Paragraph paragraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD, BaseColor.RED));
+            paragraph.setSpacingBefore(12);
+            paragraph.setSpacingAfter(8);
+            document.add(paragraph);
+        }
         //内容
         PdfPTable pdfPTable = new PdfPTable(1);
         pdfPTable.setWidthPercentage(100);
