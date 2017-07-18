@@ -10,6 +10,7 @@ import com.leorain.apim.entity.InterfaceHttpEntity;
 import com.leorain.apim.entity.InterfaceParamEntity;
 import com.leorain.apim.entity.InterfaceResultEntity;
 import com.leorain.apim.entity.ProjectEntity;
+import com.leorain.apim.enums.ExampleTypeEnum;
 import org.springframework.util.CollectionUtils;
 
 import java.io.File;
@@ -44,7 +45,8 @@ public class HttpITextExportPdfUtil {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(filePath));
         document.open();
-        BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+
+        BaseFont bfChinese = BaseFont.createFont("C:/Windows" + "/Fonts/SIMHEI.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//黑体
         //项目名称
         Paragraph projectNameParagraph = new Paragraph(projectEntity.getProjectName() + "项目接口描述文档",
                 new Font(bfChinese, 20, Font.BOLD));
@@ -63,6 +65,9 @@ public class HttpITextExportPdfUtil {
             document.add(chapter);
             //接口描述
             writerGeneralTextParagraph(document, "接口描述", interfaceHttpEntity.getDescription(), bfChinese);
+
+            //接口地址
+            writerGeneralTextParagraph(document, "接口地址", interfaceHttpEntity.getAddress(), bfChinese);
 
             //请求方式
             writerGeneralTextParagraph(document, "请求方式", interfaceHttpEntity.getProtocol()
@@ -103,13 +108,33 @@ public class HttpITextExportPdfUtil {
 
             //返回示例和异常示例
             List<InterfaceResultEntity> interfaceResultEntities = interfaceHttpEntity.getInterfaceResultEntities();
+            if (!CollectionUtils.isEmpty(interfaceResultEntities)) {
+                for (InterfaceResultEntity interfaceResultEntity : interfaceResultEntities) {
+                    if (interfaceResultEntity.getExampleType().equals(ExampleTypeEnum.NORMAL.name())) {
+                        writerComplexParagraphParagraph(document, "返回示例",
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getExampleContent()), bfChinese);
+                        writerComplexParagraphParagraph(document, "注意事项",
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getAttentionMatters()), bfChinese);
+                    }
+                }
 
-
+                for (InterfaceResultEntity interfaceResultEntity : interfaceResultEntities) {
+                    if (interfaceResultEntity.getExampleType().equals(ExampleTypeEnum.EXCEPTION.name())) {
+                        writerComplexParagraphParagraph(document, "异常示例",
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getExampleContent()), bfChinese);
+                        writerComplexParagraphParagraph(document, "注意事项",
+                                JsonITextParagraphUtil.formatJson(interfaceResultEntity.getAttentionMatters()), bfChinese);
+                    }
+                }
+            }
         }
 
+        document.close();
     }
 
     /**
+     * 写入普通文本
+     *
      * @param document
      * @param title
      * @param content
@@ -119,46 +144,74 @@ public class HttpITextExportPdfUtil {
     public static void writerGeneralTextParagraph(Document document, String title, String content, BaseFont bfChinese)
             throws DocumentException {
         //标题
-        Paragraph interfaceDescribeParagraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD));
-        interfaceDescribeParagraph.setSpacingBefore(12);
-        interfaceDescribeParagraph.setSpacingAfter(8);
-        document.add(interfaceDescribeParagraph);
+        Paragraph paragraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD));
+        paragraph.setSpacingBefore(12);
+        paragraph.setSpacingAfter(8);
+        document.add(paragraph);
         //内容
-        PdfPTable interfaceDescribePdfPTable = new PdfPTable(1);
-        interfaceDescribePdfPTable.setWidthPercentage(100);
-        PdfPCell interfaceDescribePdfPCell = new PdfPCell(new Phrase(content, new Font(bfChinese, 8, Font.NORMAL)));
-        interfaceDescribePdfPCell.setBorderWidth(0);
-        interfaceDescribePdfPCell.setBorderWidthLeft(3);
-        interfaceDescribePdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
-        interfaceDescribePdfPCell.setPadding(10);
-        interfaceDescribePdfPTable.addCell(interfaceDescribePdfPCell);
-        document.add(interfaceDescribePdfPTable);
+        PdfPTable pdfPTable = new PdfPTable(1);
+        pdfPTable.setWidthPercentage(100);
+        PdfPCell pdfPCell = new PdfPCell(new Phrase(content, new Font(bfChinese, 8, Font.NORMAL)));
+        pdfPCell.setBorderWidth(0);
+        pdfPCell.setBorderWidthLeft(3);
+        pdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+        pdfPCell.setPadding(10);
+        pdfPTable.addCell(pdfPCell);
+        document.add(pdfPTable);
+    }
+
+    /**
+     * 写入复杂表格，表格嵌套
+     *
+     * @param document
+     * @param title
+     * @param nestPdfPTable
+     * @param bfChinese
+     * @return
+     */
+    public static void writerComplexPdfPTableParagraph(Document document, String title, PdfPTable nestPdfPTable, BaseFont bfChinese)
+            throws DocumentException {
+        //标题
+        Paragraph paragraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD));
+        paragraph.setSpacingBefore(12);
+        paragraph.setSpacingAfter(8);
+        document.add(paragraph);
+        //内容
+        PdfPTable pdfPTable = new PdfPTable(1);
+        pdfPTable.setWidthPercentage(100);
+        PdfPCell pdfPCell = new PdfPCell(nestPdfPTable);
+        pdfPCell.setBorderWidth(0);
+        pdfPCell.setBorderWidthLeft(3);
+        pdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+        pdfPCell.setPadding(10);
+        pdfPTable.addCell(pdfPCell);
+        document.add(pdfPTable);
     }
 
     /**
      * @param document
      * @param title
-     * @param pdfPTable
+     * @param nestParagraph
      * @param bfChinese
      * @return
      */
-    public static void writerComplexPdfPTableParagraph(Document document, String title, PdfPTable pdfPTable, BaseFont bfChinese)
+    public static void writerComplexParagraphParagraph(Document document, String title, Paragraph nestParagraph, BaseFont bfChinese)
             throws DocumentException {
         //标题
-        Paragraph interfaceDescribeParagraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD));
-        interfaceDescribeParagraph.setSpacingBefore(12);
-        interfaceDescribeParagraph.setSpacingAfter(8);
-        document.add(interfaceDescribeParagraph);
+        Paragraph paragraph = new Paragraph(title, new Font(bfChinese, 10, Font.BOLD, BaseColor.RED));
+        paragraph.setSpacingBefore(12);
+        paragraph.setSpacingAfter(8);
+        document.add(paragraph);
         //内容
-        PdfPTable interfaceDescribePdfPTable = new PdfPTable(1);
-        interfaceDescribePdfPTable.setWidthPercentage(100);
-        PdfPCell interfaceDescribePdfPCell = new PdfPCell(pdfPTable);
-        interfaceDescribePdfPCell.setBorderWidth(0);
-        interfaceDescribePdfPCell.setBorderWidthLeft(3);
-        interfaceDescribePdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
-        interfaceDescribePdfPCell.setPadding(10);
-        interfaceDescribePdfPTable.addCell(interfaceDescribePdfPCell);
-        document.add(interfaceDescribePdfPTable);
+        PdfPTable pdfPTable = new PdfPTable(1);
+        pdfPTable.setWidthPercentage(100);
+        PdfPCell pdfPCell = new PdfPCell(nestParagraph);
+        pdfPCell.setBorderWidth(0);
+        pdfPCell.setBorderWidthLeft(3);
+        pdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+        pdfPCell.setPadding(10);
+        pdfPTable.addCell(pdfPCell);
+        document.add(pdfPTable);
     }
 
     /**
