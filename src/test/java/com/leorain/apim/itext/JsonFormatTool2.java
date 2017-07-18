@@ -46,7 +46,9 @@ public class JsonFormatTool2 {
      */
     public static Paragraph formatJson(String json) {
         Paragraph result = new Paragraph();
-        Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.GREEN);
+        Font currentFont = null;
+        Font keyFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.BLUE);
+        Font valueFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         int length = json.length();
         int number = 0;
         char key = 0;
@@ -57,6 +59,7 @@ public class JsonFormatTool2 {
 
             //2、如果当前字符是前方括号、前花括号做如下处理：
             if ((key == '[') || (key == '{')) {
+                currentFont = keyFont;
                 //（1）如果前面还有字符，并且字符为“：”，打印：换行和缩进字符字符串。
                 if ((i - 1 > 0) && (json.charAt(i - 1) == ':')) {
                     result.add(new Chunk('\n'));
@@ -100,14 +103,24 @@ public class JsonFormatTool2 {
 
             //4、如果当前字符是逗号。逗号后面换行，并缩进，不改变缩进次数。
             if ((key == ',')) {
+                currentFont = keyFont;
                 result.add(new Chunk(key));
                 result.add(new Chunk('\n'));
                 result.add(new Chunk(indent(number)));
                 continue;
             }
 
+            //如果是冒号的时候
+            if (key == ':') {
+                currentFont = valueFont;
+                result.add(new Chunk(" "));
+                result.add(new Chunk(key));
+                result.add(new Chunk(" "));
+                continue;
+            }
+
             //5、打印：当前字符。
-            result.add(new Chunk(key, paragraphFont));
+            result.add(new Chunk(key, currentFont));
         }
 
         return result;
