@@ -16,6 +16,9 @@ import java.io.IOException;
  */
 public class DocumentPdfTest {
     public static final String DEST = "results/tables/colored_border.pdf";
+    public static final String STRING = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'中文问题','lastName':'san'," +
+            "'aihao':['pashan','movies','name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies']}]}}";
+
 
     public static void main(String[] args) throws IOException, DocumentException {
         FontFactory.register("C:\\Windows\\Fonts\\simhei.ttf");
@@ -58,7 +61,7 @@ public class DocumentPdfTest {
             interfaceDescribePdfPTable.addCell(interfaceDescribePdfPCell);
             document.add(interfaceDescribePdfPTable);
 
-            Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL,  BaseColor.RED);
+            Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.RED);
             Font font1 = FontFactory.getFont("黑体", BaseFont.WINANSI, 8);
             //接口地址
             Paragraph interfaceAddressParagraph = new Paragraph("接口地址", new Font(bfChinese, 10, Font.BOLD));
@@ -170,7 +173,7 @@ public class DocumentPdfTest {
             document.add(returnExampleParagraph);
             PdfPTable returnExamplePdfPTable = new PdfPTable(1);
             returnExamplePdfPTable.setWidthPercentage(100);
-            PdfPCell returnExamplePdfPCell = new PdfPCell(new Phrase("返回成功示例", new Font(bfChinese, 10, Font.NORMAL)));
+            PdfPCell returnExamplePdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
             returnExamplePdfPCell.setBorderWidth(0);
             returnExamplePdfPCell.setBorderWidthLeft(3);
             returnExamplePdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
@@ -179,8 +182,7 @@ public class DocumentPdfTest {
             document.add(returnExamplePdfPTable);
             PdfPTable returnExampleAttentionMatterPdfPTable = new PdfPTable(1);
             returnExampleAttentionMatterPdfPTable.setWidthPercentage(100);
-            PdfPCell returnExampleAttentionMatterPdfPCell = new PdfPCell(new Phrase("返回成功注意事项",
-                    new Font(bfChinese, 10, Font.NORMAL)));
+            PdfPCell returnExampleAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
             returnExampleAttentionMatterPdfPCell.setBorderWidth(0);
             returnExampleAttentionMatterPdfPCell.setBorderWidthLeft(3);
             returnExampleAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
@@ -197,7 +199,7 @@ public class DocumentPdfTest {
 
             PdfPTable exceptionExamPdfPTable = new PdfPTable(1);
             exceptionExamPdfPTable.setWidthPercentage(100);
-            PdfPCell exceptionExamPdfPCell = new PdfPCell(new Phrase("返回异常示例", new Font(bfChinese, 10, Font.NORMAL)));
+            PdfPCell exceptionExamPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
             exceptionExamPdfPCell.setBorderWidth(0);
             exceptionExamPdfPCell.setBorderWidthLeft(3);
             exceptionExamPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
@@ -223,9 +225,7 @@ public class DocumentPdfTest {
 //                    "}",
 //                    paragraphFont);
 //            Paragraph paragraph = new Paragraph(phrase);
-            String str = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'中文问题','lastName':'san'," +
-                    "'aihao':['pashan','movies','name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies']}]}}";
-            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(str));
+            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
             exceptionExamAttentionMatterPdfPCell.setBorderWidth(0);
             exceptionExamAttentionMatterPdfPCell.setBorderWidthLeft(3);
             exceptionExamAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
