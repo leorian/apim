@@ -51,7 +51,7 @@ public class JsonFormatTool2 {
         Paragraph result = new Paragraph();
         Font currentFont = null;
         BaseFont bfCeshiFont = BaseFont.createFont("C:/Windows" + "/Fonts/SIMHEI.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//黑体
-
+        Font englishFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         Font arrayKeyFont = new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.BLUE);
         Font objKeyFont = new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.GREEN);
         Font valueFont = new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.BLACK);
@@ -147,7 +147,7 @@ public class JsonFormatTool2 {
             if (key == ':') {
                 currentFont = valueFont;
                 result.add(new Chunk(" "));
-                result.add(new Chunk(key));
+                result.add(new Chunk(key, englishFont));
                 result.add(new Chunk(" "));
                 continue;
             }
