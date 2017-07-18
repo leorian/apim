@@ -6,10 +6,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
-import com.leorain.apim.entity.InterfaceHttpEntity;
-import com.leorain.apim.entity.InterfaceParamEntity;
-import com.leorain.apim.entity.InterfaceResultEntity;
-import com.leorain.apim.entity.ProjectEntity;
+import com.leorain.apim.entity.*;
 import com.leorain.apim.enums.ExampleTypeEnum;
 import org.springframework.util.CollectionUtils;
 
@@ -61,38 +58,71 @@ public class HttpITextExportPdfUtil {
 
         PdfPTable projectPdfPTable = new PdfPTable(6);
         //项目名称
-        PdfPCell projectPdfPCell01 = new PdfPCell(new Phrase("项目名称:",new Font(bfChinese, 8, Font.BOLD)));
+        PdfPCell projectPdfPCell01 = new PdfPCell(new Phrase("项目名称:", new Font(bfChinese, 8, Font.BOLD)));
         projectPdfPCell01.setPadding(10);
         projectPdfPCell01.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell01);
 
-        PdfPCell projectPdfPCell02= new PdfPCell(new Phrase(projectEntity.getProjectName(),new Font(bfChinese, 8, Font.NORMAL)));
+        PdfPCell projectPdfPCell02 = new PdfPCell(new Phrase(projectEntity.getProjectName(), new Font(bfChinese, 8, Font.NORMAL)));
         projectPdfPCell02.setPadding(10);
         projectPdfPCell02.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell02);
 
         //项目经理
-        PdfPCell projectPdfPCell03 = new PdfPCell(new Phrase("项目经理:",new Font(bfChinese, 8, Font.BOLD)));
+        PdfPCell projectPdfPCell03 = new PdfPCell(new Phrase("项目经理:", new Font(bfChinese, 8, Font.BOLD)));
         projectPdfPCell03.setPadding(10);
         projectPdfPCell03.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell03);
 
-        PdfPCell projectPdfPCell04= new PdfPCell(new Phrase(projectEntity.getProjectManagerText(),new Font(bfChinese, 8, Font.NORMAL)));
+        PdfPCell projectPdfPCell04 = new PdfPCell(new Phrase(projectEntity.getProjectManagerText(), new Font(bfChinese, 8, Font.NORMAL)));
         projectPdfPCell04.setPadding(10);
         projectPdfPCell04.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell04);
 
         //项目创建时间
-        PdfPCell projectPdfPCell05 = new PdfPCell(new Phrase("创建时间:",new Font(bfChinese, 8, Font.BOLD)));
+        PdfPCell projectPdfPCell05 = new PdfPCell(new Phrase("创建时间:", new Font(bfChinese, 8, Font.BOLD)));
         projectPdfPCell05.setPadding(10);
         projectPdfPCell05.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell05);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        PdfPCell projectPdfPCell06= new PdfPCell(new Phrase(simpleDateFormat.format(projectEntity.getCreateDateTime()),new Font(bfChinese, 8, Font.NORMAL)));
+        PdfPCell projectPdfPCell06 = new PdfPCell(new Phrase(simpleDateFormat.format(projectEntity.getCreateDateTime()), new Font(bfChinese, 8, Font.NORMAL)));
         projectPdfPCell06.setPadding(10);
         projectPdfPCell06.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell06);
 
+        //组内成员
+        PdfPCell projectPdfPCell07 = new PdfPCell(new Phrase("组内成员:", new Font(bfChinese, 8, Font.BOLD)));
+        projectPdfPCell07.setPadding(10);
+        projectPdfPCell07.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell07);
+
+        List<ProjectMemberEntity> projectMemberEntityList = projectEntity.getProjectMemberEntities();
+        String memebers = "";
+        if (!CollectionUtils.isEmpty(projectMemberEntityList)) {
+            for (ProjectMemberEntity projectMemberEntity : projectMemberEntityList) {
+                memebers += projectMemberEntity.getUserName();
+                memebers += "  ";
+            }
+        }
+        PdfPCell projectPdfPCell08 = new PdfPCell(new Phrase(memebers, new Font(bfChinese, 8, Font.NORMAL)));
+        projectPdfPCell08.setPadding(10);
+        projectPdfPCell08.setColspan(5);
+        projectPdfPCell08.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell08);
+
+        //项目描述：
+        PdfPCell projectPdfPCell09 = new PdfPCell(new Phrase("项目描述:", new Font(bfChinese, 8, Font.BOLD)));
+        projectPdfPCell09.setPadding(10);
+        projectPdfPCell09.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell09);
+
+        PdfPCell projectPdfPCell10 = new PdfPCell(new Phrase(projectEntity.getProjectDescribe(), new Font(bfChinese, 8, Font.NORMAL)));
+        projectPdfPCell10.setPadding(10);
+        projectPdfPCell10.setColspan(5);
+        projectPdfPCell10.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell10);
+
+        //项目简介模块
         projectPdfPTable.setSpacingBefore(50);
         document.add(projectPdfPTable);
 
