@@ -82,8 +82,11 @@ public class JsonFormatTool2 {
                 }
 
                 //（2）打印：当前字符。
-                result.add(new Chunk(key));
-
+                if (key == '[') {
+                    result.add(new Chunk(key, new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.BLACK)));
+                } else {
+                    result.add(new Chunk(key, new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.ORANGE)));
+                }
                 //（3）前方括号、前花括号，的后面必须换行。打印：换行。
                 result.add(new Chunk('\n'));
 
@@ -111,11 +114,14 @@ public class JsonFormatTool2 {
                 result.add(new Chunk(indent(number)));
 
                 //（3）打印：当前字符。
-                result.add(new Chunk(key));
-
+                if (key == ']') {
+                    result.add(new Chunk(key, new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.BLACK)));
+                } else {
+                    result.add(new Chunk(key, new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.ORANGE)));
+                }
                 //（4）如果当前字符后面还有字符，并且字符不为“，”，打印：换行。
                 if (((i + 1) < length) && (json.charAt(i + 1) != ',')) {
-                    result.add(new Chunk('\n'));
+//                    result.add(new Chunk('\n'));
                 }
 
                 //（5）继续下一次循环。
