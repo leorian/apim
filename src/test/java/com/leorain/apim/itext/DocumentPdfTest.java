@@ -26,6 +26,8 @@ public class DocumentPdfTest {
         PdfWriter.getInstance(document, new FileOutputStream(DEST));
         document.open();
         for (int k = 0; k < 10; k++) {
+            Chapter chapter = new Chapter("测试" + k, 1);
+            document.add(chapter);
             //设置中文字体和字体样式
             BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
             Font f8 = new Font(bfChinese, 8, Font.NORMAL);
