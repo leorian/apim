@@ -25,12 +25,15 @@ public class DocumentPdfTest {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(DEST));
         document.open();
+        BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+        Font f8 = new Font(bfChinese, 8, Font.NORMAL);
         for (int k = 0; k < 10; k++) {
-            Chapter chapter = new Chapter("测试" + k, 1);
+            Chapter chapter = new Chapter("测试" + k, k);
+//            chapter.addSection("测试" + k);
+            chapter.setTitle(new Paragraph("测试" + k, new Font(bfChinese, 18, Font.BOLD)));
             document.add(chapter);
             //设置中文字体和字体样式
-            BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-            Font f8 = new Font(bfChinese, 8, Font.NORMAL);
+
 
             //接口描述
             Paragraph interfaceDescribeParagraph = new Paragraph("接口描述", new Font(bfChinese, 10, Font.BOLD));
