@@ -58,7 +58,7 @@ public class DocumentPdfTest {
             interfaceDescribePdfPTable.addCell(interfaceDescribePdfPCell);
             document.add(interfaceDescribePdfPTable);
 
-            Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL);
+            Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL,  BaseColor.RED);
             Font font1 = FontFactory.getFont("黑体", BaseFont.WINANSI, 8);
             //接口地址
             Paragraph interfaceAddressParagraph = new Paragraph("接口地址", new Font(bfChinese, 10, Font.BOLD));
@@ -207,8 +207,23 @@ public class DocumentPdfTest {
 
             PdfPTable exceptionExamAttentionMatterPdfPTable = new PdfPTable(1);
             exceptionExamAttentionMatterPdfPTable.setWidthPercentage(100);
-            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(new Phrase("返回异常注意事项",
-                    new Font(bfChinese, 10, Font.NORMAL)));
+            Phrase phrase = new Phrase("{\n" +
+                    "    \"data\": {\n" +
+                    "        \"accountGoldTotal\": 14.5,\n" +
+                    "        \"alipayBinding\": true,\n" +
+                    "        \"approveStatus\": 1,\n" +
+                    "        \"careCentralUrl\": \"http://dev.317hu.com\",\n" +
+                    "        \"deptAndWardMessage\": false,\n" +
+                    "        \"nurseTrainUrl\": \"http://nursetrain.dev.317hu.com\",\n" +
+                    "        \"privilegeUrl\": \"http://privilegesit.317hu.com:8080\",\n" +
+                    "        \"trainingPrivilege\": true,\n" +
+                    "        \"userCentralUrl\": \"http://usercenter.sit.317hu.com:3000\"\n" +
+                    "    },\n" +
+                    "    \"success\": true\n" +
+                    "}",
+                    paragraphFont);
+            Paragraph paragraph = new Paragraph(phrase);
+            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(paragraph);
             exceptionExamAttentionMatterPdfPCell.setBorderWidth(0);
             exceptionExamAttentionMatterPdfPCell.setBorderWidthLeft(3);
             exceptionExamAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
