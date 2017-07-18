@@ -49,6 +49,7 @@ public class JsonITextParagraphUtil {
      * @return 格式化的JSON字符串。
      */
     public static Paragraph formatJson(String json) throws IOException, DocumentException {
+        json = json.replaceAll("[\\t\\n\\r]","");
         Paragraph result = new Paragraph();
         Font currentFont = null;
         BaseFont bfCeshiFont = BaseFont.createFont("C:/Windows" + "/Fonts/SIMHEI.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//黑体
