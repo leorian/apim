@@ -150,6 +150,35 @@ public class DocumentPdfTest {
             parameterPdfPCell.setPadding(10);
             parameterPdfPTable.addCell(parameterPdfPCell);
             document.add(parameterPdfPTable);
+
+
+            //返回示例
+            Paragraph returnExampleParagraph = new Paragraph("返回示例", new Font(bfChinese, 10, Font.BOLD));
+            returnExampleParagraph.setSpacingBefore(12);
+            returnExampleParagraph.setSpacingAfter(8);
+            document.add(returnExampleParagraph);
+            PdfPTable returnExamplePdfPTable = new PdfPTable(1);
+            returnExamplePdfPTable.setWidthPercentage(100);
+            PdfPCell returnExamplePdfPCell = new PdfPCell(new Phrase("返回成功示例", new Font(bfChinese, 10, Font.NORMAL)));
+            returnExamplePdfPCell.setBorderWidth(0);
+            returnExamplePdfPCell.setBorderWidthLeft(3);
+            returnExamplePdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+            returnExamplePdfPCell.setPadding(10);
+            returnExamplePdfPTable.addCell(returnExamplePdfPCell);
+            document.add(returnExamplePdfPTable);
+            PdfPTable returnExampleAttentionMatterPdfPTable = new PdfPTable(1);
+            returnExampleAttentionMatterPdfPTable.setWidthPercentage(100);
+            PdfPCell returnExampleAttentionMatterPdfPCell = new PdfPCell(new Phrase("返回成功注意事项",
+                    new Font(bfChinese, 10, Font.NORMAL)));
+            returnExampleAttentionMatterPdfPCell.setBorderWidth(0);
+            returnExampleAttentionMatterPdfPCell.setBorderWidthLeft(3);
+            returnExampleAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+            returnExampleAttentionMatterPdfPCell.setPadding(10);
+            returnExampleAttentionMatterPdfPTable.addCell(returnExampleAttentionMatterPdfPCell);
+            returnExampleAttentionMatterPdfPTable.setSpacingBefore(6);
+            document.add(returnExampleAttentionMatterPdfPTable);
+
+            //异常示例
         }
         document.close();
     }
