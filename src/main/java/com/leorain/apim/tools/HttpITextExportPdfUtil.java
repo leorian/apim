@@ -122,6 +122,22 @@ public class HttpITextExportPdfUtil {
         projectPdfPCell10.setHorizontalAlignment(Element.ALIGN_CENTER);
         projectPdfPTable.addCell(projectPdfPCell10);
 
+        //项目接口清单
+        PdfPCell projectPdfPCell11 = new PdfPCell(new Phrase("接口清单:", new Font(bfChinese, 8, Font.BOLD)));
+        projectPdfPCell11.setPadding(10);
+        projectPdfPCell11.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell11);
+        String interfaceNames = "";
+        for (int i = 0; i < interfaceHttpEntities.size(); i++) {
+            interfaceNames += ((i + 1) + "、" + interfaceHttpEntities.get(i).getName() + "\n\n");
+        }
+
+        PdfPCell projectPdfPCell12 = new PdfPCell(new Phrase(interfaceNames, new Font(bfChinese, 8, Font.NORMAL)));
+        projectPdfPCell12.setPadding(10);
+        projectPdfPCell12.setColspan(5);
+        projectPdfPCell12.setHorizontalAlignment(Element.ALIGN_LEFT);
+        projectPdfPTable.addCell(projectPdfPCell12);
+
         //项目简介模块
         projectPdfPTable.setSpacingBefore(50);
         projectPdfPTable.setWidthPercentage(100);
