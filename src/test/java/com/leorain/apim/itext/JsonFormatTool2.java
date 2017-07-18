@@ -74,9 +74,11 @@ public class JsonFormatTool2 {
                 }
 
                 //（1）如果前面还有字符，并且字符为“：”，打印：换行和缩进字符字符串。
-                if ((i - 1 > 0) && (json.charAt(i - 1) == ':')) {
+                if ((i - 1 > 0) && (json.charAt(i - 1) == ':') && key == '[') {
                     result.add(new Chunk('\n'));
                     result.add(new Chunk(indent(number)));
+                } else {
+                    result.add(new Chunk(" "));
                 }
 
                 //（2）打印：当前字符。
