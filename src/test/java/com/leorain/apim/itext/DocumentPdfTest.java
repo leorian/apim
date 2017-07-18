@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +28,13 @@ public class DocumentPdfTest {
         document.open();
         BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
         Font f8 = new Font(bfChinese, 8, Font.NORMAL);
+
+        Paragraph centerParagraph = new Paragraph("xx项目接口描述文档", new Font(bfChinese, 20, Font.BOLD));
+        centerParagraph.setAlignment(Element.ALIGN_CENTER);
+        document.add(centerParagraph);
+        DottedLineSeparator separator = new DottedLineSeparator();
+        Chunk linebreak = new Chunk(separator);
+        document.add(new Paragraph(linebreak));
         for (int k = 0; k < 10; k++) {
             Chapter chapter = new Chapter("测试" + k, k);
 //            chapter.addSection("测试" + k);
