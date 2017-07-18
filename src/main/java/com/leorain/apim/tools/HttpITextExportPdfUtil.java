@@ -124,6 +124,7 @@ public class HttpITextExportPdfUtil {
 
         //项目简介模块
         projectPdfPTable.setSpacingBefore(50);
+        projectPdfPTable.setWidthPercentage(100);
         document.add(projectPdfPTable);
 
         for (int i = 0; i < interfaceHttpEntities.size(); i++) {
