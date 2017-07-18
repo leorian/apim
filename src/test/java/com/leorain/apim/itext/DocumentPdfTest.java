@@ -190,6 +190,32 @@ public class DocumentPdfTest {
             document.add(returnExampleAttentionMatterPdfPTable);
 
             //异常示例
+            Paragraph exceptionExampleParagraph = new Paragraph("异常示例", new Font(bfChinese, 10, Font.BOLD));
+            exceptionExampleParagraph.setSpacingBefore(12);
+            exceptionExampleParagraph.setSpacingAfter(8);
+            document.add(exceptionExampleParagraph);
+
+            PdfPTable exceptionExamPdfPTable = new PdfPTable(1);
+            exceptionExamPdfPTable.setWidthPercentage(100);
+            PdfPCell exceptionExamPdfPCell = new PdfPCell(new Phrase("返回异常示例", new Font(bfChinese, 10, Font.NORMAL)));
+            exceptionExamPdfPCell.setBorderWidth(0);
+            exceptionExamPdfPCell.setBorderWidthLeft(3);
+            exceptionExamPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+            exceptionExamPdfPCell.setPadding(10);
+            exceptionExamPdfPTable.addCell(exceptionExamPdfPCell);
+            document.add(exceptionExamPdfPTable);
+
+            PdfPTable exceptionExamAttentionMatterPdfPTable = new PdfPTable(1);
+            exceptionExamAttentionMatterPdfPTable.setWidthPercentage(100);
+            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(new Phrase("返回异常注意事项",
+                    new Font(bfChinese, 10, Font.NORMAL)));
+            exceptionExamAttentionMatterPdfPCell.setBorderWidth(0);
+            exceptionExamAttentionMatterPdfPCell.setBorderWidthLeft(3);
+            exceptionExamAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
+            exceptionExamAttentionMatterPdfPCell.setPadding(10);
+            exceptionExamAttentionMatterPdfPTable.addCell(exceptionExamAttentionMatterPdfPCell);
+            exceptionExamAttentionMatterPdfPTable.setSpacingBefore(6);
+            document.add(exceptionExamAttentionMatterPdfPTable);
         }
         document.close();
     }
