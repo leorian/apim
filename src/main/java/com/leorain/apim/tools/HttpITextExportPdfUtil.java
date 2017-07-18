@@ -16,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -57,6 +58,44 @@ public class HttpITextExportPdfUtil {
         DottedLineSeparator dottedLineSeparator = new DottedLineSeparator();
         Chunk lineChunk = new Chunk(dottedLineSeparator);
         document.add(new Paragraph(lineChunk));
+
+        PdfPTable projectPdfPTable = new PdfPTable(6);
+        //项目名称
+        PdfPCell projectPdfPCell01 = new PdfPCell(new Phrase("项目名称:",new Font(bfChinese, 8, Font.BOLD)));
+        projectPdfPCell01.setPadding(10);
+        projectPdfPCell01.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell01);
+
+        PdfPCell projectPdfPCell02= new PdfPCell(new Phrase(projectEntity.getProjectName(),new Font(bfChinese, 8, Font.NORMAL)));
+        projectPdfPCell02.setPadding(10);
+        projectPdfPCell02.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell02);
+
+        //项目经理
+        PdfPCell projectPdfPCell03 = new PdfPCell(new Phrase("项目经理:",new Font(bfChinese, 8, Font.BOLD)));
+        projectPdfPCell03.setPadding(10);
+        projectPdfPCell03.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell03);
+
+        PdfPCell projectPdfPCell04= new PdfPCell(new Phrase(projectEntity.getProjectManagerText(),new Font(bfChinese, 8, Font.NORMAL)));
+        projectPdfPCell04.setPadding(10);
+        projectPdfPCell04.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell04);
+
+        //项目创建时间
+        PdfPCell projectPdfPCell05 = new PdfPCell(new Phrase("创建时间:",new Font(bfChinese, 8, Font.BOLD)));
+        projectPdfPCell05.setPadding(10);
+        projectPdfPCell05.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell05);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        PdfPCell projectPdfPCell06= new PdfPCell(new Phrase(simpleDateFormat.format(projectEntity.getCreateDateTime()),new Font(bfChinese, 8, Font.NORMAL)));
+        projectPdfPCell06.setPadding(10);
+        projectPdfPCell06.setHorizontalAlignment(Element.ALIGN_CENTER);
+        projectPdfPTable.addCell(projectPdfPCell06);
+
+        projectPdfPTable.setSpacingBefore(50);
+        document.add(projectPdfPTable);
+
         for (int i = 0; i < interfaceHttpEntities.size(); i++) {
             //接口名称既是章节名称
             InterfaceHttpEntity interfaceHttpEntity = interfaceHttpEntities.get(i);
