@@ -223,7 +223,7 @@ public class DocumentPdfTest {
 //                    "}",
 //                    paragraphFont);
 //            Paragraph paragraph = new Paragraph(phrase);
-            String str = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'zhang','lastName':'san'," +
+            String str = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'中文问题','lastName':'san'," +
                     "'aihao':['pashan','movies','name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies']}]}}";
             PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(str));
             exceptionExamAttentionMatterPdfPCell.setBorderWidth(0);

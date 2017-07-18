@@ -1,6 +1,9 @@
 package com.leorain.apim.itext;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+
+import java.io.IOException;
 
 /**
  * 该类提供格式化JSON字符串的方法。
@@ -44,11 +47,15 @@ public class JsonFormatTool2 {
      * @param json 未格式化的JSON字符串。
      * @return 格式化的JSON字符串。
      */
-    public static Paragraph formatJson(String json) {
+    public static Paragraph formatJson(String json) throws IOException, DocumentException {
         Paragraph result = new Paragraph();
         Font currentFont = null;
-        Font keyFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.BLUE);
-        Font valueFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
+        BaseFont bfCeshiFont = BaseFont.createFont("C:/Windows" + "/Fonts/SIMHEI.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//黑体
+
+        Font arrayKeyFont = new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.BLUE);
+        Font objKeyFont = new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.GREEN);
+        Font valueFont = new Font(bfCeshiFont, 8, Font.NORMAL, BaseColor.BLACK);
+        char symbol = 0;
         int length = json.length();
         int number = 0;
         char key = 0;
@@ -59,7 +66,13 @@ public class JsonFormatTool2 {
 
             //2、如果当前字符是前方括号、前花括号做如下处理：
             if ((key == '[') || (key == '{')) {
-                currentFont = keyFont;
+                symbol = key;
+                if (key == '[') {
+                    currentFont = arrayKeyFont;
+                } else {
+                    currentFont = objKeyFont;
+                }
+
                 //（1）如果前面还有字符，并且字符为“：”，打印：换行和缩进字符字符串。
                 if ((i - 1 > 0) && (json.charAt(i - 1) == ':')) {
                     result.add(new Chunk('\n'));
@@ -82,6 +95,12 @@ public class JsonFormatTool2 {
 
             //3、如果当前字符是后方括号、后花括号做如下处理：
             if ((key == ']') || (key == '}')) {
+                symbol = key;
+                if (key == ']') {
+                    currentFont = objKeyFont;
+                } else {
+                    currentFont = arrayKeyFont;
+                }
                 //（1）后方括号、后花括号，的前面必须换行。打印：换行。
                 result.add(new Chunk('\n'));
 
@@ -103,7 +122,13 @@ public class JsonFormatTool2 {
 
             //4、如果当前字符是逗号。逗号后面换行，并缩进，不改变缩进次数。
             if ((key == ',')) {
-                currentFont = keyFont;
+                if (symbol == '[') {
+                    currentFont = arrayKeyFont;
+                } else if (symbol == '{') {
+                    currentFont = objKeyFont;
+                } else {
+                    currentFont = arrayKeyFont;
+                }
                 result.add(new Chunk(key));
                 result.add(new Chunk('\n'));
                 result.add(new Chunk(indent(number)));
@@ -140,7 +165,7 @@ public class JsonFormatTool2 {
         return result.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DocumentException {
         JsonFormatTool2 json = new JsonFormatTool2();
         String str = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies','name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies']}]}}";
         Paragraph result = json.formatJson(str);
