@@ -207,23 +207,25 @@ public class DocumentPdfTest {
 
             PdfPTable exceptionExamAttentionMatterPdfPTable = new PdfPTable(1);
             exceptionExamAttentionMatterPdfPTable.setWidthPercentage(100);
-            Phrase phrase = new Phrase("{\n" +
-                    "    \"data\": {\n" +
-                    "        \"accountGoldTotal\": 14.5,\n" +
-                    "        \"alipayBinding\": true,\n" +
-                    "        \"approveStatus\": 1,\n" +
-                    "        \"careCentralUrl\": \"http://dev.317hu.com\",\n" +
-                    "        \"deptAndWardMessage\": false,\n" +
-                    "        \"nurseTrainUrl\": \"http://nursetrain.dev.317hu.com\",\n" +
-                    "        \"privilegeUrl\": \"http://privilegesit.317hu.com:8080\",\n" +
-                    "        \"trainingPrivilege\": true,\n" +
-                    "        \"userCentralUrl\": \"http://usercenter.sit.317hu.com:3000\"\n" +
-                    "    },\n" +
-                    "    \"success\": true\n" +
-                    "}",
-                    paragraphFont);
-            Paragraph paragraph = new Paragraph(phrase);
-            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(paragraph);
+//            Phrase phrase = new Phrase("{\n" +
+//                    "    \"data\": {\n" +
+//                    "        \"accountGoldTotal\": 14.5,\n" +
+//                    "        \"alipayBinding\": true,\n" +
+//                    "        \"approveStatus\": 1,\n" +
+//                    "        \"careCentralUrl\": \"http://dev.317hu.com\",\n" +
+//                    "        \"deptAndWardMessage\": false,\n" +
+//                    "        \"nurseTrainUrl\": \"http://nursetrain.dev.317hu.com\",\n" +
+//                    "        \"privilegeUrl\": \"http://privilegesit.317hu.com:8080\",\n" +
+//                    "        \"trainingPrivilege\": true,\n" +
+//                    "        \"userCentralUrl\": \"http://usercenter.sit.317hu.com:3000\"\n" +
+//                    "    },\n" +
+//                    "    \"success\": true\n" +
+//                    "}",
+//                    paragraphFont);
+//            Paragraph paragraph = new Paragraph(phrase);
+            String str = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'zhang','lastName':'san'," +
+                    "'aihao':['pashan','movies','name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies']}]}}";
+            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(str));
             exceptionExamAttentionMatterPdfPCell.setBorderWidth(0);
             exceptionExamAttentionMatterPdfPCell.setBorderWidthLeft(3);
             exceptionExamAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
