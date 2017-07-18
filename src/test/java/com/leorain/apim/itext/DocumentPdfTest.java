@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
+import com.leorain.apim.tools.JsonITextParagraphUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -173,7 +174,7 @@ public class DocumentPdfTest {
             document.add(returnExampleParagraph);
             PdfPTable returnExamplePdfPTable = new PdfPTable(1);
             returnExamplePdfPTable.setWidthPercentage(100);
-            PdfPCell returnExamplePdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
+            PdfPCell returnExamplePdfPCell = new PdfPCell(JsonITextParagraphUtil.formatJson(STRING));
             returnExamplePdfPCell.setBorderWidth(0);
             returnExamplePdfPCell.setBorderWidthLeft(3);
             returnExamplePdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
@@ -182,7 +183,7 @@ public class DocumentPdfTest {
             document.add(returnExamplePdfPTable);
             PdfPTable returnExampleAttentionMatterPdfPTable = new PdfPTable(1);
             returnExampleAttentionMatterPdfPTable.setWidthPercentage(100);
-            PdfPCell returnExampleAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
+            PdfPCell returnExampleAttentionMatterPdfPCell = new PdfPCell(JsonITextParagraphUtil.formatJson(STRING));
             returnExampleAttentionMatterPdfPCell.setBorderWidth(0);
             returnExampleAttentionMatterPdfPCell.setBorderWidthLeft(3);
             returnExampleAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
@@ -199,7 +200,7 @@ public class DocumentPdfTest {
 
             PdfPTable exceptionExamPdfPTable = new PdfPTable(1);
             exceptionExamPdfPTable.setWidthPercentage(100);
-            PdfPCell exceptionExamPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
+            PdfPCell exceptionExamPdfPCell = new PdfPCell(JsonITextParagraphUtil.formatJson(STRING));
             exceptionExamPdfPCell.setBorderWidth(0);
             exceptionExamPdfPCell.setBorderWidthLeft(3);
             exceptionExamPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);
@@ -225,7 +226,7 @@ public class DocumentPdfTest {
 //                    "}",
 //                    paragraphFont);
 //            Paragraph paragraph = new Paragraph(phrase);
-            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(JsonFormatTool2.formatJson(STRING));
+            PdfPCell exceptionExamAttentionMatterPdfPCell = new PdfPCell(JsonITextParagraphUtil.formatJson(STRING));
             exceptionExamAttentionMatterPdfPCell.setBorderWidth(0);
             exceptionExamAttentionMatterPdfPCell.setBorderWidthLeft(3);
             exceptionExamAttentionMatterPdfPCell.setBorderColorLeft(BaseColor.LIGHT_GRAY);

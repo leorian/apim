@@ -1,4 +1,4 @@
-package com.leorain.apim.itext;
+package com.leorain.apim.tools;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
@@ -35,7 +35,7 @@ import java.io.IOException;
  * </p><p>4、如果当前字符是逗号。逗号后面换行，并缩进，不改变缩进次数。
  * </p><p>5、打印：当前字符。
  */
-public class JsonFormatTool2 {
+public class JsonITextParagraphUtil {
     /**
      * 单位缩进字符串。
      */
@@ -174,7 +174,7 @@ public class JsonFormatTool2 {
     }
 
     public static void main(String[] args) throws IOException, DocumentException {
-        JsonFormatTool2 json = new JsonFormatTool2();
+        JsonITextParagraphUtil json = new JsonITextParagraphUtil();
         String str = "{'age':23,'aihao':['pashan','movies'],'name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies','name':{'firstName':'zhang','lastName':'san','aihao':['pashan','movies']}]}}";
         Paragraph result = json.formatJson(str);
 
