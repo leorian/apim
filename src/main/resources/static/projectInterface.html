@@ -8,6 +8,7 @@
     <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="webFrame/handlebars-v4.0.10.js"></script>
     <script src="webFrame/handlebars-jquery-plugin.js"></script>
+    <!--HTTP接口列表-->
     <script id="httpInterfaceTemplate" type="text/x-handlebars-template">
         {{#if this}}
         {{#each this}}
@@ -38,6 +39,7 @@
         </tr>
         {{/if}}
     </script>
+    <!--RPC接口列表-->
     <script id="rpcInterfaceTemplate" type="text/x-handlebars-template">
         {{#if this}}
         {{#this}}
@@ -66,6 +68,76 @@
             <td colspan='5' class='text-center'>暂无信息！</td>
         </tr>
         {{/if}}
+    </script>
+    <!--HTTP接口参数详情添加一行参数-->
+    <script id="httpAddRequestParamTemplate" type="text/x-handlebars-template">
+        <tr>
+            <td><input name='paramNamesInput' type="text" class="form-control input-sm" style='height: 25px;'></td>
+            <td>
+                <select name='paramTypesInput' class="form-control input-sm" style='height: 25px;'>
+                    <option value="string">string</option>
+                </select>
+            </td>
+            <td>
+                <input name='paramDescribesInput' type="text" class="form-control input-sm" style='height: 25px;'>
+            </td>
+            <td>
+                <input name='requiredsInput' type='hidden' value='false'>
+                <input name='requiredsInputCheckBox' type="checkbox" class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            <td>
+                <input name='jsontransformatsInput' type='hidden' value='false'>
+                <input name='jsontransformatsInputCheckBox' type="checkbox" class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            <td>
+                <input name='examplesInput' type="text" class="form-control input-sm" style='height: 25px;'>
+            </td>
+            <td>
+                <input name='defaultValuesInput' type="text" class="form-control input-sm" style='height: 25px;'>
+            </td>
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    </script>
+    <!--RPC接口参数详情添加一行参数-->
+    <script id="rpcAddRequestParamTemplate" type="text/x-handlebars-template">
+        <tr>
+            <td><input name='paramNamesInput' type="text" class="form-control input-sm" style='height: 25px;'></td>
+            <td>
+                <select name='paramTypesInput' class="form-control input-sm" style='height: 25px;'>
+                    <option value="string">string</option>
+                </select>
+            </td>
+            <td>
+                <input name='paramDescribesInput' type="text" class="form-control input-sm" style='height: 25px;'>
+            </td>
+            <td>
+                <input name='requiredsInput' type='hidden' value='false'>
+                <input name='requiredsInputCheckBox' type="checkbox" class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            <td>
+                <input name='jsontransformatsInput' type='hidden' value='false'>
+                <input name='jsontransformatsInputCheckBox' type="checkbox" class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            <td>
+                <input name='examplesInput' type="text" class="form-control input-sm" style='height: 25px;'>
+            </td>
+            <td>
+                <input name='defaultValuesInput' type="text" class="form-control input-sm" style='height: 25px;'>
+            </td>
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
     </script>
     <script>
         $(function () {
@@ -468,72 +540,12 @@
 
             //HTTP接口添加参数
             $("#httpAddRequestParam").click(function () {
-                var html = "<tr> " +
-                    "<td> <input name='paramNamesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'> </td> " +
-                    " <td> " +
-                    "<select name='paramTypesInput' class=\"form-control input-sm\" style='height: 25px;'> " +
-                    "<option value=\"string\">string</option> " +
-                    "</select> " +
-                    "</td>" +
-                    "<td>" +
-                    "<input name='paramDescribesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
-                    "</td>" +
-                    "<td>" +
-                    "<input name='requiredsInput' type='hidden' value='false'>" +
-                    "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
-                    "</td>" +
-                    "<td>" +
-                    "<input name='jsontransformatsInput' type='hidden' value='false'>" +
-                    "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
-                    "</td>" +
-                    "<td> " +
-                    "<input name='examplesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
-                    "</td>" +
-                    "<td> " +
-                    "<input name='defaultValuesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
-                    "</td>" +
-                    "<td>" +
-                    "<a href=\"#\">" +
-                    "<span class=\"glyphicon glyphicon-trash\"></span>" +
-                    "</a>" +
-                    "</td>" +
-                    "</tr> ";
-                $("#myHttpModal").find("tbody").append(html);
+                $("#myHttpModal").find("tbody").append($("#httpAddRequestParamTemplate").html());
             });
 
             //Rpc接口添加参数
             $("#rpcAddRequestParam").click(function () {
-                var html = "<tr> " +
-                    "<td> <input name='paramNamesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'> </td> " +
-                    " <td> " +
-                    "<select name='paramTypesInput' class=\"form-control input-sm\" style='height: 25px;'> " +
-                    "<option value=\"string\">string</option> " +
-                    "</select> " +
-                    "</td>" +
-                    "<td>" +
-                    "<input name='paramDescribesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
-                    "</td>" +
-                    "<td>" +
-                    "<input name='requiredsInput' type='hidden' value='false'>" +
-                    "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
-                    "</td>" +
-                    "<td>" +
-                    "<input name='jsontransformatsInput' type='hidden' value='false'>" +
-                    "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
-                    "</td>" +
-                    "<td> " +
-                    "<input name='examplesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
-                    "</td>" +
-                    "<td> " +
-                    "<input name='defaultValuesInput' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
-                    "</td>" +
-                    "<td>" +
-                    "<a href=\"#\">" +
-                    "<span class=\"glyphicon glyphicon-trash\"></span>" +
-                    "</a>" +
-                    "</td>" +
-                    "</tr> ";
-                $("#myRpcModal").find("tbody").append(html);
+                $("#myRpcModal").find("tbody").append($("#rpcAddRequestParamTemplate").html());
             });
 
             //HTTP接口行选中事件
