@@ -8,6 +8,7 @@
     <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="webFrame/handlebars-v4.0.10.js"></script>
     <script src="webFrame/handlebars-jquery-plugin.js"></script>
+    <!--用户列表模板-->
     <script id="userListTemplate" type="text/x-handlebars-template">
         {{#if rows}}
         {{#each rows}}
@@ -37,6 +38,55 @@
         {{else}}
         <tr>
             <td class='text-center' colspan='7'>没有记录！</td>
+        </tr>
+        {{/if}}
+    </script>
+    <!--项目列表模板-->
+    <script id="projectListTemplate" type="text/x-handlebars-template">
+        {{#if rows}}
+        {{#rows}}
+        <tr>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                {{projectIdText}}
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                <a class='btn btn-xs btn-link' data-projectid='{{projectIdText}}'>{{projectName}}</a>
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                {{interfaceCount}}
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                {{projectManagerText}}
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                {{memberCount}}
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                {{projectDescribe}}
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                {{createDateTime}}
+            </td>
+            <td class='text-center' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                <button class="btn btn-success btn-xs" data-toggle='modal' data-target='#newProjectModal'
+                        data-projectid='{{projectIdText}}'>编辑
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteProjectModal"
+                        data-projectid='{{projectIdText}}'>删除
+                </button>
+                &nbsp;&nbsp;
+                <button class='btn btn-warning btn-xs' data-projectid='{{projectIdText}}'>机器管理</button>
+                &nbsp;&nbsp;
+                <button class='btn btn-info btn-xs' data-projectid='{{projectIdText}}'>配置管理</button>
+                &nbsp;&nbsp;
+                <button class='btn btn-default btn-xs' data-projectid='{{projectIdText}}'>接口管理</button>
+            </td>
+        </tr>
+        {{/rows}}
+        {{else}}
+        <tr>
+            <td class='text-center' colspan='8'>没有记录！</td>
         </tr>
         {{/if}}
     </script>
@@ -82,36 +132,7 @@
                     projectNameCondition: $("#projectNameCondition").val(),
                     projectManagerCondition: $("#projectManagerCondition").val()
                 }, function (data) {
-                    if (data != null && data.rows != null && data.rows.length > 0) {
-                        var trElements = "";
-                        for (var i = 0; i < data.rows.length; i++) {
-                            var trElement = "<tr>";
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\">" + data.rows[i].projectIdText + "</td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\"><a class='btn btn-xs btn-link' data-projectid='" + data.rows[i].projectIdText + "'>" + data.rows[i].projectName + "</a></td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\" >" + data.rows[i].interfaceCount + "</td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\">" + data.rows[i].projectManagerText + "</td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\">" + data.rows[i].memberCount + "</td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\">" + data.rows[i].projectDescribe + "</td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\">" + data.rows[i].createDateTime + "</td>");
-                            trElement += ("<td class='text-center' style=\"white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\">" + "<button class=\"btn btn-success btn-xs\" data-toggle='modal' " +
-                            "data-target='#newProjectModal' data-projectid='" + data.rows[i].projectIdText + "'>编辑</button>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;"
-                            + "<button class=\"btn btn-danger btn-xs\" data-toggle=\"modal\" " +
-                            "data-target=\"#deleteProjectModal\" data-projectid='" + data.rows[i].projectIdText + "'>删除</button>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;"
-                            + "<button class='btn btn-warning btn-xs' data-projectid='" + data.rows[i].projectIdText + "'>机器管理</button>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;"
-                            + "<button class='btn btn-info btn-xs' data-projectid='" + data.rows[i].projectIdText + "'>配置管理</button>"
-                            + "&nbsp;&nbsp;&nbsp;&nbsp;"
-                            + "<button class='btn btn-default btn-xs' data-projectid='" + data.rows[i].projectIdText + "'>接口管理</button>"
-                            + "</td>");
-                            trElement += "</tr>";
-                            trElements = trElements + trElement;
-                        }
-                        $("#projectTableTBody").html(trElements);
-                    } else {
-                        $("#projectTableTBody").html("<tr><td class='text-center' colspan='8'>没有记录！</td></tr>");
-                    }
+                    $("#projectTableTBody").handlebars($("#projectListTemplate"), data);
                     pagerControl($("#projectManagerPanel"), data);
                 }, "json");
             }
