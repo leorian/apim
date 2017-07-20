@@ -6,36 +6,14 @@
     <link rel="stylesheet" href="webFrame/bootstrap-3.3.7/dist/css/bootstrap.min.css">
     <script src="webFrame/jquery-2.1.1/jquery.min.js"></script>
     <script src="webFrame/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="webFrame/handlebars-v4.0.10.js"></script>
+    <script src="webFrame/handlebars-jquery-plugin.js"></script>
     <script>
         $(function () {
             var boolObj = new Object();
             boolObj[true] = "是";
             boolObj[false] = "否";
-            function add0(m) {
-                return m < 10 ? '0' + m : m
-            }
-
-            function format(timestamp) {
-                //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
-
-                var time = new Date(timestamp);
-                var year = time.getFullYear();
-                var month = time.getMonth() + 1;
-                var date = time.getDate();
-                var hours = time.getHours();
-                var minutes = time.getMinutes();
-                var seconds = time.getSeconds();
-                return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
-            }
-
-            function getQueryString(name) {
-                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-                var r = window.location.search.substr(1).match(reg);
-                if (r != null) return unescape(r[2]);
-                return null;
-            }
-
-            var projectId = getQueryString("projectId");
+            var projectId = $.getQueryString("projectId");
             $("#myHttpModal").find("input[name='appIdInput']").val(projectId);
             $("#myRpcModal").find("input[name='appIdInput']").val(projectId);
             //项目信息展示区
@@ -43,7 +21,7 @@
                 console.log(data);
                 $("#projectNameTd").html(data.projectName);
                 $("#projectManagerTd").html(data.projectManagerText);
-                $("#createDateTimeTd").html(format(data.createDateTime));
+                $("#createDateTimeTd").html($.format(data.createDateTime));
                 $("#projectDescribeTd").html(data.projectDescribe);
                 var projectMemberEntities = data.projectMemberEntities;
                 if (projectMemberEntities != null && projectMemberEntities.length > 0) {
