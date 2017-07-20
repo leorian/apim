@@ -33,6 +33,38 @@
         </tr>
         {{/each}}
         {{else}}
+        <tr>
+            <td colspan='6' class='text-center'>暂无信息！</td>
+        </tr>
+        {{/if}}
+    </script>
+    <script id="rpcInterfaceTemplate" type="text/x-handlebars-template">
+        {{#if this}}
+        {{#this}}
+        <tr>
+            <td class='text-center'>{{idText}}</td>
+            <td class='text-center'>{{name}}</td>
+            <td class='text-center'>{{className}}</td>
+            <td class='text-center'>{{methodName}}</td>
+            <td class='text-center'>
+                <button class="btn btn-xs btn-success" data-interfaceid='{{idText}}' data-toggle='modal'
+                        data-target='#myRpcModal'>编辑
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-xs btn-danger" data-interfaceid='{{idText}}' data-toggle='modal'
+                        data-target='#deleteInterfaceModal'>删除
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-xs btn-warning" data-interfaceid='{{idText}}' data-toggle="modal"
+                        data-target="#myRpcPreviewModal">预览
+                </button>
+            </td>
+        </tr>
+        {{/this}}
+        {{else}}
+        <tr>
+            <td colspan='5' class='text-center'>暂无信息！</td>
+        </tr>
         {{/if}}
     </script>
     <script>
@@ -70,27 +102,7 @@
 
             //RPC接口列表展示
             $.get("interfaceRpc/findInterfaceRpcList/" + projectId, null, function (data) {
-                if (data != null && data.length > 0) {
-                    var trElements = "";
-                    for (var i = 0; i < data.length; i++) {
-                        var trElement = "<tr>";
-                        trElement += ("<td class='text-center'>" + data[i].idText + "</td>");
-                        trElement += ("<td class='text-center'>" + data[i].name + "</td>");
-                        trElement += ("<td class='text-center'>" + data[i].className + "</td>");
-                        trElement += ("<td class='text-center'>" + data[i].methodName + "</td>");
-                        trElement += ("<td class='text-center'>" +
-                        "<button class=\"btn btn-xs btn-success\" data-interfaceid='" + data[i].idText + "' data-toggle='modal' data-target='#myRpcModal'>编辑</button>" +
-                        "&nbsp;&nbsp;" +
-                        "<button class=\"btn btn-xs btn-danger\" data-interfaceid='" + data[i].idText + "' data-toggle='modal' data-target='#deleteInterfaceModal'>删除</button>" +
-                        "&nbsp;&nbsp;" +
-                        "<button class=\"btn btn-xs btn-warning\" data-interfaceid='" + data[i].idText + "' data-toggle=\"modal\" data-target=\"#myRpcPreviewModal\">预览 </button>" +
-                        "</td>");
-                        trElements += trElement;
-                    }
-                    $("#rpcTableTBody").html(trElements);
-                } else {
-                    $("#rpcTableTBody").html("<tr><td colspan='5' class='text-center'>暂无信息！</td></tr>");
-                }
+                $("#rpcTableTBody").handlebars($("#rpcInterfaceTemplate"), data);
             });
 
             //HTTP接口删除事件
