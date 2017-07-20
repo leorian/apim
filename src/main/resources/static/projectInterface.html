@@ -317,7 +317,7 @@
             </div>
         </div>
     </script>
-
+    <!--RPC接口预览-->
     <script id="myRpcPreviewModalTemplate" type="text/x-handlebars-template">
         <div class="row">
             <div class="col-sm-12">
@@ -504,6 +504,66 @@
         </div>
     </script>
 
+    <!--HTTP接口请求参数编辑模板-->
+    <script id="httpRequestParamEditTemplate" type="text/x-handlebars-template">
+        {{#if interfaceParamEntities}}
+        {{#interfaceParamEntities}}
+        <tr>
+            <td><input name='paramNamesInput' type="text" value='{{paramName}}' class="form-control input-sm"
+                       style='height: 25px;'></td>
+            <td>
+                <select name='paramTypesInput' class="form-control input-sm" style='height: 25px;'>
+                    <option value="string">string</option>
+                </select>
+            </td>
+            <td>
+                <input name='paramDescribesInput' value='{{paramDescribe}}' type="text" class="form-control input-sm"
+                       style='height: 25px;'>
+            </td>
+            {{#if required}}
+            <td>
+                <input name='requiredsInput' type='hidden' value='{{required}}'>
+                <input name='requiredsInputCheckBox' type="checkbox" checked='checked' class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            {{else}}
+            <td>
+                <input name='requiredsInput' type='hidden' value='{{required}}'>
+                <input name='requiredsInputCheckBox' type="checkbox" class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            {{/if}}
+            {{#if jsontransformat}}
+            <td>
+                <input name='jsontransformatsInput' type='hidden' value='{{jsontransformat}}'>
+                <input name='jsontransformatsInputCheckBox' checked='checked' type="checkbox" class="form-control
+                        input-sm" style='height: 18px;'>
+            </td>
+            {{else}}
+            <td>
+                <input name='jsontransformatsInput' type='hidden' value='{{jsontransformat}}'>
+                <input name='jsontransformatsInputCheckBox' type="checkbox" class="form-control input-sm"
+                       style='height: 18px;'>
+            </td>
+            {{/if}}
+            <td>
+                <input name='examplesInput' value='{{example}}' type="text" class="form-control input-sm"
+                       style='height: 25px;'>
+            </td>
+            <td>
+                <input name='defaultValuesInput' value='{{defaultValue}}' type="text" class="form-control input-sm"
+                       style='height: 25px;'>
+            </td>
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+        {{/interfaceParamEntities}}
+        {{/if}}
+    </script>
+
     <script>
         $(function () {
             var boolObj = new Object();
@@ -598,65 +658,10 @@
                     $("#myHttpModal").find("textarea[name='descriptionInput']").val(data.description);
 
                     //请求参数
-                    if (data.interfaceParamEntities != null && data.interfaceParamEntities.length > 0) {
-                        for (var i = 0; i < data.interfaceParamEntities.length; i++) {
-                            var html = "<tr> ";
-                            html += ("<td> <input name='paramNamesInput' type=\"text\" value='" + data.interfaceParamEntities[i].paramName + "' class=\"form-control input-sm\" style='height: 25px;'> </td> " );
-                            html += (" <td> " +
-                            "<select name='paramTypesInput' class=\"form-control input-sm\" style='height: 25px;'> " +
-                            "<option value=\"string\">string</option> " +
-                            "</select> " +
-                            "</td>");
-                            html += (
-                                "<td>" +
-                                "<input name='paramDescribesInput' value='" + data.interfaceParamEntities[i].paramDescribe + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;' >" +
-                                "</td>"
-                            );
-
-                            if (data.interfaceParamEntities[i].required) {
-                                html += ( "<td>" +
-                                "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
-                                "<input name='requiredsInputCheckBox' type=\"checkbox\" checked='checked' class=\"form-control input-sm\" style='height: 18px;' >" +
-                                "</td>" );
-                            } else {
-                                html += ( "<td>" +
-                                "<input name='requiredsInput' type='hidden' value='" + data.interfaceParamEntities[i].required + "'>" +
-                                "<input name='requiredsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;' >" +
-                                "</td>" );
-                            }
-
-                            if (data.interfaceParamEntities[i].jsontransformat) {
-                                html += ( "<td>" +
-                                "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformat + "'>" +
-                                "<input name='jsontransformatsInputCheckBox' checked='checked' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
-                                "</td>");
-                            } else {
-                                html += ( "<td>" +
-                                "<input name='jsontransformatsInput' type='hidden' value='" + data.interfaceParamEntities[i].jsontransformat + "'>" +
-                                "<input name='jsontransformatsInputCheckBox' type=\"checkbox\" class=\"form-control input-sm\" style='height: 18px;'>" +
-                                "</td>");
-                            }
-
-                            html += (  "<td> " +
-                            "<input name='examplesInput' value='" + data.interfaceParamEntities[i].example + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
-                            "</td>" );
-                            html += ( "<td> " +
-                            "<input name='defaultValuesInput' value='" + data.interfaceParamEntities[i].defaultValue + "' type=\"text\" class=\"form-control input-sm\" style='height: 25px;'>" +
-                            "</td>" );
-                            html += (
-                            "<td>" +
-                            "<a href=\"#\">" +
-                            "<span class=\"glyphicon glyphicon-trash\"></span>" +
-                            "</a>" +
-                            "</td>" );
-                            html += "</tr> ";
-                            $("#myHttpModal").find("tbody").append(html);
-                        }
-                    }
+                    $("#myHttpModal").find("tbody").handlebars($("#httpRequestParamEditTemplate"), data);
 
                     //结果示例
                     if (data.interfaceResultEntities != null && data.interfaceResultEntities.length > 0) {
-                        debugger;
                         for (var i = 0; i < data.interfaceResultEntities.length; i++) {
                             if (data.interfaceResultEntities[i].exampleType == "NORMAL") {
                                 $("#myHttpModal").find("textarea[name='returnExampleContent']").val(data.interfaceResultEntities[i].exampleContent);
