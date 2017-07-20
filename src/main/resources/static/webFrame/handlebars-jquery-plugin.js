@@ -8,4 +8,3 @@
         this.html(compiled[template](data));
     };
 })(jQuery);
-// $('#content').handlebars($('#template'), { name: "Alan" });

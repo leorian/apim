@@ -9,8 +9,8 @@
     <script src="webFrame/handlebars-v4.0.10.js"></script>
     <script src="webFrame/handlebars-jquery-plugin.js"></script>
     <script id="projectDeployListTemplate" type="text/x-handlebars-template">
-        {{#if this}}
-        {{#this}}
+        {{#if rows}}
+        {{#rows}}
         <tr>
             <td class='text-center'>{{deployIdText}}</td>
             <td class='text-center'>{{env}}</td>
@@ -32,7 +32,7 @@
                 </button>
             </td>
         </tr>
-        {{/this}}
+        {{/rows}}
         {{else}}
         <tr>
             <td colspan='11' class='text-center'>没有记录！</td>
@@ -89,7 +89,38 @@
 
             //机器列表信息展示区
             $.get("projectDeploy/findProjectDeployList/" + projectId, null, function (data) {
-                $("#machineTableTBody").handlebars($("#projectDeployListTemplate"), data);
+//                console.log(data);
+//                if (data != null && data.length > 0) {
+//                    var trElements = "";
+//                    for (var i = 0; i < data.length; i++) {
+//                        var trElement = "<tr>";
+//                        trElement += ("<td class='text-center'>" + data[i].deployIdText + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].env + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].ip + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].port + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].path + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].loginOs + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].loginProtocol + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].loginPort + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].loginAccount + "</td>");
+//                        trElement += ("<td class='text-center'>" + data[i].loginPassword + "</td>");
+//                        trElement += ("<td class='text-center'>"
+//                        + "<button data-toggle=\"modal\" data-target=\"#newMachineModal\""
+//                        + " class='btn btn-success btn-xs' data-deployid='" + data[i].deployIdText + "'>编辑</button>"
+//                        + "&nbsp;&nbsp;&nbsp;&nbsp;"
+//                        + "<button data-toggle=\"modal\" data-target=\"#deleteMachineModal\" " +
+//                        "class='btn btn-danger btn-xs' data-deployid='" + data[i].deployIdText + "'>删除</button>" +
+//                        "</td>");
+//                        trElement += "</tr>";
+//                        trElements += trElement;
+//                    }
+//                    $("#machineTableTBody").html(trElements);
+//                } else {
+//                    $("#machineTableTBody").html("<tr><td colspan='11' class='text-center'>没有记录！</td></tr>")
+//                }
+                var obj = new Object();
+                obj["rows"] = data;
+                $("#machineTableTBody").handlebars($("#projectDeployListTemplate"), obj);
             }, "json");
 
             //环境枚举
